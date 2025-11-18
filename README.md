@@ -48,14 +48,14 @@ Below is a quick guide for each option. For more information, you can refer to [
 
   This should show the URL of your forked repository (`https://github.com/YOUR-USERNAME/union_shop.git` where `YOUR-USERNAME` is your GitHub username).
 
-University Computers:
+**University Computers:**
 
 - Open [AppsAnywhere](https://appsanywhere.port.ac.uk/sso) and launch the following in the given order:
   - Git
   - Flutter And Dart SDK
   - Visual Studio Code
 
-Personal Windows Computer:
+**Personal Windows Computer:**
 
 - Install [Chocolatey package manager](https://chocolatey.org/install)
 - Run in PowerShell (as Administrator):
@@ -64,7 +64,7 @@ Personal Windows Computer:
   choco install git vscode flutter -y
   ```
 
-Personal macOS Computer:
+**Personal macOS Computer:**
 
 - Install [Homebrew package manager](https://brew.sh/)
 - Run in Terminal:
