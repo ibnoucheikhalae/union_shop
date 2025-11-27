@@ -59,11 +59,10 @@ class HomeScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 8),
                     color: const Color(0xFF4d2963),
                     child: const Text(
-  'PLACEHOLDER HEADER TEXT - STUDENTS TO UPDATE!',
-  textAlign: TextAlign.center,
-  style: TextStyle(color: Colors.white, fontSize: 16),
-),
-
+                      'PLACEHOLDER HEADER TEXT - STUDENTS TO UPDATE!',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.white, fontSize: 16),
+                    ),
                   ),
                   // Main header
                   Expanded(
@@ -85,8 +84,10 @@ class HomeScreen extends StatelessWidget {
                                   width: 18,
                                   height: 18,
                                   child: const Center(
-                                    child: Icon(Icons.image_not_supported,
-                                        color: Colors.grey),
+                                    child: Icon(
+                                      Icons.image_not_supported,
+                                      color: Colors.grey,
+                                    ),
                                   ),
                                 );
                               },
@@ -179,9 +180,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                       child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.black.withValues(alpha: 0.7),
-                        ),
+                        color: Colors.black.withOpacity(0.7),
                       ),
                     ),
                   ),
@@ -242,14 +241,26 @@ class HomeScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     const Text(
-                      'PRODUCTS SECTION',
+                      'PLACEHOLDER PRODUCTS SECTION',
                       style: TextStyle(
                         fontSize: 20,
                         color: Colors.black,
                         letterSpacing: 1,
                       ),
                     ),
-                    const SizedBox(height: 48),
+                    const SizedBox(height: 16),
+                    ElevatedButton(
+                      onPressed: placeholderCallbackForButtons,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF4d2963),
+                        foregroundColor: Colors.white,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.zero,
+                        ),
+                      ),
+                      child: const Text('VIEW ALL PRODUCTS'),
+                    ),
+                    const SizedBox(height: 32),
                     GridView.count(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
@@ -294,13 +305,26 @@ class HomeScreen extends StatelessWidget {
               width: double.infinity,
               color: Colors.grey[50],
               padding: const EdgeInsets.all(24),
-              child: const Text(
-                'Placeholder Footer',
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
+              child: const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Placeholder Footer',
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    'Students should customise this footer section',
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
