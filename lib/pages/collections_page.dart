@@ -10,7 +10,21 @@ class CollectionsPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            AppHeader(
+            AppHeader(Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const [
+                  Text(
+                    'Collections',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
               onLogoTap: () {
                 Navigator.pushNamedAndRemoveUntil(
                   context,
