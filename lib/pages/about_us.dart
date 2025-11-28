@@ -30,6 +30,18 @@ class AboutPage extends StatelessWidget {
           fontWeight: FontWeight.bold,
         ),
       ),
+      SizedBox(height: 16),
+const Text(
+  'placeholder About Us page for the Union Shop.\n\n'
+  'To update this section with real information '
+  'about the Students\' Union/ mission/values/services, '
+  'and how the shop supports students.',
+  style: TextStyle(
+    fontSize: 16,
+    height: 1.5,
+  ),
+),
+
     ],
   ),
 ),
