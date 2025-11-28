@@ -1,4 +1,4 @@
-// lib/widgets/app_header.dart
+
 
 import 'package:flutter/material.dart';
 
@@ -43,6 +43,7 @@ class AppHeader extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Row(
                 children: [
+                  // FINAL LOGO WITH ERRORBUILDER (Commit 6)
                   GestureDetector(
                     onTap: onLogoTap,
                     child: Image.network(
@@ -55,13 +56,18 @@ class AppHeader extends StatelessWidget {
                           width: 18,
                           height: 18,
                           child: const Center(
-                            child: Icon(Icons.image_not_supported, color: Colors.grey),
+                            child: Icon(
+                              Icons.image_not_supported,
+                              color: Colors.grey,
+                            ),
                           ),
                         );
                       },
                     ),
                   ),
-                 const Spacer(),
+
+                  const Spacer(),
+
                   IconButton(
                     icon: const Icon(Icons.search, size: 18, color: Colors.grey),
                     onPressed: onSearchTap,
