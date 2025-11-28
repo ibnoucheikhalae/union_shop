@@ -14,15 +14,28 @@ class CollectionsPage extends StatelessWidget {
               padding: const EdgeInsets.all(24.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text(
-                    'Collections',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
+                child: Column(
+  crossAxisAlignment: CrossAxisAlignment.start,
+  children: [
+    const Text(
+      'Collections',
+      style: TextStyle(
+        fontSize: 24,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+    const SizedBox(height: 16),
+
+    ListTile(
+      title: const Text('Hoodies & Sweatshirts'),
+      subtitle: const Text('Warm and comfy uni hoodies'),
+      onTap: () {
+        Navigator.pushNamed(context, '/collection');
+      },
+    ),
+  ],
+),
+
               ),
             ),
               onLogoTap: () {
