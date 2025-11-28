@@ -27,3 +27,17 @@ return Container(
     ],
   ),
 );
+Expanded(
+  child: Container(
+    padding: const EdgeInsets.symmetric(horizontal: 10),
+    child: Row(
+      children: const [
+        Spacer(),
+        Icon(Icons.search),
+        Icon(Icons.person_outline),
+        Icon(Icons.shopping_bag_outlined),
+        Icon(Icons.menu),
+      ],
+    ),
+  ),
+),
