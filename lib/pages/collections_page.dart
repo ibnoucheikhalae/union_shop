@@ -33,6 +33,24 @@ class CollectionsPage extends StatelessWidget {
         Navigator.pushNamed(context, '/collection');
       },
     ),
+        ListTile(
+      title: const Text('Hoodies & Sweatshirts'),
+      subtitle: const Text('Warm and comfy uni hoodies'),
+      onTap: () {
+        Navigator.pushNamed(context, '/collection');
+      },
+    ),
+    const Divider(),
+    const ListTile(
+      title: Text('Gifts & Accessories'),
+      subtitle: Text('Mugs, magnets, keyrings and more'),
+    ),
+    const Divider(),
+    const ListTile(
+      title: Text('Stationery'),
+      subtitle: Text('Notebooks, pens, and study essentials'),
+    ),
+
   ],
 ),
 
