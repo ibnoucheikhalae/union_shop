@@ -61,7 +61,23 @@ class AppHeader extends StatelessWidget {
                       },
                     ),
                   ),
-                  // icon buttons
+                 const Spacer(),
+                  IconButton(
+                    icon: const Icon(Icons.search, size: 18, color: Colors.grey),
+                    onPressed: onSearchTap,
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.person_outline, size: 18, color: Colors.grey),
+                    onPressed: onAccountTap,
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.shopping_bag_outlined, size: 18, color: Colors.grey),
+                    onPressed: onCartTap,
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.menu, size: 18, color: Colors.grey),
+                    onPressed: onMenuTap,
+                  ),
                 ],
               ),
             ),
