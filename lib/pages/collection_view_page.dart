@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../widgets/app_header.dart';
 import '../widgets/footer.dart';
 import '../data/dummy_products.dart';
+import '../data/dummy_collections.dart';
+import '../models/collection.dart';
 class CollectionViewPage extends StatelessWidget {
   const CollectionViewPage({super.key});
 
@@ -9,43 +11,54 @@ class CollectionViewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Read route arguments which may be a `String` slug or a `Collection`.
+    final args = ModalRoute.of(context)?.settings.arguments;
+    Collection? selectedCollection;
+    if (args is String) {
+      selectedCollection = dummyCollections.firstWhere(
+        (c) => c.slug == args,
+        orElse: () => dummyCollections.isNotEmpty ? dummyCollections.first : null,
+      );
+    } else if (args is Collection) {
+      selectedCollection = args;
+    }
+
+    final title = selectedCollection?.title ?? 'Collection';
+    final description = selectedCollection?.description ?? 'Browse items in this collection.';
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
             AppHeader(
-  onLogoTap: () {
-    Navigator.pushNamedAndRemoveUntil(
-      context,
-      '/',
-      (route) => false,
-    );
-  },
-  onSearchTap: _placeholder,
-  onAccountTap: _placeholder,
-  onCartTap: () {
-    Navigator.pushNamed(context, '/cart'); // 👈 NEW
-  },
-  onMenuTap: _placeholder,
-),
-
+              onLogoTap: () {
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  '/',
+                  (route) => false,
+                );
+              },
+              onSearchTap: _placeholder,
+              onAccountTap: _placeholder,
+              onCartTap: _placeholder,
+              onMenuTap: _placeholder,
+            ),
 
             Padding(
               padding: const EdgeInsets.all(24.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Hoodies & Sweatshirts',
-                    style: TextStyle(
+                  Text(
+                    title,
+                    style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
-                    'Warm and comfy uni hoodies for everyday campus life.',
-                    style: TextStyle(
+                  Text(
+                    description,
+                    style: const TextStyle(
                       fontSize: 14,
                       height: 1.5,
                     ),
@@ -64,15 +77,15 @@ class CollectionViewPage extends StatelessWidget {
                           items: const [
                             DropdownMenuItem(
                               value: 'popular',
-                              child: const Text('Most popular'),
+                              child: Text('Most popular'),
                             ),
                             DropdownMenuItem(
                               value: 'price_low_high',
-                              child: const Text('Price: Low to High'),
+                              child: Text('Price: Low to High'),
                             ),
                             DropdownMenuItem(
                               value: 'price_high_low',
-                              child: const Text('Price: High to Low'),
+                              child: Text('Price: High to Low'),
                             ),
                           ],
                           onChanged: (_) {},
@@ -88,23 +101,23 @@ class CollectionViewPage extends StatelessWidget {
                           items: const [
                             DropdownMenuItem(
                               value: 'all',
-                              child: const Text('All sizes'),
+                              child: Text('All sizes'),
                             ),
                             DropdownMenuItem(
                               value: 's',
-                              child: const Text('S'),
+                              child: Text('S'),
                             ),
                             DropdownMenuItem(
                               value: 'm',
-                              child: const Text('M'),
+                              child: Text('M'),
                             ),
                             DropdownMenuItem(
                               value: 'l',
-                              child: const Text('L'),
+                              child: Text('L'),
                             ),
                             DropdownMenuItem(
                               value: 'xl',
-                              child: const Text('XL'),
+                              child: Text('XL'),
                             ),
                           ],
                           onChanged: (_) {},
@@ -124,19 +137,19 @@ class CollectionViewPage extends StatelessWidget {
                           items: const [
                             DropdownMenuItem(
                               value: 'all',
-                              child: const Text('All colours'),
+                              child: Text('All colours'),
                             ),
                             DropdownMenuItem(
                               value: 'black',
-                              child: const Text('Black'),
+                              child: Text('Black'),
                             ),
                             DropdownMenuItem(
                               value: 'grey',
-                              child: const Text('Grey'),
+                              child: Text('Grey'),
                             ),
                             DropdownMenuItem(
                               value: 'navy',
-                              child: const Text('Navy'),
+                              child: Text('Navy'),
                             ),
                           ],
                           onChanged: (_) {},
@@ -152,15 +165,15 @@ class CollectionViewPage extends StatelessWidget {
                           items: const [
                             DropdownMenuItem(
                               value: 'all',
-                              child: const Text('All fits'),
+                              child: Text('All fits'),
                             ),
                             DropdownMenuItem(
                               value: 'regular',
-                              child: const Text('Regular'),
+                              child: Text('Regular'),
                             ),
                             DropdownMenuItem(
                               value: 'oversized',
-                              child: const Text('Oversized'),
+                              child: Text('Oversized'),
                             ),
                           ],
                           onChanged: (_) {},
@@ -207,7 +220,6 @@ class _CollectionProductCard extends StatelessWidget {
   final String price;
 
   const _CollectionProductCard({
-    super.key,
     required this.title,
     required this.price,
   });
