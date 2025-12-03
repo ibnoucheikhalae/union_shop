@@ -55,3 +55,18 @@ void _placeholder() {}
                     ),
                   ),
                   const SizedBox(height: 24),
+                   // Login button
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: _placeholder,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF4d2963),
+                        foregroundColor: Colors.white,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.zero,
+                        ),
+                      ),
+                      child: const Text('Login'),
+                    ),
+                  ),
