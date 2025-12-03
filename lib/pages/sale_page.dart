@@ -99,7 +99,6 @@ class _SaleItemCard extends StatelessWidget {
   final String salePrice;
 
   const _SaleItemCard({
-    super.key,
     required this.title,
     required this.oldPrice,
     required this.salePrice,

@@ -45,8 +45,8 @@ class SignupPage extends StatelessWidget {
                   const SizedBox(height: 16),
 
                   // Full name
-                  TextField(
-                    decoration: const InputDecoration(
+                  const TextField(
+                    decoration: InputDecoration(
                       labelText: 'Full name',
                       border: OutlineInputBorder(),
                     ),
@@ -54,8 +54,8 @@ class SignupPage extends StatelessWidget {
                   const SizedBox(height: 16),
 
                   // Email
-                  TextField(
-                    decoration: const InputDecoration(
+                  const TextField(
+                    decoration: InputDecoration(
                       labelText: 'Email',
                       border: OutlineInputBorder(),
                     ),
@@ -63,9 +63,9 @@ class SignupPage extends StatelessWidget {
                   const SizedBox(height: 16),
 
                   // Password
-                  TextField(
+                  const TextField(
                     obscureText: true,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       labelText: 'Password',
                       border: OutlineInputBorder(),
                     ),
@@ -73,9 +73,9 @@ class SignupPage extends StatelessWidget {
                   const SizedBox(height: 16),
 
                   // Confirm password
-                  TextField(
+                  const TextField(
                     obscureText: true,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       labelText: 'Confirm password',
                       border: OutlineInputBorder(),
                     ),
