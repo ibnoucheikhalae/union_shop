@@ -56,11 +56,71 @@ class SalePage extends StatelessWidget {
         oldPrice: '£38.00',
         salePrice: '£26.00',
       ),
+       Container(
+  width: double.infinity,
+  color: Colors.grey[50],
+  padding: const EdgeInsets.all(24),
+  child: const Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(
+        'Placeholder Footer',
+        style: TextStyle(
+          color: Colors.grey,
+          fontSize: 16,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+      SizedBox(height: 8),
+      Text(
+        'the footer section',
+        style: TextStyle(
+          color: Colors.grey,
+          fontSize: 14,
+        ),
+      ),
+    ],
+  ),
+),
+ 
+    );
+  }
+}
     ],
   ),
 ),
                 style: TextStyle(
                   fontSize: 28,
+                  Container(
+  width: double.infinity,
+  color: Colors.grey[50],
+  padding: const EdgeInsets.all(24),
+  child: const Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(
+        'Placeholder Footer',
+        style: TextStyle(
+          color: Colors.grey,
+          fontSize: 16,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+      SizedBox(height: 8),
+      Text(
+        'the footer section',
+        style: TextStyle(
+          color: Colors.grey,
+          fontSize: 14,
+        ),
+      ),
+    ],
+  ),
+),
+ 
+    );
+  }
+}
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -137,33 +197,4 @@ class _SaleItemCard extends StatelessWidget {
           ],
         ),
       ],
-      Container(
-  width: double.infinity,
-  color: Colors.grey[50],
-  padding: const EdgeInsets.all(24),
-  child: const Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(
-        'Placeholder Footer',
-        style: TextStyle(
-          color: Colors.grey,
-          fontSize: 16,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-      SizedBox(height: 8),
-      Text(
-        'the footer section',
-        style: TextStyle(
-          color: Colors.grey,
-          fontSize: 14,
-        ),
-      ),
-    ],
-  ),
-),
- 
-    );
-  }
-}
+     
