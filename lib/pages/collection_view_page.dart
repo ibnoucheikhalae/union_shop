@@ -20,6 +20,12 @@ class _CollectionViewPageState extends State<CollectionViewPage> {
   String selectedSize = 'all';
   String selectedColour = 'all';
   String selectedFit = 'all';
+
+  // New underscored state variables (wired to dropdown `value:`)
+  String _selectedSort = 'popular';
+  String _selectedSize = 'all';
+  String _selectedColour = 'all';
+  String _selectedFit = 'all';
   int currentPage = 0;
   static const int pageSize = 6;
 
@@ -117,7 +123,7 @@ class _CollectionViewPageState extends State<CollectionViewPage> {
                     children: [
                       Expanded(
                         child: DropdownButtonFormField<String>(
-                          value: selectedSort,
+                          value: _selectedSort,
                           decoration: const InputDecoration(
                             labelText: 'Sort by',
                             border: OutlineInputBorder(),
@@ -146,6 +152,7 @@ class _CollectionViewPageState extends State<CollectionViewPage> {
                       const SizedBox(width: 12),
                       Expanded(
                         child: DropdownButtonFormField<String>(
+                          value: _selectedSize,
                           decoration: const InputDecoration(
                             labelText: 'Size',
                             border: OutlineInputBorder(),
@@ -182,6 +189,7 @@ class _CollectionViewPageState extends State<CollectionViewPage> {
                     children: [
                       Expanded(
                         child: DropdownButtonFormField<String>(
+                          value: _selectedColour,
                           decoration: const InputDecoration(
                             labelText: 'Colour',
                             border: OutlineInputBorder(),
@@ -210,6 +218,7 @@ class _CollectionViewPageState extends State<CollectionViewPage> {
                       const SizedBox(width: 12),
                       Expanded(
                         child: DropdownButtonFormField<String>(
+                          value: _selectedFit,
                           decoration: const InputDecoration(
                             labelText: 'Fit',
                             border: OutlineInputBorder(),
