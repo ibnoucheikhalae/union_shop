@@ -19,3 +19,8 @@ void _placeholder() {}
                   (route) => false,
                 );
               },
+               onSearchTap: _placeholder,
+              onAccountTap: _placeholder,
+              onCartTap: _placeholder,
+              onMenuTap: _placeholder,
+            ),
