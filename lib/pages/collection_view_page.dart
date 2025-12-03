@@ -271,3 +271,23 @@ class _CollectionProductCard extends StatelessWidget {
             ),
           ),
         ),
+      const SizedBox(height: 8),
+        Text(
+          title,
+          style: const TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          price,
+          style: const TextStyle(
+            fontSize: 13,
+            color: Colors.grey,
+          ),
+        ),
+      ],
+    );
+  }
+}
