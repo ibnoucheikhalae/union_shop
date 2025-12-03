@@ -44,6 +44,24 @@ class CollectionViewPage extends StatelessWidget {
         ),
       ),
     ],
+    const SizedBox(height: 24),
+
+Row(
+  children: [
+    Expanded(
+      child: DropdownButtonFormField<String>(
+        decoration: const InputDecoration(
+          labelText: 'Sort by',
+          border: OutlineInputBorder(),
+        ),
+        items: const [
+          DropdownMenuItem(value: 'popular', child: Text('Most popular')),
+          DropdownMenuItem(value: 'price_low_high', child: Text('Price: Low to High')),
+          DropdownMenuItem(value: 'price_high_low', child: Text('Price: High to Low')),
+        ],
+        onChanged: (_) {},
+      ),
+    ),
   ),
 ),
       ),
