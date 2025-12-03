@@ -1,48 +1,66 @@
 // lib/services/cart_service.dart
-import 'package:flutter/foundation.dart';
-import '../models/cart_item.dart';
 import '../models/product.dart';
+import '../models/cart_item.dart';
 
 class CartService {
-  CartService._private();
-  static final CartService instance = CartService._private();
+  CartService._internal();
 
-  final ValueNotifier<List<CartItem>> items = ValueNotifier<List<CartItem>>([]);
+  static final CartService instance = CartService._internal();
 
-  void addProduct(Product p) {
-    final list = List<CartItem>.from(items.value);
-    final idx = list.indexWhere((ci) => ci.product.id == p.id);
-    if (idx >= 0) {
-      list[idx].quantity += 1;
+  final List<CartItem> _items = [];
+
+  List<CartItem> get items => List.unmodifiable(_items);
+
+  bool get isEmpty => _items.isEmpty;
+
+  double get subtotal =>
+      _items.fold(0.0, (sum, item) => sum + item.lineTotal);
+
+  void addToCart({
+    required Product product,
+    required String colour,
+    required String size,
+    int quantity = 1,
+  }) {
+    // If same product + same options already exist, bump quantity
+    final existingIndex = _items.indexWhere(
+      (item) =>
+          item.product.title == product.title &&
+          item.colour == colour &&
+          item.size == size,
+    );
+
+    if (existingIndex != -1) {
+      _items[existingIndex].quantity += quantity;
     } else {
-      list.add(CartItem(product: p));
+      _items.add(
+        CartItem(
+          product: product,
+          colour: colour,
+          size: size,
+          quantity: quantity,
+        ),
+      );
     }
-    items.value = list;
   }
 
-  void removeProduct(String productId) {
-    final list = List<CartItem>.from(items.value)..removeWhere((ci) => ci.product.id == productId);
-    items.value = list;
-  }
-
-  void setQuantity(String productId, int qty) {
-    if (qty <= 0) {
-      removeProduct(productId);
+  void updateQuantity(CartItem item, int newQuantity) {
+    if (newQuantity <= 0) {
+      removeItem(item);
       return;
     }
-    final list = List<CartItem>.from(items.value);
-    final idx = list.indexWhere((ci) => ci.product.id == productId);
-    if (idx >= 0) {
-      list[idx].quantity = qty;
-      items.value = list;
+
+    final index = _items.indexOf(item);
+    if (index != -1) {
+      _items[index].quantity = newQuantity;
     }
   }
 
-  double get total {
-    return items.value.fold(0.0, (s, ci) => s + ci.totalPrice);
+  void removeItem(CartItem item) {
+    _items.remove(item);
   }
 
   void clear() {
-    items.value = [];
+    _items.clear();
   }
 }
