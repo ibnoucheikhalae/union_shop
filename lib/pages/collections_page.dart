@@ -82,3 +82,15 @@ class CollectionsPage extends StatelessWidget {
     );
   }
 }
+
+
+// 2. Sort
+    result = List<Collection>.from(result); // copy
+    if (_sortOrder == 'az') {
+      result.sort((a, b) => a.title.compareTo(b.title));
+    } else if (_sortOrder == 'za') {
+      result.sort((a, b) => b.title.compareTo(a.title));
+    }
+
+    return result;
+  }
