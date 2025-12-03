@@ -77,3 +77,14 @@ class HomeScreen extends StatelessWidget {
                       style: TextStyle(color: Colors.white, fontSize: 16),
                     ),
                   ),
+
+                                  // Main header
+                  Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              navigateToHome(context);
+                            },
