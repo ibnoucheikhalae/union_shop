@@ -21,3 +21,22 @@ class CartPage extends StatelessWidget {
                   (route) => false,
                 );
               },
+              onSearchTap: _placeholder,
+              onAccountTap: _placeholder,
+              onCartTap: _placeholder, // already on Cart page
+              onMenuTap: _placeholder,
+            ),
+
+            Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const [
+                  Text(
+                    'Your Cart',
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 16),
