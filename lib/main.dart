@@ -55,3 +55,15 @@ class HomeScreen extends StatelessWidget {
   void placeholderCallbackForButtons() {
     // This is the event handler for buttons that don't work yet
   }
+@override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            // Header
+            Container(
+              height: 100,
+              color: Colors.white,
+              child: Column(
+                children: [
