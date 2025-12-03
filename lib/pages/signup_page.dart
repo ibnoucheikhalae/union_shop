@@ -73,3 +73,18 @@ class SignupPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 24),
 
+ // Signup button
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: _placeholder,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF4d2963),
+                        foregroundColor: Colors.white,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.zero,
+                        ),
+                      ),
+                      child: const Text('Create account'),
+                    ),
+                  ),
