@@ -1,6 +1,8 @@
+// lib/pages/signup_page.dart
 import 'package:flutter/material.dart';
 import '../widgets/app_header.dart';
 import '../widgets/footer.dart';
+
 class SignupPage extends StatelessWidget {
   const SignupPage({super.key});
 
@@ -13,20 +15,20 @@ class SignupPage extends StatelessWidget {
         child: Column(
           children: [
             AppHeader(
-  onLogoTap: () {
-    Navigator.pushNamedAndRemoveUntil(
-      context,
-      '/',
-      (route) => false,
-    );
-  },
-  onSearchTap: _placeholder,
-  onAccountTap: _placeholder,
-  onCartTap: () {
-    Navigator.pushNamed(context, '/cart'); // 👈 NEW
-  },
-  onMenuTap: _placeholder,
-),
+              onLogoTap: () {
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  '/',
+                  (route) => false,
+                );
+              },
+              onSearchTap: _placeholder,
+              onAccountTap: _placeholder,
+              onCartTap: () {
+                Navigator.pushNamed(context, '/cart');
+              },
+              onMenuTap: _placeholder,
+            ),
 
             Padding(
               padding: const EdgeInsets.all(24.0),
@@ -41,7 +43,8 @@ class SignupPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  // Name
+
+                  // Full name
                   TextField(
                     decoration: const InputDecoration(
                       labelText: 'Full name',
@@ -49,15 +52,8 @@ class SignupPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 16),
-                   // Email
-                  TextField(
-                    decoration: const InputDecoration(
-                      labelText: 'Email',
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
- // Email
+
+                  // Email
                   TextField(
                     decoration: const InputDecoration(
                       labelText: 'Email',
@@ -66,7 +62,7 @@ class SignupPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
 
- // Password
+                  // Password
                   TextField(
                     obscureText: true,
                     decoration: const InputDecoration(
@@ -74,9 +70,19 @@ class SignupPage extends StatelessWidget {
                       border: OutlineInputBorder(),
                     ),
                   ),
+                  const SizedBox(height: 16),
+
+                  // Confirm password
+                  TextField(
+                    obscureText: true,
+                    decoration: const InputDecoration(
+                      labelText: 'Confirm password',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
                   const SizedBox(height: 24),
 
- // Signup button
+                  // Signup button
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
@@ -91,7 +97,8 @@ class SignupPage extends StatelessWidget {
                       child: const Text('Create account'),
                     ),
                   ),
-const SizedBox(height: 16),
+
+                  const SizedBox(height: 16),
 
                   // Back to login
                   Row(
@@ -108,7 +115,8 @@ const SizedBox(height: 16),
                 ],
               ),
             ),
-// Reusable Footer
+
+            // Reusable Footer
             const AppFooter(),
           ],
         ),
