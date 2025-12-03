@@ -39,3 +39,30 @@ class ProductCard extends StatelessWidget {
               },
             ),
           ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 4),
+              Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 14,
+                  color: Colors.black,
+                ),
+                maxLines: 2,
+              ),
+              const SizedBox(height: 4),
+              Text(
+                price,
+                style: const TextStyle(
+                  fontSize: 13,
+                  color: Colors.grey,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
