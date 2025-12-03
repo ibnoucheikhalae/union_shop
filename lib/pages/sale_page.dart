@@ -1,3 +1,4 @@
+// lib/pages/sale_page.dart
 import 'package:flutter/material.dart';
 import '../widgets/app_header.dart';
 
@@ -12,129 +13,107 @@ class SalePage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            // Header
             AppHeader(
               onLogoTap: () {
                 Navigator.pushNamedAndRemoveUntil(
-                    context, '/', (route) => false);
+                  context,
+                  '/',
+                  (route) => false,
+                );
               },
               onSearchTap: _placeholder,
               onAccountTap: _placeholder,
               onCartTap: _placeholder,
               onMenuTap: _placeholder,
             ),
-           const Padding(
+
+            // SALE title
+            const Padding(
               padding: EdgeInsets.all(24.0),
-              child: Text(
-                'SALE',
-                Padding(
-  padding: const EdgeInsets.symmetric(horizontal: 24.0),
-  child: GridView.count(
-    shrinkWrap: true,
-    physics: const NeverScrollableScrollPhysics(),
-    crossAxisCount: MediaQuery.of(context).size.width > 600 ? 3 : 2,
-    crossAxisSpacing: 16,
-    mainAxisSpacing: 16,
-    childAspectRatio: 3 / 4,
-      children: const [
-      _SaleItemCard(
-        title: 'Classic Hoodie',
-        oldPrice: '£40.00',
-        salePrice: '£28.00',
-      ),
-      _SaleItemCard(
-        title: 'Campus Sweatshirt',
-        oldPrice: '£35.00',
-        salePrice: '£25.00',
-      ),
-      _SaleItemCard(
-        title: 'Zip Hoodie',
-        oldPrice: '£42.00',
-        salePrice: '£30.00',
-      ),
-      _SaleItemCard(
-        title: 'Lightweight Hoodie',
-        oldPrice: '£38.00',
-        salePrice: '£26.00',
-      ),
-       Container(
-  width: double.infinity,
-  color: Colors.grey[50],
-  padding: const EdgeInsets.all(24),
-  child: const Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(
-        'Placeholder Footer',
-        style: TextStyle(
-          color: Colors.grey,
-          fontSize: 16,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-      SizedBox(height: 8),
-      Text(
-        'the footer section',
-        style: TextStyle(
-          color: Colors.grey,
-          fontSize: 14,
-        ),
-      ),
-    ],
-  ),
-),
- 
-    );
-  }
-}
-    ],
-  ),
-),
-                style: TextStyle(
-                  fontSize: 28,
-                  Container(
-  width: double.infinity,
-  color: Colors.grey[50],
-  padding: const EdgeInsets.all(24),
-  child: const Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(
-        'Placeholder Footer',
-        style: TextStyle(
-          color: Colors.grey,
-          fontSize: 16,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-      SizedBox(height: 8),
-      Text(
-        'the footer section',
-        style: TextStyle(
-          color: Colors.grey,
-          fontSize: 14,
-        ),
-      ),
-    ],
-  ),
-),
- 
-    );
-  }
-}
-                  fontWeight: FontWeight.bold,
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'SALE',
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
 
-            // Products will come later
+            // Grid of sale items
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              child: GridView.count(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                crossAxisCount:
+                    MediaQuery.of(context).size.width > 600 ? 3 : 2,
+                crossAxisSpacing: 16,
+                mainAxisSpacing: 16,
+                childAspectRatio: 3 / 4,
+                children: const [
+                  _SaleItemCard(
+                    title: 'Classic Hoodie',
+                    oldPrice: '£40.00',
+                    salePrice: '£28.00',
+                  ),
+                  _SaleItemCard(
+                    title: 'Campus Sweatshirt',
+                    oldPrice: '£35.00',
+                    salePrice: '£25.00',
+                  ),
+                  _SaleItemCard(
+                    title: 'Zip Hoodie',
+                    oldPrice: '£42.00',
+                    salePrice: '£30.00',
+                  ),
+                  _SaleItemCard(
+                    title: 'Lightweight Hoodie',
+                    oldPrice: '£38.00',
+                    salePrice: '£26.00',
+                  ),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 24),
+
+            // Footer
+            Container(
+              width: double.infinity,
+              color: Colors.grey[50],
+              padding: const EdgeInsets.all(24),
+              child: const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Placeholder Footer',
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    'the footer section',
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
     );
   }
 }
-
-
 
 class _SaleItemCard extends StatelessWidget {
   final String title;
@@ -147,7 +126,8 @@ class _SaleItemCard extends StatelessWidget {
     required this.oldPrice,
     required this.salePrice,
   });
- @override
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -197,4 +177,6 @@ class _SaleItemCard extends StatelessWidget {
           ],
         ),
       ],
-     
+    );
+  }
+}
