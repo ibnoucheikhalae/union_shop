@@ -43,17 +43,17 @@ class LoginPage extends StatelessWidget {
                    const SizedBox(height: 16),
 
                   // Email
-                  TextField(
-                    decoration: const InputDecoration(
+                  const TextField(
+                    decoration: InputDecoration(
                       labelText: 'Email',
                       border: OutlineInputBorder(),
                     ),
                   ),
                   const SizedBox(height: 16),
                    // Password
-                  TextField(
+                  const TextField(
                     obscureText: true,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       labelText: 'Password',
                       border: OutlineInputBorder(),
                     ),
