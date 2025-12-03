@@ -7,7 +7,8 @@ class CartService {
   CartService._private();
   static final CartService instance = CartService._private();
 
-  
+   final ValueNotifier<List<CartItem>> items = ValueNotifier<List<CartItem>>([]);
+
 
   void addProduct(Product p) {
     final list = List<CartItem>.from(items.value);
