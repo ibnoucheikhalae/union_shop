@@ -42,6 +42,29 @@ class CollectionsPage extends StatelessWidget {
                   (route) => false,
                 );
               },
+              // 🔽 Collections list (paged)
+                  if (_pagedCollections.isEmpty)
+                    const Text(
+                      'No collections match your filters.',
+                      style: TextStyle(fontSize: 16),
+                    )
+                  else
+                    ..._pagedCollections.map(
+                      (collection) => Column(
+                        children: [
+                          ListTile(
+                            title: Text(collection.title),
+                            subtitle: Text(collection.description),
+                            trailing: const Icon(Icons.chevron_right),
+                            onTap: () => _openCollection(context, collection),
+                          ),
+                          const Divider(),
+                        ],
+                      ),
+                    ),
+
+                  const SizedBox(height: 16),
+
               onSearchTap: _placeholder,
               onAccountTap: () {
                 Navigator.pushNamed(context, '/login');
