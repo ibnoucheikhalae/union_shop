@@ -46,3 +46,11 @@ class SignupPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 16),
+                   // Email
+                  TextField(
+                    decoration: const InputDecoration(
+                      labelText: 'Email',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
