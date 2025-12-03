@@ -38,3 +38,11 @@ class SignupPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 16),
+                  // Name
+                  TextField(
+                    decoration: const InputDecoration(
+                      labelText: 'Full name',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
