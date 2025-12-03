@@ -23,12 +23,20 @@ class CollectionViewPage extends StatelessWidget {
             onAccountTap: _placeholder,
             onCartTap: _placeholder,
             onMenuTap: _placeholder,
-          ),
-          const Expanded(
-            child: Center(child: Text("Collection content goes here")),
-          ),
-        ],
+        Padding(
+  padding: const EdgeInsets.all(24.0),
+  child: Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: const [
+      Text(
+        'Hoodies & Sweatshirts',
+        style: TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
       ),
     );
   }
 }
+
