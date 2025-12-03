@@ -30,16 +30,21 @@ class HomeScreen extends StatelessWidget {
           children: [
             // Header using reusable AppHeader
             AppHeader(
-              onLogoTap: () => navigateToHome(context),
-              onSearchTap: placeholderCallbackForButtons,
-              onAccountTap: () {
-                Navigator.pushNamed(context, '/login');
-              },
-              onCartTap: placeholderCallbackForButtons,
-              onMenuTap: () {
-                Navigator.pushNamed(context, '/collections');
-              },
-            ),
+  onLogoTap: () {
+    Navigator.pushNamedAndRemoveUntil(
+      context,
+      '/',
+      (route) => false,
+    );
+  },
+  onSearchTap: _placeholder,
+  onAccountTap: _placeholder,
+  onCartTap: () {
+    Navigator.pushNamed(context, '/cart'); // 👈 NEW
+  },
+  onMenuTap: _placeholder,
+),
+
 
             // Hero Section
             SizedBox(

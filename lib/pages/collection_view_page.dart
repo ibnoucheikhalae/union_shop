@@ -14,18 +14,21 @@ class CollectionViewPage extends StatelessWidget {
         child: Column(
           children: [
             AppHeader(
-              onLogoTap: () {
-                Navigator.pushNamedAndRemoveUntil(
-                  context,
-                  '/',
-                  (route) => false,
-                );
-              },
-              onSearchTap: _placeholder,
-              onAccountTap: _placeholder,
-              onCartTap: _placeholder,
-              onMenuTap: _placeholder,
-            ),
+  onLogoTap: () {
+    Navigator.pushNamedAndRemoveUntil(
+      context,
+      '/',
+      (route) => false,
+    );
+  },
+  onSearchTap: _placeholder,
+  onAccountTap: _placeholder,
+  onCartTap: () {
+    Navigator.pushNamed(context, '/cart'); // 👈 NEW
+  },
+  onMenuTap: _placeholder,
+),
+
 
             Padding(
               padding: const EdgeInsets.all(24.0),

@@ -13,18 +13,21 @@ class CollectionsPage extends StatelessWidget {
           children: [
             // Reusable header
             AppHeader(
-              onLogoTap: () {
-                Navigator.pushNamedAndRemoveUntil(
-                  context,
-                  '/',
-                  (route) => false,
-                );
-              },
-              onSearchTap: () {},
-              onAccountTap: () {},
-              onCartTap: () {},
-              onMenuTap: () {},
-            ),
+  onLogoTap: () {
+    Navigator.pushNamedAndRemoveUntil(
+      context,
+      '/',
+      (route) => false,
+    );
+  },
+  onSearchTap: _placeholder,
+  onAccountTap: _placeholder,
+  onCartTap: () {
+    Navigator.pushNamed(context, '/cart'); // 👈 NEW
+  },
+  onMenuTap: _placeholder,
+),
+
 
             // Main content
             Padding(
