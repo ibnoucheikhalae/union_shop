@@ -1,245 +1,329 @@
+// lib/pages/product_page.dart
 import 'package:flutter/material.dart';
+
+import '../widgets/app_header.dart';
 import '../widgets/footer.dart';
-class ProductPage extends StatelessWidget {
+import '../data/dummy_products.dart';
+import '../models/product.dart';
+import '../services/cart_service.dart';
+
+class ProductPage extends StatefulWidget {
   const ProductPage({super.key});
 
-  void navigateToHome(BuildContext context) {
-    Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+  @override
+  State<ProductPage> createState() => _ProductPageState();
+}
+
+class _ProductPageState extends State<ProductPage> {
+  late Product product;
+
+  String? _selectedColour;
+  String? _selectedSize;
+  int _quantity = 1;
+
+  void _placeholder() {}
+
+  @override
+  void initState() {
+    super.initState();
+
+    // For now just take the first dummy product.
+    // Later you can pass product via Navigator arguments.
+    product = dummyProducts.first;
+
+    // Optional sensible defaults
+    _selectedColour =
+        product.colours.isNotEmpty ? product.colours.first : null;
+    _selectedSize = product.sizes.isNotEmpty ? product.sizes.first : null;
   }
 
-  void placeholderCallbackForButtons() {
-    // This is the event handler for buttons that don't work yet
+  void _addToCart() {
+    if (_selectedColour == null || _selectedSize == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please choose colour and size first.'),
+        ),
+      );
+      return;
+    }
+
+    CartService.instance.addToCart(
+      product: product,
+      colour: _selectedColour!,
+      size: _selectedSize!,
+      quantity: _quantity,
+    );
+
+    // Navigate to cart so user sees result
+    Navigator.pushNamed(context, '/cart');
   }
 
   @override
   Widget build(BuildContext context) {
+    // Parse numeric price for layout if you want it
+    final priceText = product.price; // already includes £
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Header
-            Container(
-              height: 100,
-              color: Colors.white,
-              child: Column(
-                children: [
-                  // Top banner
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    color: const Color(0xFF4d2963),
-                    child: const Text(
-                      'PLACEHOLDER HEADER TEXT - STUDENTS TO UPDATE!',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white, fontSize: 16),
-                    ),
-                  ),
-                  // Main header
-                  Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Row(
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              navigateToHome(context);
-                            },
-                            child: Image.network(
-                              'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
-                              height: 18,
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) {
-                                return Container(
-                                  color: Colors.grey[300],
-                                  width: 18,
-                                  height: 18,
-                                  child: const Center(
-                                    child: Icon(
-                                      Icons.image_not_supported,
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                          const Spacer(),
-                          ConstrainedBox(
-                            constraints: const BoxConstraints(maxWidth: 600),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.search,
-                                    size: 18,
-                                    color: Colors.grey,
-                                  ),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(
-                                    minWidth: 32,
-                                    minHeight: 32,
-                                  ),
-                                  onPressed: placeholderCallbackForButtons,
-                                ),
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.person_outline,
-                                    size: 18,
-                                    color: Colors.grey,
-                                  ),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(
-                                    minWidth: 32,
-                                    minHeight: 32,
-                                  ),
-                                  onPressed: placeholderCallbackForButtons,
-                                ),
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.shopping_bag_outlined,
-                                    size: 18,
-                                    color: Colors.grey,
-                                  ),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(
-                                    minWidth: 32,
-                                    minHeight: 32,
-                                  ),
-                                  onPressed: placeholderCallbackForButtons,
-                                ),
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.menu,
-                                    size: 18,
-                                    color: Colors.grey,
-                                  ),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(
-                                    minWidth: 32,
-                                    minHeight: 32,
-                                  ),
-                                  onPressed: placeholderCallbackForButtons,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+            AppHeader(
+              onLogoTap: () {
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  '/',
+                  (route) => false,
+                );
+              },
+              onSearchTap: _placeholder,
+              onAccountTap: () {
+                Navigator.pushNamed(context, '/login');
+              },
+              onCartTap: () {
+                Navigator.pushNamed(context, '/cart');
+              },
+              onMenuTap: _placeholder,
             ),
 
-            // Product details
-            Container(
-              color: Colors.white,
-              padding: const EdgeInsets.all(24),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Product image
-                  Container(
-                    height: 300,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: Colors.grey[200],
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: Image.network(
-                        'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) {
-                          return Container(
-                            color: Colors.grey[300],
-                            child: const Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    Icons.image_not_supported,
-                                    size: 64,
-                                    color: Colors.grey,
-                                  ),
-                                  SizedBox(height: 8),
-                                  Text(
-                                    'Image unavailable',
-                                    style: TextStyle(color: Colors.grey),
-                                  ),
-                                ],
+            // Main content
+            Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  final isWide = constraints.maxWidth > 800;
+
+                  if (isWide) {
+                    // Side-by-side image + details (desktop-ish)
+                    return Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Image
+                        Expanded(
+                          flex: 3,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(4),
+                            child: AspectRatio(
+                              aspectRatio: 4 / 3,
+                              child: Image.network(
+                                product.imageUrl,
+                                fit: BoxFit.cover,
+                                errorBuilder: (context, _, __) {
+                                  return Container(
+                                    color: Colors.grey[300],
+                                    child: const Center(
+                                      child: Icon(
+                                        Icons.image_not_supported,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                  );
+                                },
                               ),
                             ),
-                          );
-                        },
+                          ),
+                        ),
+                        const SizedBox(width: 32),
+
+                        // Details
+                        Expanded(
+                          flex: 4,
+                          child: _buildDetails(priceText),
+                        ),
+                      ],
+                    );
+                  }
+
+                  // Mobile / narrow: stacked
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(4),
+                        child: AspectRatio(
+                          aspectRatio: 4 / 3,
+                          child: Image.network(
+                            product.imageUrl,
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, _, __) {
+                              return Container(
+                                color: Colors.grey[300],
+                                child: const Center(
+                                  child: Icon(
+                                    Icons.image_not_supported,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-
-                  const SizedBox(height: 24),
-
-                  // Product name
-                  const Text(
-                    'Placeholder Product Name',
-                    style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-                  ),
-
-                  const SizedBox(height: 12),
-
-                  // Product price
-                  const Text(
-                    '£15.00',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF4d2963),
-                    ),
-                  ),
-
-                  const SizedBox(height: 24),
-
-                  // Product description
-                  const Text(
-                    'Description',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  const Text(
-                    'This is a placeholder description for the product. Students should replace this with real product information and implement proper data management.',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey,
-                      height: 1.5,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  const Text(
-                    'Students should add size options, colour options, quantity selector, add to cart button, and buy now button here.',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.grey,
-                      height: 1.5,
-                    ),
-                  ),
-                ],
+                      const SizedBox(height: 24),
+                      _buildDetails(priceText),
+                    ],
+                  );
+                },
               ),
             ),
 
-               // Reusable Footer
             const AppFooter(),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildDetails(String priceText) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          product.title,
+          style: const TextStyle(
+            fontSize: 28,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          priceText,
+          style: const TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+            color: Color(0xFF4d2963),
+          ),
+        ),
+        const SizedBox(height: 16),
+
+        const Text(
+          'Description',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          product.description,
+          style: const TextStyle(
+            fontSize: 14,
+            height: 1.5,
+          ),
+        ),
+        const SizedBox(height: 24),
+
+        // Colour dropdown
+        if (product.colours.isNotEmpty) ...[
+          const Text(
+            'Colour',
+            style: TextStyle(fontWeight: FontWeight.w600),
+          ),
+          const SizedBox(height: 8),
+          DropdownButtonFormField<String>(
+            value: _selectedColour,
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+            ),
+            items: product.colours
+                .map(
+                  (c) => DropdownMenuItem(
+                    value: c,
+                    child: Text(c),
+                  ),
+                )
+                .toList(),
+            onChanged: (value) {
+              setState(() {
+                _selectedColour = value;
+              });
+            },
+          ),
+          const SizedBox(height: 16),
+        ],
+
+        // Size dropdown
+        if (product.sizes.isNotEmpty) ...[
+          const Text(
+            'Size',
+            style: TextStyle(fontWeight: FontWeight.w600),
+          ),
+          const SizedBox(height: 8),
+          DropdownButtonFormField<String>(
+            value: _selectedSize,
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+            ),
+            items: product.sizes
+                .map(
+                  (s) => DropdownMenuItem(
+                    value: s,
+                    child: Text(s),
+                  ),
+                )
+                .toList(),
+            onChanged: (value) {
+              setState(() {
+                _selectedSize = value;
+              });
+            },
+          ),
+          const SizedBox(height: 16),
+        ],
+
+        // Quantity selector
+        const Text(
+          'Quantity',
+          style: TextStyle(fontWeight: FontWeight.w600),
+        ),
+        const SizedBox(height: 8),
+        Row(
+          children: [
+            IconButton(
+              onPressed: _quantity > 1
+                  ? () {
+                      setState(() {
+                        _quantity--;
+                      });
+                    }
+                  : null,
+              icon: const Icon(Icons.remove),
+            ),
+            Text('$_quantity'),
+            IconButton(
+              onPressed: () {
+                setState(() {
+                  _quantity++;
+                });
+              },
+              icon: const Icon(Icons.add),
+            ),
+          ],
+        ),
+        const SizedBox(height: 24),
+
+        // Add to cart
+        SizedBox(
+          width: double.infinity,
+          child: ElevatedButton(
+            onPressed: _addToCart,
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF4d2963),
+              foregroundColor: Colors.white,
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.zero,
+              ),
+            ),
+            child: const Text(
+              'ADD TO CART',
+              style: TextStyle(
+                letterSpacing: 1,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
