@@ -1,41 +1,41 @@
 // lib/data/dummy_products.dart
 import '../models/product.dart';
 
-const dummyProducts = [
+const List<Product> dummyProducts = [
   Product(
-    id: 'hoodie-1',
+    id: 'p1',
     title: 'Classic Uni Hoodie',
     price: '£35.00',
-    image: 'assets/products/classic_hoodie.png',
+    collectionSlug: 'hoodies',
   ),
   Product(
-    id: 'hoodie-2',
+    id: 'p2',
     title: 'Oversized Campus Hoodie',
     price: '£38.00',
-    image: 'assets/products/oversized_hoodie.png',
+    collectionSlug: 'hoodies',
   ),
   Product(
-    id: 'hoodie-3',
-    title: 'Zip-Up Sports Hoodie',
-    price: '£40.00',
-    image: 'assets/products/zip_sports_hoodie.png',
+    id: 'p3',
+    title: 'Portsmouth City Mug',
+    price: '£8.00',
+    collectionSlug: 'gifts',
   ),
   Product(
-    id: 'hoodie-4',
-    title: 'Heritage Logo Sweatshirt',
-    price: '£32.00',
-    image: 'assets/products/heritage_sweatshirt.png',
+    id: 'p4',
+    title: 'Logo Keyring',
+    price: '£4.00',
+    collectionSlug: 'gifts',
   ),
   Product(
-    id: 'hoodie-5',
-    title: 'Fleece Lined Hoodie',
-    price: '£42.00',
-    image: 'assets/products/fleece_hoodie.png',
+    id: 'p5',
+    title: 'A5 Notebook',
+    price: '£6.00',
+    collectionSlug: 'stationery',
   ),
   Product(
-    id: 'hoodie-6',
-    title: 'Minimal Crest Hoodie',
-    price: '£36.00',
-    image: 'assets/products/minimal_crest_hoodie.png',
+    id: 'p6',
+    title: 'Ballpoint Pen Set',
+    price: '£5.00',
+    collectionSlug: 'stationery',
   ),
 ];
