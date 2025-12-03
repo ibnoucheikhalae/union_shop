@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import '../widgets/app_header.dart';
 import '../widgets/footer.dart';
 import '../data/dummy_products.dart';
-import '../data/dummy_collections.dart';
-import '../models/collection.dart';
 class CollectionViewPage extends StatelessWidget {
   const CollectionViewPage({super.key});
 
@@ -11,20 +9,6 @@ class CollectionViewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Read route arguments which may be a `String` slug or a `Collection`.
-    final args = ModalRoute.of(context)?.settings.arguments;
-    Collection? selectedCollection;
-    if (args is String) {
-      selectedCollection = dummyCollections.firstWhere(
-        (c) => c.slug == args,
-        orElse: () => dummyCollections.isNotEmpty ? dummyCollections.first : null,
-      );
-    } else if (args is Collection) {
-      selectedCollection = args;
-    }
-
-    final title = selectedCollection?.title ?? 'Collection';
-    final description = selectedCollection?.description ?? 'Browse items in this collection.';
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -48,17 +32,17 @@ class CollectionViewPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    title,
-                    style: const TextStyle(
+                  const Text(
+                    'Hoodies & Sweatshirts',
+                    style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 8),
-                  Text(
-                    description,
-                    style: const TextStyle(
+                  const Text(
+                    'Warm and comfy uni hoodies for everyday campus life.',
+                    style: TextStyle(
                       fontSize: 14,
                       height: 1.5,
                     ),
