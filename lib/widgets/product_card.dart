@@ -76,8 +76,13 @@ class ProductCard extends StatelessWidget {
                       title: title,
                       price: price,
                       collectionSlug: collectionSlug ?? '',
+                      imageUrl: imageUrl,
                     );
-                    CartService.instance.addProduct(product);
+                    CartService.instance.addToCart(
+                      product: product,
+                      colour: '',
+                      size: '',
+                    );
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Added to cart')),
                     );
