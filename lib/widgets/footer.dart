@@ -19,3 +19,16 @@ class AppFooter extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ),
           ),
+           SizedBox(height: 8),
+          Text(
+            'Students should customise this footer section',
+            style: TextStyle(
+              color: Colors.grey,
+              fontSize: 14,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
