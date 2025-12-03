@@ -27,6 +27,9 @@ class _CollectionViewPageState extends State<CollectionViewPage> {
   String _selectedSize = 'all';
   String _selectedColour = 'all';
   String _selectedFit = 'all';
+  // Pagination state
+  int _currentPage = 1;
+  int itemsPerPage = 4;
 
   double _parsePrice(String price) {
     final cleaned = price.replaceAll(RegExp(r'[^0-9.]'), '');
@@ -119,6 +122,35 @@ class _CollectionViewPageState extends State<CollectionViewPage> {
                     ),
                   ),
                   const SizedBox(height: 24),
+
+                  // --- Pagination ---
+                  final int startIndex = (_currentPage - 1) * itemsPerPage;
+                  final int endIndex = (startIndex + itemsPerPage) > collectionProducts.length
+                      ? collectionProducts.length
+                      : startIndex + itemsPerPage;
+                  final paginatedProducts = collectionProducts.sublist(
+                    startIndex.clamp(0, collectionProducts.length).toInt(),
+                    endIndex.clamp(0, collectionProducts.length).toInt(),
+                  );
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ElevatedButton(
+                        onPressed: _currentPage > 1
+                            ? () => setState(() => _currentPage--)
+                            : null,
+                        child: const Text('Previous'),
+                      ),
+                      Text('Page $_currentPage of ${ (collectionProducts.length / itemsPerPage).ceil() }'),
+                      ElevatedButton(
+                        onPressed: _currentPage * itemsPerPage < collectionProducts.length
+                            ? () => setState(() => _currentPage++)
+                            : null,
+                        child: const Text('Next'),
+                      ),
+                    ],
+                  ),
 
                   // Sorting already applied above using `_selectedSort`.
 
@@ -259,18 +291,17 @@ class _CollectionViewPageState extends State<CollectionViewPage> {
                     mainAxisSpacing: 16,
                     crossAxisSpacing: 16,
                     childAspectRatio: 3 / 4,
-                    children: collectionProducts.isEmpty
+                    children: paginatedProducts.isEmpty
                         ? const [
                             Center(
                               child: Text('No products in this collection yet.'),
                             ),
                           ]
-                        : collectionProducts.map((product) {
+                        : paginatedProducts.map((product) {
                             return ProductCard(
                               title: product.title,
                               price: product.price,
-                              imageUrl:
-                                  'https://via.placeholder.com/400x400?text=Product',
+                              imageUrl: 'https://via.placeholder.com/400x400?text=Product',
                             );
                           }).toList(),
                   ),
