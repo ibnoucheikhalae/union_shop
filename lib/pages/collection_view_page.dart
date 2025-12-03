@@ -241,3 +241,12 @@ class CollectionViewPage extends StatelessWidget {
   }
 }
 
+class _CollectionProductCard extends StatelessWidget {
+  final String title;
+  final String price;
+
+  const _CollectionProductCard({
+    super.key,
+    required this.title,
+    required this.price,
+  });
