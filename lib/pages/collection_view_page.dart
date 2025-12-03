@@ -48,7 +48,7 @@ class CollectionViewPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 24),
 
-                  // Row 1: Sort + Size
+                  // Fake filters (UI only)
                   Row(
                     children: [
                       Expanded(
@@ -58,15 +58,15 @@ class CollectionViewPage extends StatelessWidget {
                             border: OutlineInputBorder(),
                           ),
                           items: const [
-                            DropdownMenuItem<String>(
+                            DropdownMenuItem(
                               value: 'popular',
                               child: Text('Most popular'),
                             ),
-                            DropdownMenuItem<String>(
+                            DropdownMenuItem(
                               value: 'price_low_high',
                               child: Text('Price: Low to High'),
                             ),
-                            DropdownMenuItem<String>(
+                            DropdownMenuItem(
                               value: 'price_high_low',
                               child: Text('Price: High to Low'),
                             ),
@@ -82,24 +82,24 @@ class CollectionViewPage extends StatelessWidget {
                             border: OutlineInputBorder(),
                           ),
                           items: const [
-                            DropdownMenuItem<String>(
+                            DropdownMenuItem(
                               value: 'all',
                               child: Text('All sizes'),
                             ),
-                            DropdownMenuItem<String>(
-                              value: 'S',
+                            DropdownMenuItem(
+                              value: 's',
                               child: Text('S'),
                             ),
-                            DropdownMenuItem<String>(
-                              value: 'M',
+                            DropdownMenuItem(
+                              value: 'm',
                               child: Text('M'),
                             ),
-                            DropdownMenuItem<String>(
-                              value: 'L',
+                            DropdownMenuItem(
+                              value: 'l',
                               child: Text('L'),
                             ),
-                            DropdownMenuItem<String>(
-                              value: 'XL',
+                            DropdownMenuItem(
+                              value: 'xl',
                               child: Text('XL'),
                             ),
                           ],
@@ -108,10 +108,7 @@ class CollectionViewPage extends StatelessWidget {
                       ),
                     ],
                   ),
-
                   const SizedBox(height: 12),
-
-                  // Row 2: Colour + Fit
                   Row(
                     children: [
                       Expanded(
@@ -121,19 +118,19 @@ class CollectionViewPage extends StatelessWidget {
                             border: OutlineInputBorder(),
                           ),
                           items: const [
-                            DropdownMenuItem<String>(
+                            DropdownMenuItem(
                               value: 'all',
                               child: Text('All colours'),
                             ),
-                            DropdownMenuItem<String>(
+                            DropdownMenuItem(
                               value: 'black',
                               child: Text('Black'),
                             ),
-                            DropdownMenuItem<String>(
+                            DropdownMenuItem(
                               value: 'grey',
                               child: Text('Grey'),
                             ),
-                            DropdownMenuItem<String>(
+                            DropdownMenuItem(
                               value: 'navy',
                               child: Text('Navy'),
                             ),
@@ -149,15 +146,15 @@ class CollectionViewPage extends StatelessWidget {
                             border: OutlineInputBorder(),
                           ),
                           items: const [
-                            DropdownMenuItem<String>(
+                            DropdownMenuItem(
                               value: 'all',
                               child: Text('All fits'),
                             ),
-                            DropdownMenuItem<String>(
+                            DropdownMenuItem(
                               value: 'regular',
                               child: Text('Regular'),
                             ),
-                            DropdownMenuItem<String>(
+                            DropdownMenuItem(
                               value: 'oversized',
                               child: Text('Oversized'),
                             ),
@@ -165,52 +162,74 @@ class CollectionViewPage extends StatelessWidget {
                           onChanged: (_) {},
                         ),
                       ),
-                      const SizedBox(height: 24),
-
-GridView.count(
-  shrinkWrap: true,
-  physics: const NeverScrollableScrollPhysics(),
-  crossAxisCount: MediaQuery.of(context).size.width > 600 ? 3 : 2,
-  mainAxisSpacing: 16,
-  crossAxisSpacing: 16,
-  childAspectRatio: 3 / 4,
-  children: const [
-    _CollectionProductCard(title: 'Classic Uni Hoodie', price: '£35.00'),
-    _CollectionProductCard(title: 'Oversized Campus Hoodie', price: '£38.00'),
-    _CollectionProductCard(title: 'Zip-Up Sports Hoodie', price: '£40.00'),
-    _CollectionProductCard(title: 'Heritage Logo Sweatshirt', price: '£32.00'),
-    _CollectionProductCard(title: 'Fleece Lined Hoodie', price: '£42.00'),
-    _CollectionProductCard(title: 'Minimal Crest Hoodie', price: '£36.00'),
-  ],
-),
-Container(
-  width: double.infinity,
-  color: Colors.grey[50],
-  padding: const EdgeInsets.all(24),
-  child: const Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(
-        'Placeholder Footer',
-        style: TextStyle(
-          color: Colors.grey,
-          fontSize: 16,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-      SizedBox(height: 8),
-      Text(
-        'Footer Section',
-        style: TextStyle(
-          color: Colors.grey,
-          fontSize: 14,
-        ),
-      ),
-    ],
-  ),
-),
-
                     ],
+                  ),
+
+                  const SizedBox(height: 24),
+
+                  // Grid of dummy products
+                  GridView.count(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    crossAxisCount:
+                        MediaQuery.of(context).size.width > 600 ? 3 : 2,
+                    mainAxisSpacing: 16,
+                    crossAxisSpacing: 16,
+                    childAspectRatio: 3 / 4,
+                    children: const [
+                      _CollectionProductCard(
+                        title: 'Classic Uni Hoodie',
+                        price: '£35.00',
+                      ),
+                      _CollectionProductCard(
+                        title: 'Oversized Campus Hoodie',
+                        price: '£38.00',
+                      ),
+                      _CollectionProductCard(
+                        title: 'Zip-Up Sports Hoodie',
+                        price: '£40.00',
+                      ),
+                      _CollectionProductCard(
+                        title: 'Heritage Logo Sweatshirt',
+                        price: '£32.00',
+                      ),
+                      _CollectionProductCard(
+                        title: 'Fleece Lined Hoodie',
+                        price: '£42.00',
+                      ),
+                      _CollectionProductCard(
+                        title: 'Minimal Crest Hoodie',
+                        price: '£36.00',
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+
+            // Footer
+            Container(
+              width: double.infinity,
+              color: Colors.grey[50],
+              padding: const EdgeInsets.all(24),
+              child: const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Placeholder Footer',
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    'Footer section',
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 14,
+                    ),
                   ),
                 ],
               ),
@@ -221,3 +240,4 @@ Container(
     );
   }
 }
+
