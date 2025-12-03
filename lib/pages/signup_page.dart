@@ -88,3 +88,20 @@ class SignupPage extends StatelessWidget {
                       child: const Text('Create account'),
                     ),
                   ),
+const SizedBox(height: 16),
+
+                  // Back to login
+                  Row(
+                    children: [
+                      const Text('Already have an account?'),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/login');
+                        },
+                        child: const Text('Login'),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
