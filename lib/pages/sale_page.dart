@@ -73,3 +73,17 @@ class SalePage extends StatelessWidget {
     );
   }
 }
+
+
+
+class _SaleItemCard extends StatelessWidget {
+  final String title;
+  final String oldPrice;
+  final String salePrice;
+
+  const _SaleItemCard({
+    super.key,
+    required this.title,
+    required this.oldPrice,
+    required this.salePrice,
+  });
