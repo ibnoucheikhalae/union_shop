@@ -26,6 +26,15 @@ class SalePage extends StatelessWidget {
               padding: EdgeInsets.all(24.0),
               child: Text(
                 'SALE',
+                Padding(
+  padding: const EdgeInsets.symmetric(horizontal: 24.0),
+  child: GridView.count(
+    shrinkWrap: true,
+    physics: const NeverScrollableScrollPhysics(),
+    crossAxisCount: MediaQuery.of(context).size.width > 600 ? 3 : 2,
+    crossAxisSpacing: 16,
+    mainAxisSpacing: 16,
+    childAspectRatio: 3 / 4,
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
