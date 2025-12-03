@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../widgets/app_header.dart';
 import '../widgets/footer.dart';
+import '../widgets/product_card.dart';
 import '../data/dummy_products.dart';
 import '../data/dummy_collections.dart';
 import '../models/collection.dart';
@@ -58,20 +59,20 @@ class _CollectionViewPageState extends State<CollectionViewPage> {
         .where((p) => p.collectionSlug == effectiveSlug)
         .toList();
 
-    // apply simple sorting based on selectedSort state
-    if (selectedSort == 'price_low_high') {
+    // apply simple sorting based on the selected sort state
+    if (_selectedSort == 'price_low_high') {
       collectionProducts.sort((a, b) =>
           double.parse(a.price.replaceAll(RegExp(r'[^0-9\.]'), ''))
               .compareTo(double.parse(
                   b.price.replaceAll(RegExp(r'[^0-9\.]'), ''))));
-    } else if (selectedSort == 'price_high_low') {
+    } else if (_selectedSort == 'price_high_low') {
       collectionProducts.sort((a, b) =>
           double.parse(b.price.replaceAll(RegExp(r'[^0-9\.]'), ''))
               .compareTo(double.parse(
                   a.price.replaceAll(RegExp(r'[^0-9\.]'), ''))));
-    } else if (selectedSort == 'az') {
+    } else if (_selectedSort == 'az') {
       collectionProducts.sort((a, b) => a.title.compareTo(b.title));
-    } else if (selectedSort == 'za') {
+    } else if (_selectedSort == 'za') {
       collectionProducts.sort((a, b) => b.title.compareTo(a.title));
     }
 
@@ -119,29 +120,7 @@ class _CollectionViewPageState extends State<CollectionViewPage> {
                   ),
                   const SizedBox(height: 24),
 
-                  // --- Sorting: apply only, do not filter ---
-                  // Sort by price or leave unchanged for 'popular'
-                  if (_selectedSort == 'price_low_high') {
-                    collectionProducts.sort((a, b) {
-                      final pa = double.tryParse(
-                              a.price.replaceAll(RegExp(r'[^0-9\.]'), '')) ??
-                          0.0;
-                      final pb = double.tryParse(
-                              b.price.replaceAll(RegExp(r'[^0-9\.]'), '')) ??
-                          0.0;
-                      return pa.compareTo(pb);
-                    });
-                  } else if (_selectedSort == 'price_high_low') {
-                    collectionProducts.sort((a, b) {
-                      final pa = double.tryParse(
-                              a.price.replaceAll(RegExp(r'[^0-9\.]'), '')) ??
-                          0.0;
-                      final pb = double.tryParse(
-                              b.price.replaceAll(RegExp(r'[^0-9\.]'), '')) ??
-                          0.0;
-                      return pb.compareTo(pa);
-                    });
-                  }
+                  // Sorting already applied above using `_selectedSort`.
 
                   // (keep your filters the same)
                   // Fake filters (UI only)
@@ -171,7 +150,7 @@ class _CollectionViewPageState extends State<CollectionViewPage> {
                             DropdownMenuItem(value: 'za', child: Text('Z → A')),
                           ],
                           onChanged: (v) => setState(() {
-                            selectedSort = v ?? 'popular';
+                            _selectedSort = v ?? 'popular';
                           }),
                         ),
                       ),
@@ -286,14 +265,14 @@ class _CollectionViewPageState extends State<CollectionViewPage> {
                               child: Text('No products in this collection yet.'),
                             ),
                           ]
-                        : collectionProducts
-                            .map(
-                              (product) => _CollectionProductCard(
-                                title: product.title,
-                                price: product.price,
-                              ),
-                            )
-                            .toList(),
+                        : collectionProducts.map((product) {
+                            return ProductCard(
+                              title: product.title,
+                              price: product.price,
+                              imageUrl:
+                                  'https://via.placeholder.com/400x400?text=Product',
+                            );
+                          }).toList(),
                   ),
                 ],
               ),
