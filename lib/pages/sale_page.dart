@@ -35,6 +35,30 @@ class SalePage extends StatelessWidget {
     crossAxisSpacing: 16,
     mainAxisSpacing: 16,
     childAspectRatio: 3 / 4,
+      children: const [
+      _SaleItemCard(
+        title: 'Classic Hoodie',
+        oldPrice: '£40.00',
+        salePrice: '£28.00',
+      ),
+      _SaleItemCard(
+        title: 'Campus Sweatshirt',
+        oldPrice: '£35.00',
+        salePrice: '£25.00',
+      ),
+      _SaleItemCard(
+        title: 'Zip Hoodie',
+        oldPrice: '£42.00',
+        salePrice: '£30.00',
+      ),
+      _SaleItemCard(
+        title: 'Lightweight Hoodie',
+        oldPrice: '£38.00',
+        salePrice: '£26.00',
+      ),
+    ],
+  ),
+),
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
