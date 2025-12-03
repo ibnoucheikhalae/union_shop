@@ -26,3 +26,62 @@ class Collection {
     required this.image,
     required this.slug,
   });
+
+  /// Creates a copy of this collection with optional replacement fields.
+  Collection copyWith({
+    String? id,
+    String? title,
+    String? description,
+    String? image,
+    String? slug,
+  }) {
+    return Collection(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      description: description ?? this.description,
+      image: image ?? this.image,
+      slug: slug ?? this.slug,
+    );
+  }
+
+  /// Convert from a JSON-like map (from API or local storage).
+  factory Collection.fromJson(Map<String, dynamic> json) {
+    return Collection(
+      id: json['id']?.toString() ?? '',
+      title: json['title']?.toString() ?? '',
+      description: json['description']?.toString() ?? '',
+      image: json['image']?.toString() ?? '',
+      slug: json['slug']?.toString() ?? '',
+    );
+  }
+
+  /// Convert to a JSON-like map suitable for serialization.
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'description': description,
+      'image': image,
+      'slug': slug,
+    };
+  }
+
+  @override
+  String toString() {
+    return 'Collection(id: $id, title: $title, slug: $slug)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is Collection &&
+        other.id == id &&
+        other.title == title &&
+        other.description == description &&
+        other.image == image &&
+        other.slug == slug;
+  }
+
+  @override
+  int get hashCode => Object.hash(id, title, description, image, slug);
+}
