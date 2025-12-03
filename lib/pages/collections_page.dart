@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/app_header.dart';
 import '../widgets/footer.dart';
+import '../models/collection.dart';
 // simple placeholder for header callback actions
 void _placeholder() {}
 class CollectionsPage extends StatelessWidget {
@@ -46,24 +47,37 @@ class CollectionsPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
 
-                  // list of dummy collections
-                  ListTile(
-                    title: const Text('Hoodies & Sweatshirts'),
-                    subtitle: const Text('Warm and comfy uni hoodies'),
-                    onTap: () {
-                      Navigator.pushNamed(context, '/collection');
-                    },
-                  ),
-                  const Divider(),
-                  const ListTile(
-                    title: Text('Gifts & Accessories'),
-                    subtitle: Text('Mugs, magnets, keyrings and more'),
-                  ),
-                  const Divider(),
-                  const ListTile(
-                    title: Text('Stationery'),
-                    subtitle: Text('Notebooks, pens, and study essentials'),
-                  ),
+                  // generated list of dummy collections from model
+                  for (final collection in kDummyCollections) ...[
+                    ListTile(
+                      leading: SizedBox(
+                        width: 56,
+                        height: 56,
+                        child: Image.network(
+                          collection.image,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Container(
+                              color: Colors.grey[300],
+                              child: const Center(
+                                child: Icon(Icons.image_not_supported, color: Colors.grey),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                      title: Text(collection.title),
+                      subtitle: Text(collection.description),
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          '/collection',
+                          arguments: collection,
+                        );
+                      },
+                    ),
+                    const Divider(),
+                  ],
                 ],
               ),
             ),
