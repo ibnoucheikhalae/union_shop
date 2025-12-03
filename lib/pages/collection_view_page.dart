@@ -17,17 +17,11 @@ class CollectionViewPage extends StatefulWidget {
 
 class _CollectionViewPageState extends State<CollectionViewPage> {
   // UI state for filters/sorting/pagination
-  String selectedSort = 'popular';
-  String selectedSize = 'all';
-  String selectedColour = 'all';
-  String selectedFit = 'all';
-
-    // New underscored state variables (for dropdown `value:`)
   String _selectedSort = 'popular';
   String _selectedSize = 'all';
   String _selectedColour = 'all';
   String _selectedFit = 'all';
-  // Pagination state
+
   int _currentPage = 1;
   int itemsPerPage = 4;
 
@@ -37,11 +31,11 @@ class _CollectionViewPageState extends State<CollectionViewPage> {
   }
 
   void _placeholder() {}
+
   @override
   Widget build(BuildContext context) {
-    // 👇 read slug passed from /collections
+    // slug passed from /collections
     final slug = ModalRoute.of(context)?.settings.arguments as String?;
-    // fallback if null
     final String effectiveSlug = slug ?? 'hoodies';
 
     // find matching collection metadata
@@ -54,30 +48,43 @@ class _CollectionViewPageState extends State<CollectionViewPage> {
         );
 
     final title = selectedCollection?.title ?? 'Collection';
-    final description = selectedCollection?.description ??
-        'Products in this collection.';
+    final description =
+        selectedCollection?.description ?? 'Products in this collection.';
 
     // filter products by collectionSlug
     var collectionProducts = dummyProducts
         .where((p) => p.collectionSlug == effectiveSlug)
         .toList();
 
-    // apply simple sorting based on the selected sort state
+    // apply sorting
     if (_selectedSort == 'price_low_high') {
-      collectionProducts.sort((a, b) =>
-          double.parse(a.price.replaceAll(RegExp(r'[^0-9\.]'), ''))
-              .compareTo(double.parse(
-                  b.price.replaceAll(RegExp(r'[^0-9\.]'), ''))));
+      collectionProducts
+          .sort((a, b) => _parsePrice(a.price).compareTo(_parsePrice(b.price)));
     } else if (_selectedSort == 'price_high_low') {
-      collectionProducts.sort((a, b) =>
-          double.parse(b.price.replaceAll(RegExp(r'[^0-9\.]'), ''))
-              .compareTo(double.parse(
-                  a.price.replaceAll(RegExp(r'[^0-9\.]'), ''))));
+      collectionProducts
+          .sort((a, b) => _parsePrice(b.price).compareTo(_parsePrice(a.price)));
     } else if (_selectedSort == 'az') {
       collectionProducts.sort((a, b) => a.title.compareTo(b.title));
     } else if (_selectedSort == 'za') {
       collectionProducts.sort((a, b) => b.title.compareTo(a.title));
     }
+
+    // ----- pagination logic (MOVED OUT of children[]) -----
+    List paginatedProducts;
+    if (collectionProducts.isEmpty) {
+      paginatedProducts = [];
+    } else {
+      final totalItems = collectionProducts.length;
+      final totalPages = (totalItems / itemsPerPage).ceil();
+      final safePage = _currentPage.clamp(1, totalPages);
+
+      final startIndex = (safePage - 1) * itemsPerPage;
+      var endIndex = startIndex + itemsPerPage;
+      if (endIndex > totalItems) endIndex = totalItems;
+
+      paginatedProducts = collectionProducts.sublist(startIndex, endIndex);
+    }
+    // --------------------------------------------
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -106,6 +113,7 @@ class _CollectionViewPageState extends State<CollectionViewPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // Title + description
                   Text(
                     title,
                     style: const TextStyle(
@@ -123,39 +131,37 @@ class _CollectionViewPageState extends State<CollectionViewPage> {
                   ),
                   const SizedBox(height: 24),
 
-                  // --- Pagination ---
-                  final int startIndex = (_currentPage - 1) * itemsPerPage;
-                  final int endIndex = (startIndex + itemsPerPage) > collectionProducts.length
-                      ? collectionProducts.length
-                      : startIndex + itemsPerPage;
-                  final paginatedProducts = collectionProducts.sublist(
-                    startIndex.clamp(0, collectionProducts.length).toInt(),
-                    endIndex.clamp(0, collectionProducts.length).toInt(),
-                  );
+                  // --- Pagination controls ---
+                  if (collectionProducts.isNotEmpty) ...[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ElevatedButton(
+                          onPressed: _currentPage > 1
+                              ? () => setState(() {
+                                    _currentPage--;
+                                  })
+                              : null,
+                          child: const Text('Previous'),
+                        ),
+                        Text(
+                          'Page $_currentPage of ${(collectionProducts.length / itemsPerPage).ceil()}',
+                        ),
+                        ElevatedButton(
+                          onPressed:
+                              _currentPage * itemsPerPage < collectionProducts.length
+                                  ? () => setState(() {
+                                        _currentPage++;
+                                      })
+                                  : null,
+                          child: const Text('Next'),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                  ],
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ElevatedButton(
-                        onPressed: _currentPage > 1
-                            ? () => setState(() => _currentPage--)
-                            : null,
-                        child: const Text('Previous'),
-                      ),
-                      Text('Page $_currentPage of ${ (collectionProducts.length / itemsPerPage).ceil() }'),
-                      ElevatedButton(
-                        onPressed: _currentPage * itemsPerPage < collectionProducts.length
-                            ? () => setState(() => _currentPage++)
-                            : null,
-                        child: const Text('Next'),
-                      ),
-                    ],
-                  ),
-
-                  // Sorting already applied above using `_selectedSort`.
-
-                  // (keep your filters the same)
-                  // Fake filters (UI only)
+                  // --- Filters ---
                   Row(
                     children: [
                       Expanded(
@@ -178,12 +184,21 @@ class _CollectionViewPageState extends State<CollectionViewPage> {
                               value: 'price_high_low',
                               child: Text('Price: High to Low'),
                             ),
-                            DropdownMenuItem(value: 'az', child: Text('A → Z')),
-                            DropdownMenuItem(value: 'za', child: Text('Z → A')),
+                            DropdownMenuItem(
+                              value: 'az',
+                              child: Text('A → Z'),
+                            ),
+                            DropdownMenuItem(
+                              value: 'za',
+                              child: Text('Z → A'),
+                            ),
                           ],
-                          onChanged: (v) => setState(() {
-                            _selectedSort = v ?? 'popular';
-                          }),
+                          onChanged: (v) {
+                            setState(() {
+                              _selectedSort = v ?? 'popular';
+                              _currentPage = 1; // reset page on sort change
+                            });
+                          },
                         ),
                       ),
                       const SizedBox(width: 12),
@@ -216,7 +231,9 @@ class _CollectionViewPageState extends State<CollectionViewPage> {
                               child: Text('XL'),
                             ),
                           ],
-                          onChanged: (_) {},
+                          onChanged: (_) {
+                            // you can add real filter logic later
+                          },
                         ),
                       ),
                     ],
@@ -249,7 +266,9 @@ class _CollectionViewPageState extends State<CollectionViewPage> {
                               child: Text('Navy'),
                             ),
                           ],
-                          onChanged: (_) {},
+                          onChanged: (_) {
+                            // later: apply colour filters
+                          },
                         ),
                       ),
                       const SizedBox(width: 12),
@@ -274,7 +293,9 @@ class _CollectionViewPageState extends State<CollectionViewPage> {
                               child: Text('Oversized'),
                             ),
                           ],
-                          onChanged: (_) {},
+                          onChanged: (_) {
+                            // later: apply fit filters
+                          },
                         ),
                       ),
                     ],
@@ -294,14 +315,17 @@ class _CollectionViewPageState extends State<CollectionViewPage> {
                     children: paginatedProducts.isEmpty
                         ? const [
                             Center(
-                              child: Text('No products in this collection yet.'),
+                              child:
+                                  Text('No products in this collection yet.'),
                             ),
                           ]
                         : paginatedProducts.map((product) {
                             return ProductCard(
                               title: product.title,
                               price: product.price,
-                              imageUrl: 'https://via.placeholder.com/400x400?text=Product',
+                              // you can map to a real image later
+                              imageUrl:
+                                  'https://via.placeholder.com/400x400?text=Product',
                             );
                           }).toList(),
                   ),
@@ -317,6 +341,7 @@ class _CollectionViewPageState extends State<CollectionViewPage> {
   }
 }
 
+// (you can delete this if no longer needed)
 class _CollectionProductCard extends StatelessWidget {
   final String title;
   final String price;
