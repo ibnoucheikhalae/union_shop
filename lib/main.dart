@@ -3,6 +3,7 @@ import 'package:union_shop/pages/product_page.dart';
 import 'package:union_shop/pages/about_page.dart';
 import 'package:union_shop/pages/collections_page.dart';
 import 'package:union_shop/pages/collection_view_page.dart';
+import 'package:union_shop/pages/sale_page.dart';
 
 void main() {
   runApp(const UnionShopApp());
