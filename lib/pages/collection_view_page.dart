@@ -9,82 +9,170 @@ class CollectionViewPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          AppHeader(
-            onLogoTap: () {
-              Navigator.pushNamedAndRemoveUntil(
-                context,
-                '/',
-                (route) => false,
-              );
-            },
-            onSearchTap: _placeholder,
-            onAccountTap: _placeholder,
-            onCartTap: _placeholder,
-            onMenuTap: _placeholder,
-        Padding(
-  padding: const EdgeInsets.all(24.0),
-  child: Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: const [
-      Text(
-        'Hoodies & Sweatshirts',
-        style: TextStyle(
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-      SizedBox(height: 8),
-      Text(
-        'Warm and comfy uni hoodies for everyday campus life.',
-        style: TextStyle(
-          fontSize: 14,
-          height: 1.5,
-        ),
-      ),
-    ],
-    const SizedBox(height: 24),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            AppHeader(
+              onLogoTap: () {
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  '/',
+                  (route) => false,
+                );
+              },
+              onSearchTap: _placeholder,
+              onAccountTap: _placeholder,
+              onCartTap: _placeholder,
+              onMenuTap: _placeholder,
+            ),
 
-Row(
-  children: [
-    Expanded(
-      child: DropdownButtonFormField<String>(
-        decoration: const InputDecoration(
-          labelText: 'Sort by',
-          border: OutlineInputBorder(),
+            Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Hoodies & Sweatshirts',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  const Text(
+                    'Warm and comfy uni hoodies for everyday campus life.',
+                    style: TextStyle(
+                      fontSize: 14,
+                      height: 1.5,
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+
+                  // Row 1: Sort + Size
+                  Row(
+                    children: [
+                      Expanded(
+                        child: DropdownButtonFormField<String>(
+                          decoration: const InputDecoration(
+                            labelText: 'Sort by',
+                            border: OutlineInputBorder(),
+                          ),
+                          items: const [
+                            DropdownMenuItem<String>(
+                              value: 'popular',
+                              child: Text('Most popular'),
+                            ),
+                            DropdownMenuItem<String>(
+                              value: 'price_low_high',
+                              child: Text('Price: Low to High'),
+                            ),
+                            DropdownMenuItem<String>(
+                              value: 'price_high_low',
+                              child: Text('Price: High to Low'),
+                            ),
+                          ],
+                          onChanged: (_) {},
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: DropdownButtonFormField<String>(
+                          decoration: const InputDecoration(
+                            labelText: 'Size',
+                            border: OutlineInputBorder(),
+                          ),
+                          items: const [
+                            DropdownMenuItem<String>(
+                              value: 'all',
+                              child: Text('All sizes'),
+                            ),
+                            DropdownMenuItem<String>(
+                              value: 'S',
+                              child: Text('S'),
+                            ),
+                            DropdownMenuItem<String>(
+                              value: 'M',
+                              child: Text('M'),
+                            ),
+                            DropdownMenuItem<String>(
+                              value: 'L',
+                              child: Text('L'),
+                            ),
+                            DropdownMenuItem<String>(
+                              value: 'XL',
+                              child: Text('XL'),
+                            ),
+                          ],
+                          onChanged: (_) {},
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 12),
+
+                  // Row 2: Colour + Fit
+                  Row(
+                    children: [
+                      Expanded(
+                        child: DropdownButtonFormField<String>(
+                          decoration: const InputDecoration(
+                            labelText: 'Colour',
+                            border: OutlineInputBorder(),
+                          ),
+                          items: const [
+                            DropdownMenuItem<String>(
+                              value: 'all',
+                              child: Text('All colours'),
+                            ),
+                            DropdownMenuItem<String>(
+                              value: 'black',
+                              child: Text('Black'),
+                            ),
+                            DropdownMenuItem<String>(
+                              value: 'grey',
+                              child: Text('Grey'),
+                            ),
+                            DropdownMenuItem<String>(
+                              value: 'navy',
+                              child: Text('Navy'),
+                            ),
+                          ],
+                          onChanged: (_) {},
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: DropdownButtonFormField<String>(
+                          decoration: const InputDecoration(
+                            labelText: 'Fit',
+                            border: OutlineInputBorder(),
+                          ),
+                          items: const [
+                            DropdownMenuItem<String>(
+                              value: 'all',
+                              child: Text('All fits'),
+                            ),
+                            DropdownMenuItem<String>(
+                              value: 'regular',
+                              child: Text('Regular'),
+                            ),
+                            DropdownMenuItem<String>(
+                              value: 'oversized',
+                              child: Text('Oversized'),
+                            ),
+                          ],
+                          onChanged: (_) {},
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
-        items: const [
-          DropdownMenuItem(value: 'popular', child: Text('Most popular')),
-          DropdownMenuItem(value: 'price_low_high', child: Text('Price: Low to High')),
-          DropdownMenuItem(value: 'price_high_low', child: Text('Price: High to Low')),
-        ],
-        onChanged: (_) {},
-      ),
-      const SizedBox(width: 12),
-    Expanded(
-      child: DropdownButtonFormField<String>(
-        decoration: const InputDecoration(
-          labelText: 'Size',
-          border: OutlineInputBorder(),
-        ),
-        items: const [
-          DropdownMenuItem(value: 'all', child: Text('All sizes')),
-          DropdownMenuItem(value: 's', child: Text('S')),
-          DropdownMenuItem(value: 'm', child: Text('M')),
-          DropdownMenuItem(value: 'l', child: Text('L')),
-          DropdownMenuItem(value: 'xl', child: Text('XL')),
-        ],
-        onChanged: (_) {},
-      ),
-    ),
-  ],
-),
-    ),
-  ),
-),
       ),
     );
   }
 }
-
