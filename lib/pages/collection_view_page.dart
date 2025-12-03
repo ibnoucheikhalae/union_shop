@@ -165,6 +165,25 @@ class CollectionViewPage extends StatelessWidget {
                           onChanged: (_) {},
                         ),
                       ),
+                      const SizedBox(height: 24),
+
+GridView.count(
+  shrinkWrap: true,
+  physics: const NeverScrollableScrollPhysics(),
+  crossAxisCount: MediaQuery.of(context).size.width > 600 ? 3 : 2,
+  mainAxisSpacing: 16,
+  crossAxisSpacing: 16,
+  childAspectRatio: 3 / 4,
+  children: const [
+    _CollectionProductCard(title: 'Classic Uni Hoodie', price: '£35.00'),
+    _CollectionProductCard(title: 'Oversized Campus Hoodie', price: '£38.00'),
+    _CollectionProductCard(title: 'Zip-Up Sports Hoodie', price: '£40.00'),
+    _CollectionProductCard(title: 'Heritage Logo Sweatshirt', price: '£32.00'),
+    _CollectionProductCard(title: 'Fleece Lined Hoodie', price: '£42.00'),
+    _CollectionProductCard(title: 'Minimal Crest Hoodie', price: '£36.00'),
+  ],
+),
+
                     ],
                   ),
                 ],
