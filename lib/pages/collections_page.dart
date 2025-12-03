@@ -42,6 +42,26 @@ class CollectionsPage extends StatelessWidget {
                   (route) => false,
                 );
               },
+              // 🔽 Filters & sorting
+                  Row(
+                    children: [
+                      Expanded(
+                        child: DropdownButtonFormField<String>(
+                          value: _sortOrder,
+                          decoration: const InputDecoration(
+                            labelText: 'Sort by',
+                            border: OutlineInputBorder(),
+                          ),
+                          items: const [
+                            DropdownMenuItem(
+                              value: 'az',
+                              child: Text('Name A–Z'),
+                            ),
+                            DropdownMenuItem(
+                              value: 'za',
+                              child: Text('Name Z–A'),
+                            ),
+                          ],
               // 🔽 Collections list (paged)
                   if (_pagedCollections.isEmpty)
                     const Text(
