@@ -250,7 +250,8 @@ class _CollectionProductCard extends StatelessWidget {
     required this.title,
     required this.price,
   });
-@override
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -271,7 +272,7 @@ class _CollectionProductCard extends StatelessWidget {
             ),
           ),
         ),
-      const SizedBox(height: 8),
+        const SizedBox(height: 8),
         Text(
           title,
           style: const TextStyle(
