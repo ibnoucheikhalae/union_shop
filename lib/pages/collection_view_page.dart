@@ -21,16 +21,18 @@ class _CollectionViewPageState extends State<CollectionViewPage> {
   String selectedColour = 'all';
   String selectedFit = 'all';
 
-  // New underscored state variables (wired to dropdown `value:`)
+    // New underscored state variables (for dropdown `value:`)
   String _selectedSort = 'popular';
   String _selectedSize = 'all';
   String _selectedColour = 'all';
   String _selectedFit = 'all';
-  int currentPage = 0;
-  static const int pageSize = 6;
+
+  double _parsePrice(String price) {
+    final cleaned = price.replaceAll(RegExp(r'[^0-9.]'), '');
+    return double.tryParse(cleaned) ?? 0.0;
+  }
 
   void _placeholder() {}
-
   @override
   Widget build(BuildContext context) {
     // 👇 read slug passed from /collections
