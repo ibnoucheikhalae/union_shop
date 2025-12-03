@@ -41,12 +41,15 @@ class HomeScreen extends StatelessWidget {
     );
   },
   onSearchTap: _placeholder,
-  onAccountTap: _placeholder,
+  onAccountTap: () {
+    Navigator.pushNamed(context, '/login');  // 👈 GO TO LOGIN PAGE
+  },
   onCartTap: () {
-    Navigator.pushNamed(context, '/cart'); // 👈 NEW
+    Navigator.pushNamed(context, '/cart');
   },
   onMenuTap: _placeholder,
 ),
+
 
 
             // Hero Section
