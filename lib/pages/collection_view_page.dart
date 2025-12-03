@@ -183,6 +183,32 @@ GridView.count(
     _CollectionProductCard(title: 'Minimal Crest Hoodie', price: '£36.00'),
   ],
 ),
+Container(
+  width: double.infinity,
+  color: Colors.grey[50],
+  padding: const EdgeInsets.all(24),
+  child: const Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(
+        'Placeholder Footer',
+        style: TextStyle(
+          color: Colors.grey,
+          fontSize: 16,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+      SizedBox(height: 8),
+      Text(
+        'Footer Section',
+        style: TextStyle(
+          color: Colors.grey,
+          fontSize: 14,
+        ),
+      ),
+    ],
+  ),
+),
 
                     ],
                   ),
