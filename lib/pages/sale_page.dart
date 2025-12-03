@@ -1,7 +1,7 @@
 // lib/pages/sale_page.dart
 import 'package:flutter/material.dart';
 import '../widgets/app_header.dart';
-
+import '../widgets/footer.dart';
 class SalePage extends StatelessWidget {
   const SalePage({super.key});
 

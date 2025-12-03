@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/app_header.dart';
-
+import '../widgets/footer.dart';
 class CollectionViewPage extends StatelessWidget {
   const CollectionViewPage({super.key});
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../widgets/footer.dart';
 class ProductPage extends StatelessWidget {
   const ProductPage({super.key});
 

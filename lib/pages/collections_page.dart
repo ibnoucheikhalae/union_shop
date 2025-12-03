@@ -1,7 +1,7 @@
 // lib/pages/collections_page.dart
 import 'package:flutter/material.dart';
 import '../widgets/app_header.dart';
-
+import '../widgets/footer.dart';
 class CollectionsPage extends StatelessWidget {
   const CollectionsPage({super.key});
 
