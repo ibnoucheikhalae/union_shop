@@ -7,8 +7,21 @@ import '../data/dummy_products.dart';
 import '../data/dummy_collections.dart';
 import '../models/collection.dart';
 
-class CollectionViewPage extends StatelessWidget {
+class CollectionViewPage extends StatefulWidget {
   const CollectionViewPage({super.key});
+
+  @override
+  State<CollectionViewPage> createState() => _CollectionViewPageState();
+}
+
+class _CollectionViewPageState extends State<CollectionViewPage> {
+  // UI state for filters/sorting/pagination
+  String selectedSort = 'popular';
+  String selectedSize = 'all';
+  String selectedColour = 'all';
+  String selectedFit = 'all';
+  int currentPage = 0;
+  static const int pageSize = 6;
 
   void _placeholder() {}
 
