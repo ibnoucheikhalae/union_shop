@@ -9,3 +9,33 @@ const List<Collection> dummyCollections = [
     description: 'Warm and comfy uni hoodies for everyday campus life.',
     category: 'clothing',
   ),
+
+  Collection(
+    id: 'c2',
+    slug: 'gifts',
+    title: 'Gifts & Accessories',
+    description: 'Mugs, magnets, keyrings and small presents.',
+    category: 'gifts',
+  ),
+  Collection(
+    id: 'c3',
+    slug: 'stationery',
+    title: 'Stationery',
+    description: 'Notebooks, pens, and study essentials.',
+    category: 'stationery',
+  ),
+  Collection(
+    id: 'c4',
+    slug: 'sportswear',
+    title: 'Sportswear',
+    description: 'Activewear for BUCS teams and gym sessions.',
+    category: 'clothing',
+  ),
+  Collection(
+    id: 'c5',
+    slug: 'campus-essentials',
+    title: 'Campus Essentials',
+    description: 'Everyday bits you need around campus.',
+    category: 'essentials',
+  ),
+];
