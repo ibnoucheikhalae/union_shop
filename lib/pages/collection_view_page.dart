@@ -46,9 +46,26 @@ class _CollectionViewPageState extends State<CollectionViewPage> {
         'Products in this collection.';
 
     // filter products by collectionSlug
-    final collectionProducts = dummyProducts
+    var collectionProducts = dummyProducts
         .where((p) => p.collectionSlug == effectiveSlug)
         .toList();
+
+    // apply simple sorting based on selectedSort state
+    if (selectedSort == 'price_low_high') {
+      collectionProducts.sort((a, b) =>
+          double.parse(a.price.replaceAll(RegExp(r'[^0-9\.]'), ''))
+              .compareTo(double.parse(
+                  b.price.replaceAll(RegExp(r'[^0-9\.]'), ''))));
+    } else if (selectedSort == 'price_high_low') {
+      collectionProducts.sort((a, b) =>
+          double.parse(b.price.replaceAll(RegExp(r'[^0-9\.]'), ''))
+              .compareTo(double.parse(
+                  a.price.replaceAll(RegExp(r'[^0-9\.]'), ''))));
+    } else if (selectedSort == 'az') {
+      collectionProducts.sort((a, b) => a.title.compareTo(b.title));
+    } else if (selectedSort == 'za') {
+      collectionProducts.sort((a, b) => b.title.compareTo(a.title));
+    }
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -100,6 +117,7 @@ class _CollectionViewPageState extends State<CollectionViewPage> {
                     children: [
                       Expanded(
                         child: DropdownButtonFormField<String>(
+                          value: selectedSort,
                           decoration: const InputDecoration(
                             labelText: 'Sort by',
                             border: OutlineInputBorder(),
@@ -117,8 +135,12 @@ class _CollectionViewPageState extends State<CollectionViewPage> {
                               value: 'price_high_low',
                               child: Text('Price: High to Low'),
                             ),
+                            DropdownMenuItem(value: 'az', child: Text('A → Z')),
+                            DropdownMenuItem(value: 'za', child: Text('Z → A')),
                           ],
-                          onChanged: (_) {},
+                          onChanged: (v) => setState(() {
+                            selectedSort = v ?? 'popular';
+                          }),
                         ),
                       ),
                       const SizedBox(width: 12),
