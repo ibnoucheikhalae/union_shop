@@ -22,3 +22,21 @@ class SalePage extends StatelessWidget {
               onCartTap: _placeholder,
               onMenuTap: _placeholder,
             ),
+           const Padding(
+              padding: EdgeInsets.all(24.0),
+              child: Text(
+                'SALE',
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+
+            // Products will come later
+          ],
+        ),
+      ),
+    );
+  }
+}
