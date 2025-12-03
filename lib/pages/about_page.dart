@@ -31,11 +31,11 @@ class AboutPage extends StatelessWidget {
 
 
             // Page Content
-            Padding(
-              padding: const EdgeInsets.all(24.0),
+            const Padding(
+              padding: EdgeInsets.all(24.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   Text(
                     'About Us',
                     style: TextStyle(
