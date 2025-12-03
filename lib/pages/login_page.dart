@@ -73,11 +73,18 @@ void _placeholder() {}
 
                 const SizedBox(height: 16),
 
-                  // Signup link
-                  Center(
-                    child: TextButton(
-                      onPressed: _placeholder,
-                      child: const Text('Don\'t have an account? Sign up'),
-                    ),
+                  // Signup 
+                  Row(
+                    children: [
+                      const Text("Don't have an account?"),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/signup');
+                        },
+                        child: const Text('Create one'),
+                      ),
+                    ],
                   ),
-                ],  
+                ],
+              ),
+            ),
