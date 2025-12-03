@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import '../widgets/app_header.dart';
 import '../widgets/footer.dart';
+// simple placeholder for header callback actions
+void _placeholder() {}
+
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
-
-void _placeholder() {}
 @override
   Widget build(BuildContext context) {
     return Scaffold(
