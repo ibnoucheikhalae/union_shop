@@ -64,15 +64,15 @@ class CollectionViewPage extends StatelessWidget {
                           items: const [
                             DropdownMenuItem(
                               value: 'popular',
-                              child: Text('Most popular'),
+                              child: const Text('Most popular'),
                             ),
                             DropdownMenuItem(
                               value: 'price_low_high',
-                              child: Text('Price: Low to High'),
+                              child: const Text('Price: Low to High'),
                             ),
                             DropdownMenuItem(
                               value: 'price_high_low',
-                              child: Text('Price: High to Low'),
+                              child: const Text('Price: High to Low'),
                             ),
                           ],
                           onChanged: (_) {},
@@ -88,23 +88,23 @@ class CollectionViewPage extends StatelessWidget {
                           items: const [
                             DropdownMenuItem(
                               value: 'all',
-                              child: Text('All sizes'),
+                              child: const Text('All sizes'),
                             ),
                             DropdownMenuItem(
                               value: 's',
-                              child: Text('S'),
+                              child: const Text('S'),
                             ),
                             DropdownMenuItem(
                               value: 'm',
-                              child: Text('M'),
+                              child: const Text('M'),
                             ),
                             DropdownMenuItem(
                               value: 'l',
-                              child: Text('L'),
+                              child: const Text('L'),
                             ),
                             DropdownMenuItem(
                               value: 'xl',
-                              child: Text('XL'),
+                              child: const Text('XL'),
                             ),
                           ],
                           onChanged: (_) {},
@@ -124,19 +124,19 @@ class CollectionViewPage extends StatelessWidget {
                           items: const [
                             DropdownMenuItem(
                               value: 'all',
-                              child: Text('All colours'),
+                              child: const Text('All colours'),
                             ),
                             DropdownMenuItem(
                               value: 'black',
-                              child: Text('Black'),
+                              child: const Text('Black'),
                             ),
                             DropdownMenuItem(
                               value: 'grey',
-                              child: Text('Grey'),
+                              child: const Text('Grey'),
                             ),
                             DropdownMenuItem(
                               value: 'navy',
-                              child: Text('Navy'),
+                              child: const Text('Navy'),
                             ),
                           ],
                           onChanged: (_) {},
@@ -152,15 +152,15 @@ class CollectionViewPage extends StatelessWidget {
                           items: const [
                             DropdownMenuItem(
                               value: 'all',
-                              child: Text('All fits'),
+                              child: const Text('All fits'),
                             ),
                             DropdownMenuItem(
                               value: 'regular',
-                              child: Text('Regular'),
+                              child: const Text('Regular'),
                             ),
                             DropdownMenuItem(
                               value: 'oversized',
-                              child: Text('Oversized'),
+                              child: const Text('Oversized'),
                             ),
                           ],
                           onChanged: (_) {},
