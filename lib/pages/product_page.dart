@@ -102,23 +102,34 @@ class _ProductPageState extends State<ProductPage> {
                           flex: 3,
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(4),
-                            child: AspectRatio(
+                              child: AspectRatio(
                               aspectRatio: 4 / 3,
-                              child: Image.network(
-                                product.imageUrl,
-                                fit: BoxFit.cover,
-                                errorBuilder: (context, _, __) {
-                                  return Container(
-                                    color: Colors.grey[300],
-                                    child: const Center(
-                                      child: Icon(
-                                        Icons.image_not_supported,
-                                        color: Colors.grey,
+                              child: (product.imageUrl != null &&
+                                      product.imageUrl!.isNotEmpty)
+                                  ? Image.network(
+                                      product.imageUrl!,
+                                      fit: BoxFit.cover,
+                                      errorBuilder: (context, _, __) {
+                                        return Container(
+                                          color: Colors.grey[300],
+                                          child: const Center(
+                                            child: Icon(
+                                              Icons.image_not_supported,
+                                              color: Colors.grey,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    )
+                                  : Container(
+                                      color: Colors.grey[300],
+                                      child: const Center(
+                                        child: Icon(
+                                          Icons.image_not_supported,
+                                          color: Colors.grey,
+                                        ),
                                       ),
                                     ),
-                                  );
-                                },
-                              ),
                             ),
                           ),
                         ),
@@ -139,23 +150,34 @@ class _ProductPageState extends State<ProductPage> {
                     children: [
                       ClipRRect(
                         borderRadius: BorderRadius.circular(4),
-                        child: AspectRatio(
+                          child: AspectRatio(
                           aspectRatio: 4 / 3,
-                          child: Image.network(
-                            product.imageUrl,
-                            fit: BoxFit.cover,
-                            errorBuilder: (context, _, __) {
-                              return Container(
-                                color: Colors.grey[300],
-                                child: const Center(
-                                  child: Icon(
-                                    Icons.image_not_supported,
-                                    color: Colors.grey,
+                          child: (product.imageUrl != null &&
+                                  product.imageUrl!.isNotEmpty)
+                              ? Image.network(
+                                  product.imageUrl!,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, _, __) {
+                                    return Container(
+                                      color: Colors.grey[300],
+                                      child: const Center(
+                                        child: Icon(
+                                          Icons.image_not_supported,
+                                          color: Colors.grey,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                )
+                              : Container(
+                                  color: Colors.grey[300],
+                                  child: const Center(
+                                    child: Icon(
+                                      Icons.image_not_supported,
+                                      color: Colors.grey,
+                                    ),
                                   ),
                                 ),
-                              );
-                            },
-                          ),
                         ),
                       ),
                       const SizedBox(height: 24),
@@ -204,7 +226,7 @@ class _ProductPageState extends State<ProductPage> {
         ),
         const SizedBox(height: 8),
         Text(
-          product.description,
+          product.description ?? '',
           style: const TextStyle(
             fontSize: 14,
             height: 1.5,
