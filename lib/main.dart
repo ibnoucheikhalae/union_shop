@@ -1,14 +1,12 @@
 // lib/main.dart
+// lib/main.dart
 import 'package:flutter/material.dart';
-
-import 'pages/home_page.dart';
-import 'pages/product_page.dart';
-import 'pages/about_page.dart';
-import 'pages/collections_page.dart';
-import 'pages/collection_view_page.dart';
-import 'pages/sale_page.dart';
-import 'pages/signup_page.dart';
-import 'pages/login_page.dart';
+import 'package:union_shop/pages/product_page.dart';
+import 'package:union_shop/pages/about_page.dart';
+import 'package:union_shop/pages/collections_page.dart';
+import 'package:union_shop/pages/collection_view_page.dart';
+import 'package:union_shop/pages/sale_page.dart';
+import 'package:union_shop/widgets/product_card.dart';
 
 void main() {
   runApp(const UnionShopApp());
