@@ -120,3 +120,148 @@ class _CartPageState extends State<CartPage> {
                               ),
                             ),
                             const SizedBox(width: 16),
+
+                            // text + controls
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    item.product.title,
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    'Colour: ${item.colour}\nSize: ${item.size}',
+                                    style: const TextStyle(
+                                      fontSize: 13,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        _cart.removeItem(item);
+                                      });
+                                    },
+                                    child: const Text('Remove'),
+                                  ),
+                                ],
+                              ),
+                            ),
+
+                            // price + quantity + line total
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text(
+                                  item.product.price,
+                                  style: const TextStyle(fontSize: 14),
+                                ),
+                                const SizedBox(height: 8),
+                                Row(
+                                  children: [
+                                    IconButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          _cart.updateQuantity(
+                                            item,
+                                            item.quantity - 1,
+                                          );
+                                        });
+                                      },
+                                      icon: const Icon(Icons.remove),
+                                      visualDensity: VisualDensity.compact,
+                                    ),
+                                    Text('${item.quantity}'),
+                                    IconButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          _cart.updateQuantity(
+                                            item,
+                                            item.quantity + 1,
+                                          );
+                                        });
+                                      },
+                                      icon: const Icon(Icons.add),
+                                      visualDensity: VisualDensity.compact,
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  '£${item.lineTotal.toStringAsFixed(2)}',
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+
+                    const SizedBox(height: 24),
+
+                    // Summary + checkout
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            'Subtotal: £${_cart.subtotal.toStringAsFixed(2)}',
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 12),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              TextButton(
+                                onPressed: () {
+                                  setState(() {
+                                    _cart.clear();
+                                  });
+                                },
+                                child: const Text('Clear cart'),
+                              ),
+                              const SizedBox(width: 8),
+                              ElevatedButton(
+                                onPressed: _placeOrder,
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: const Color(0xFF4d2963),
+                                  foregroundColor: Colors.white,
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 24,
+                                    vertical: 12,
+                                  ),
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.zero,
+                                  ),
+                                ),
+                                child: const Text('CHECK OUT'),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ],
+              ),
+            ),
+
+            const AppFooter(),
+          ],
+        ),
+      ),
+    );
+  }
+}
