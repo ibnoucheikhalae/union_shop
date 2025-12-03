@@ -66,4 +66,14 @@ class HomeScreen extends StatelessWidget {
               height: 100,
               color: Colors.white,
               child: Column(
-                children: [
+                children: [// Top banner
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    color: const Color(0xFF4d2963),
+                    child: const Text(
+                      'PLACEHOLDER HEADER TEXT - STUDENTS TO UPDATE!',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.white, fontSize: 16),
+                    ),
+                  ),
