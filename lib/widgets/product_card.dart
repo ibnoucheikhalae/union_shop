@@ -1,16 +1,23 @@
 // lib/widgets/product_card.dart
 import 'package:flutter/material.dart';
 
+import '../models/product.dart';
+import '../services/cart_service.dart';
+
 class ProductCard extends StatelessWidget {
   final String title;
   final String price;
   final String imageUrl;
+  final String? id;
+  final String? collectionSlug;
 
   const ProductCard({
     super.key,
     required this.title,
     required this.price,
     required this.imageUrl,
+    this.id,
+    this.collectionSlug,
   });
 @override
   Widget build(BuildContext context) {
@@ -57,6 +64,24 @@ class ProductCard extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 13,
                   color: Colors.grey,
+                ),
+              ),
+              Align(
+                alignment: Alignment.centerRight,
+                child: IconButton(
+                  icon: const Icon(Icons.add_shopping_cart),
+                  onPressed: () {
+                    final product = Product(
+                      id: id ?? title,
+                      title: title,
+                      price: price,
+                      collectionSlug: collectionSlug ?? '',
+                    );
+                    CartService.instance.addProduct(product);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Added to cart')),
+                    );
+                  },
                 ),
               ),
             ],
