@@ -40,3 +40,15 @@ class CartPage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 16),
+                   Text(
+                    'Your shopping cart is currently empty.\n\n'
+                    'In later stages of the coursework, this page will show '
+                    'a list of selected products, quantities, and a checkout summary.',
+                    style: TextStyle(
+                      fontSize: 16,
+                      height: 1.5,
+                    ),
+                  ),
+                ],
+              ),
+            ),
