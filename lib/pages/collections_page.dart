@@ -1,12 +1,23 @@
 // lib/pages/collections_page.dart
 import 'package:flutter/material.dart';
+
 import '../widgets/app_header.dart';
 import '../widgets/footer.dart';
+import '../data/dummy_collections.dart';
 import '../models/collection.dart';
-// simple placeholder for header callback actions
-void _placeholder() {}
+
 class CollectionsPage extends StatelessWidget {
   const CollectionsPage({super.key});
+
+  void _placeholder() {}
+
+  void _openCollection(BuildContext context, Collection collection) {
+    Navigator.pushNamed(
+      context,
+      '/collection',
+      arguments: collection.slug, // we’ll use this later
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,25 +25,24 @@ class CollectionsPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Reusable header
             AppHeader(
-  onLogoTap: () {
-    Navigator.pushNamedAndRemoveUntil(
-      context,
-      '/',
-      (route) => false,
-    );
-  },
-  onSearchTap: _placeholder,
-  onAccountTap: _placeholder,
-  onCartTap: () {
-    Navigator.pushNamed(context, '/cart'); // 👈 NEW
-  },
-  onMenuTap: _placeholder,
-),
+              onLogoTap: () {
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  '/',
+                  (route) => false,
+                );
+              },
+              onSearchTap: _placeholder,
+              onAccountTap: () {
+                Navigator.pushNamed(context, '/login');
+              },
+              onCartTap: () {
+                Navigator.pushNamed(context, '/cart');
+              },
+              onMenuTap: _placeholder,
+            ),
 
-
-            // Main content
             Padding(
               padding: const EdgeInsets.all(24.0),
               child: Column(
@@ -47,42 +57,24 @@ class CollectionsPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
 
-                  // generated list of dummy collections from model
-                  for (final collection in kDummyCollections) ...[
-                    ListTile(
-                      leading: SizedBox(
-                        width: 56,
-                        height: 56,
-                        child: Image.network(
-                          collection.image,
-                          fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) {
-                            return Container(
-                              color: Colors.grey[300],
-                              child: const Center(
-                                child: Icon(Icons.image_not_supported, color: Colors.grey),
-                              ),
-                            );
-                          },
+                  // Dynamic list of collections from dummy_collections.dart
+                  ...dummyCollections.map(
+                    (collection) => Column(
+                      children: [
+                        ListTile(
+                          title: Text(collection.title),
+                          subtitle: Text(collection.description),
+                          trailing: const Icon(Icons.chevron_right),
+                          onTap: () => _openCollection(context, collection),
                         ),
-                      ),
-                      title: Text(collection.title),
-                      subtitle: Text(collection.description),
-                      onTap: () {
-                        Navigator.pushNamed(
-                          context,
-                          '/collection',
-                          arguments: collection,
-                        );
-                      },
+                        const Divider(),
+                      ],
                     ),
-                    const Divider(),
-                  ],
+                  ),
                 ],
               ),
             ),
 
-              // Reusable Footer
             const AppFooter(),
           ],
         ),
