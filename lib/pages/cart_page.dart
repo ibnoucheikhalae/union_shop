@@ -102,21 +102,32 @@ class _CartPageState extends State<CartPage> {
                               height: 80,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(4),
-                                child: Image.network(
-                                  item.product.imageUrl,
-                                  fit: BoxFit.cover,
-                                  errorBuilder: (context, _, __) {
-                                    return Container(
-                                      color: Colors.grey[300],
-                                      child: const Center(
-                                        child: Icon(
-                                          Icons.image_not_supported,
-                                          color: Colors.grey,
+                                child: (item.product.imageUrl != null &&
+                                        item.product.imageUrl!.isNotEmpty)
+                                    ? Image.network(
+                                        item.product.imageUrl!,
+                                        fit: BoxFit.cover,
+                                        errorBuilder: (context, _, __) {
+                                          return Container(
+                                            color: Colors.grey[300],
+                                            child: const Center(
+                                              child: Icon(
+                                                Icons.image_not_supported,
+                                                color: Colors.grey,
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      )
+                                    : Container(
+                                        color: Colors.grey[300],
+                                        child: const Center(
+                                          child: Icon(
+                                            Icons.image_not_supported,
+                                            color: Colors.grey,
+                                          ),
                                         ),
                                       ),
-                                    );
-                                  },
-                                ),
                               ),
                             ),
                             const SizedBox(width: 16),
