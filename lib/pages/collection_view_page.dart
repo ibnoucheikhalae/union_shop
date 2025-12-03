@@ -35,6 +35,17 @@ class CollectionViewPage extends StatelessWidget {
           fontWeight: FontWeight.bold,
         ),
       ),
+      SizedBox(height: 8),
+      Text(
+        'Warm and comfy uni hoodies for everyday campus life.',
+        style: TextStyle(
+          fontSize: 14,
+          height: 1.5,
+        ),
+      ),
+    ],
+  ),
+),
       ),
     );
   }
