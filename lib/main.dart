@@ -7,6 +7,8 @@ import 'pages/about_page.dart';
 import 'pages/collections_page.dart';
 import 'pages/collection_view_page.dart';
 import 'pages/sale_page.dart';
+import 'pages/signup_page.dart';
+import 'pages/login_page.dart';
 
 void main() {
   runApp(const UnionShopApp());
