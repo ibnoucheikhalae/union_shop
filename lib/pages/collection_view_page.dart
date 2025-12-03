@@ -61,6 +61,25 @@ Row(
         ],
         onChanged: (_) {},
       ),
+      const SizedBox(width: 12),
+    Expanded(
+      child: DropdownButtonFormField<String>(
+        decoration: const InputDecoration(
+          labelText: 'Size',
+          border: OutlineInputBorder(),
+        ),
+        items: const [
+          DropdownMenuItem(value: 'all', child: Text('All sizes')),
+          DropdownMenuItem(value: 's', child: Text('S')),
+          DropdownMenuItem(value: 'm', child: Text('M')),
+          DropdownMenuItem(value: 'l', child: Text('L')),
+          DropdownMenuItem(value: 'xl', child: Text('XL')),
+        ],
+        onChanged: (_) {},
+      ),
+    ),
+  ],
+),
     ),
   ),
 ),
