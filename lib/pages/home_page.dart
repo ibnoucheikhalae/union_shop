@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import '../widgets/app_header.dart';
 import '../widgets/footer.dart';
 
+// simple placeholder for header callback actions
+void _placeholder() {}
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
