@@ -85,3 +85,35 @@ class Collection {
   @override
   int get hashCode => Object.hash(id, title, description, image, slug);
 }
+
+
+/// Example / dummy collections suitable for coursework and tests.
+/// These are const so they can be used in `const` widget trees where
+/// appropriate.
+const List<Collection> kDummyCollections = [
+  Collection(
+    id: '1',
+    title: 'Hoodies & Sweatshirts',
+    description: 'Warm and comfy uni hoodies and sweatshirts.',
+    image:
+        'https://shop.upsu.net/cdn/shop/files/upsu_hoodie_placeholder.jpg?v=1',
+    slug: 'hoodies',
+  ),
+  Collection(
+    id: '2',
+    title: 'Gifts & Accessories',
+    description: 'Mugs, magnets, keyrings and more.',
+    image:
+        'https://shop.upsu.net/cdn/shop/files/gifts_placeholder.jpg?v=1',
+    slug: 'gifts',
+  ),
+  Collection(
+    id: '3',
+    title: 'Stationery',
+    description: 'Notebooks, pens, and study essentials.',
+    image:
+        'https://shop.upsu.net/cdn/shop/files/stationery_placeholder.jpg?v=1',
+    slug: 'stationery',
+  ),
+];
+
