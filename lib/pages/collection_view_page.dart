@@ -1,7 +1,12 @@
+// lib/pages/collection_view_page.dart
 import 'package:flutter/material.dart';
+
 import '../widgets/app_header.dart';
 import '../widgets/footer.dart';
 import '../data/dummy_products.dart';
+import '../data/dummy_collections.dart';
+import '../models/collection.dart';
+
 class CollectionViewPage extends StatelessWidget {
   const CollectionViewPage({super.key});
 
@@ -9,6 +14,29 @@ class CollectionViewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // 👇 read slug passed from /collections
+    final slug = ModalRoute.of(context)?.settings.arguments as String?;
+    // fallback if null
+    final String effectiveSlug = slug ?? 'hoodies';
+
+    // find matching collection metadata
+    final Collection? selectedCollection = dummyCollections
+        .where((c) => c.slug == effectiveSlug)
+        .cast<Collection?>()
+        .firstWhere(
+          (c) => c != null,
+          orElse: () => null,
+        );
+
+    final title = selectedCollection?.title ?? 'Collection';
+    final description = selectedCollection?.description ??
+        'Products in this collection.';
+
+    // filter products by collectionSlug
+    final collectionProducts = dummyProducts
+        .where((p) => p.collectionSlug == effectiveSlug)
+        .toList();
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -22,8 +50,12 @@ class CollectionViewPage extends StatelessWidget {
                 );
               },
               onSearchTap: _placeholder,
-              onAccountTap: _placeholder,
-              onCartTap: _placeholder,
+              onAccountTap: () {
+                Navigator.pushNamed(context, '/login');
+              },
+              onCartTap: () {
+                Navigator.pushNamed(context, '/cart');
+              },
               onMenuTap: _placeholder,
             ),
 
@@ -32,23 +64,24 @@ class CollectionViewPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Hoodies & Sweatshirts',
-                    style: TextStyle(
+                  Text(
+                    title,
+                    style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
-                    'Warm and comfy uni hoodies for everyday campus life.',
-                    style: TextStyle(
+                  Text(
+                    description,
+                    style: const TextStyle(
                       fontSize: 14,
                       height: 1.5,
                     ),
                   ),
                   const SizedBox(height: 24),
 
+                  // (keep your filters the same)
                   // Fake filters (UI only)
                   Row(
                     children: [
@@ -168,7 +201,7 @@ class CollectionViewPage extends StatelessWidget {
 
                   const SizedBox(height: 24),
 
-                  // Grid of dummy products
+                  // Grid of products in this collection
                   GridView.count(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
@@ -177,20 +210,25 @@ class CollectionViewPage extends StatelessWidget {
                     mainAxisSpacing: 16,
                     crossAxisSpacing: 16,
                     childAspectRatio: 3 / 4,
-                    children: dummyProducts
-    .map(
-      (product) => _CollectionProductCard(
-        title: product.title,
-        price: product.price,
-      ),
-    )
-    .toList(),
+                    children: collectionProducts.isEmpty
+                        ? const [
+                            Center(
+                              child: Text('No products in this collection yet.'),
+                            ),
+                          ]
+                        : collectionProducts
+                            .map(
+                              (product) => _CollectionProductCard(
+                                title: product.title,
+                                price: product.price,
+                              ),
+                            )
+                            .toList(),
                   ),
                 ],
               ),
             ),
 
-              // Reusable Footer
             const AppFooter(),
           ],
         ),
@@ -204,6 +242,7 @@ class _CollectionProductCard extends StatelessWidget {
   final String price;
 
   const _CollectionProductCard({
+    super.key,
     required this.title,
     required this.price,
   });
