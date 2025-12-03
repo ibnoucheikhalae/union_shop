@@ -70,3 +70,5 @@ void _placeholder() {}
                       child: const Text('Login'),
                     ),
                   ),
+
+                const SizedBox(height: 16),
