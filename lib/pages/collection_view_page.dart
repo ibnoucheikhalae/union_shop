@@ -117,6 +117,30 @@ class _CollectionViewPageState extends State<CollectionViewPage> {
                   ),
                   const SizedBox(height: 24),
 
+                  // --- Sorting: apply only, do not filter ---
+                  // Sort by price or leave unchanged for 'popular'
+                  if (_selectedSort == 'price_low_high') {
+                    collectionProducts.sort((a, b) {
+                      final pa = double.tryParse(
+                              a.price.replaceAll(RegExp(r'[^0-9\.]'), '')) ??
+                          0.0;
+                      final pb = double.tryParse(
+                              b.price.replaceAll(RegExp(r'[^0-9\.]'), '')) ??
+                          0.0;
+                      return pa.compareTo(pb);
+                    });
+                  } else if (_selectedSort == 'price_high_low') {
+                    collectionProducts.sort((a, b) {
+                      final pa = double.tryParse(
+                              a.price.replaceAll(RegExp(r'[^0-9\.]'), '')) ??
+                          0.0;
+                      final pb = double.tryParse(
+                              b.price.replaceAll(RegExp(r'[^0-9\.]'), '')) ??
+                          0.0;
+                      return pb.compareTo(pa);
+                    });
+                  }
+
                   // (keep your filters the same)
                   // Fake filters (UI only)
                   Row(
