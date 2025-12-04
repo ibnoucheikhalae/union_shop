@@ -30,81 +30,88 @@ class PrintShackAboutPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'The Print Shack',
-                    style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
+                  // Centered title
+                  const Center(
+                    child: Text(
+                      'The Union Print Shack',
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
                   ),
                   const SizedBox(height: 16),
-                  const Text(
-                    'The Print Shack lets you add personalised text to a range of '
-                    'Union Shop products. Ideal for clubs, societies, teams and gifts.',
-                    style: TextStyle(fontSize: 16, height: 1.5),
-                  ),
-                  const SizedBox(height: 24),
 
-                  const Text(
-                    'How it works',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  const Text(
-                    '1. Choose a product and colour.\n'
-                    '2. Pick your print position and number of lines.\n'
-                    '3. Enter your personalised text.\n'
-                    '4. Review your summary and place the order in the cart.\n\n'
-                    'All examples in this coursework are for demonstration only – '
-                    'no real orders are processed.',
-                    style: TextStyle(fontSize: 15, height: 1.6),
-                  ),
-                  const SizedBox(height: 24),
-
-                  const Text(
-                    'Turnaround & limits (demo)',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  const Text(
-                    '• Up to 3 lines of text per print area.\n'
-                    '• Maximum 20 characters per line.\n'
-                    '• One print position per item in this demo.\n'
-                    '• Turnaround time, colours and prices are placeholders only.',
-                    style: TextStyle(fontSize: 15, height: 1.6),
-                  ),
-                  const SizedBox(height: 32),
-
-                  SizedBox(
+                  // Placeholder rectangular image
+                  Container(
                     width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/personalisation');
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF4d2963),
-                        foregroundColor: Colors.white,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.zero,
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 14,
-                        ),
-                      ),
-                      child: const Text(
-                        'START PERSONALISING',
-                        style: TextStyle(
-                          letterSpacing: 1,
-                          fontSize: 14,
-                        ),
+                    height: 180,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: const Center(
+                      child: Icon(
+                        Icons.image,
+                        size: 48,
+                        color: Colors.white70,
                       ),
                     ),
+                  ),
+                  const SizedBox(height: 20),
+
+                  const Text(
+                    'Make It Your Own with The Union Print Shack',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                  ),
+                  const SizedBox(height: 8),
+                  const Text(
+                    'Want something a bit more you? We offer fast, affordable custom text prints on hoodies and tees. '
+                    'Just pop into the shop — we\'re always happy to help you choose colours, styles, and layouts.',
+                    style: TextStyle(fontSize: 15, height: 1.6),
+                  ),
+                  const SizedBox(height: 12),
+                  const Text(
+                    'Bring Your Own or Choose Ours',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  ),
+                  const SizedBox(height: 6),
+                  const Text(
+                    'Whether it\'s official Uni merch or your favourite hoodie from home, we can personalise it with heat-pressed text or logos.',
+                    style: TextStyle(fontSize: 15, height: 1.6),
+                  ),
+                  const SizedBox(height: 12),
+                  const Text(
+                    'Simple Prices Students Love',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  ),
+                  const SizedBox(height: 6),
+                  const Text(
+                    '• £3 — one line of text or a small chest print\n'
+                    '• £5 — two lines of text or a large back print\n\n'
+                    'Orders are usually ready in three working days, and we\'ll contact you as soon as it\'s done.',
+                    style: TextStyle(fontSize: 15, height: 1.6),
+                  ),
+                  const SizedBox(height: 12),
+                  const Text(
+                    'Before You Order',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  ),
+                  const SizedBox(height: 6),
+                  const Text(
+                    'We print text exactly as you write it. Double-check spelling, punctuation, and capital letters, as personalised items are non-refundable.',
+                    style: TextStyle(fontSize: 15, height: 1.6),
+                  ),
+                  const SizedBox(height: 12),
+                  const Text(
+                    'Let\'s Get Creating',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  ),
+                  const SizedBox(height: 6),
+                  const Text(
+                    'Come see us at the Print Shack — your ideas, your gear, your style',
+                    style: TextStyle(fontSize: 15, height: 1.6),
                   ),
                 ],
               ),
