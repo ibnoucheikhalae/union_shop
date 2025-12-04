@@ -38,4 +38,11 @@ const List<Collection> dummyCollections = [
     description: 'Everyday bits you need around campus.',
     category: 'essentials',
   ),
+  Collection(
+  id: 'c6',
+  slug: 'sale',
+  title: 'Sale Items',
+  description: 'Discounted items — limited time offers.',
+  category: 'sales',
+),
 ];

@@ -20,6 +20,7 @@ const Map<String, String> _collectionImages = {
       'https://shop.upsu.net/cdn/shop/files/ElectionDiscounts_1024x1024.jpg?v=1',
   'essential-range':
       'https://shop.upsu.net/cdn/shop/files/EssentialRange_1024x1024.jpg?v=1',
+'sale': 'https://shop.upsu.net/cdn/shop/files/sale-banner_1024x1024.jpg?v=1',
 };
 
 const String _fallbackCollectionImage =
