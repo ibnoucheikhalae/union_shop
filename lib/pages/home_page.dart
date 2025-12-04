@@ -167,3 +167,51 @@ class HomeScreen extends StatelessWidget {
             ),
 
             
+            // ==== SIGNATURE RANGE SECTION ====
+            Container(
+              color: Colors.white,
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Text(
+                    'SIGNATURE RANGE',
+                    style: TextStyle(
+                      fontSize: 18,
+                      letterSpacing: 1.2,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 24),
+                  GridView.count(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    crossAxisCount:
+                        MediaQuery.of(context).size.width > 800 ? 2 : 1,
+                    crossAxisSpacing: 24,
+                    mainAxisSpacing: 32,
+                    childAspectRatio: 4 / 3,
+                    children: const [
+                      ProductCard(
+                        id: 'signature-hoodie',
+                        collectionSlug: 'signature',
+                        title: 'Signature Hoodie',
+                        price: '£32.99',
+                        imageUrl:
+                            'https://shop.upsu.net/cdn/shop/files/Signature_Hoodie.jpg',
+                      ),
+                      ProductCard(
+                        id: 'signature-tshirt',
+                        collectionSlug: 'signature',
+                        title: 'Signature T-Shirt',
+                        price: '£14.99',
+                        imageUrl:
+                            'https://shop.upsu.net/cdn/shop/files/Signature_Tshirt.jpg',
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
