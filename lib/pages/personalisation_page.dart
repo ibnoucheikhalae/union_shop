@@ -144,3 +144,82 @@ Widget _buildLineField({
                   child: LayoutBuilder(
                     builder: (context, constraints) {
                       final bool isWide = constraints.maxWidth >= 900;
+
+
+ // ----- LEFT: IMAGE GALLERY -----
+                      final imageArea = Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: Image.network(
+                              _galleryImages[_selectedImageIndex],
+                              width: isWide ? 480 : double.infinity,
+                              height: isWide ? 480 : 260,
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stack) {
+                                return Container(
+                                  width: isWide ? 480 : double.infinity,
+                                  height: isWide ? 480 : 260,
+                                  color: Colors.grey[200],
+                                  child: const Center(
+                                    child: Icon(
+                                      Icons.broken_image,
+                                      size: 48,
+                                      color: Colors.black26,
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                          const SizedBox(height: 12),
+                          SizedBox(
+                            height: 72,
+                            child: ListView.separated(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: _galleryImages.length,
+                              separatorBuilder: (_, __) =>
+                                  const SizedBox(width: 8),
+                              itemBuilder: (context, index) {
+                                final selected =
+                                    index == _selectedImageIndex;
+                                return GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      _selectedImageIndex = index;
+                                    });
+                                  },
+                                  child: Container(
+                                    width: 72,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: selected
+                                            ? const Color(0xFF4d2963)
+                                            : Colors.grey[300]!,
+                                      ),
+                                      borderRadius: BorderRadius.circular(6),
+                                    ),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(6),
+                                      child: Image.network(
+                                        _galleryImages[index],
+                                        fit: BoxFit.cover,
+                                        errorBuilder:
+                                            (context, error, stack) =>
+                                                Container(
+                                          color: Colors.grey[200],
+                                          child: const Icon(
+                                            Icons.broken_image,
+                                            color: Colors.black26,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      );
