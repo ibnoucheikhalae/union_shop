@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 
 class AppHeader extends StatelessWidget {
@@ -25,25 +23,25 @@ class AppHeader extends StatelessWidget {
       color: Colors.white,
       child: Column(
         children: [
-          // Top banner
+          // ---------------- TOP BANNER ----------------
           Container(
             width: double.infinity,
             padding: const EdgeInsets.symmetric(vertical: 8),
             color: const Color(0xFF4d2963),
             child: const Text(
-              'PLACEHOLDER HEADER TEXT - STUDENTS TO UPDATE!',
+              'BIG SALE! OUR ESSENTIAL RANGE HAS DROPPED IN PRICE! OVER 20% OFF! COME GRAB YOURS WHILE STOCK LASTS!',
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.white, fontSize: 16),
             ),
           ),
 
-          // Main header
+          // ---------------- MAIN HEADER ----------------
           Expanded(
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Row(
                 children: [
-                  // FINAL LOGO WITH ERRORBUILDER (Commit 6)
+                  // ---------------- LOGO ----------------
                   GestureDetector(
                     onTap: onLogoTap,
                     child: Image.network(
@@ -66,8 +64,42 @@ class AppHeader extends StatelessWidget {
                     ),
                   ),
 
+                  const SizedBox(width: 20),
+
+                  // ---------------- NAVIGATION LINKS ----------------
+                  Row(
+                    children: [
+                      TextButton(
+                        onPressed: () => Navigator.pushNamed(context, '/'),
+                        child: const Text(
+                          'Home',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+
+                      TextButton(
+                        onPressed: () => Navigator.pushNamed(context, '/about'),
+                        child: const Text(
+                          'About',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+
+                      TextButton(
+                        onPressed: () => Navigator.pushNamed(context, '/collections'),
+                        child: const Text(
+                          'Shop',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      ),
+                    ],
+                  ),
+
                   const Spacer(),
 
+                  // ---------------- HEADER ICON BUTTONS ----------------
                   IconButton(
                     icon: const Icon(Icons.search, size: 18, color: Colors.grey),
                     onPressed: onSearchTap,
