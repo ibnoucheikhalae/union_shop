@@ -160,3 +160,65 @@ class PersonalisationPage extends StatefulWidget {
                       value: _line3,
                       onChanged: (t) => _line3 = t,
                     ),
+      
+      // Font style & colour
+                  Row(
+                    children: [
+                      Expanded(
+                        child: DropdownButtonFormField<String>(
+                          value: _fontStyle,
+                          decoration: const InputDecoration(
+                            labelText: 'Font style',
+                            border: OutlineInputBorder(),
+                          ),
+                          items: const [
+                            DropdownMenuItem(
+                              value: 'block',
+                              child: Text('Block'),
+                            ),
+                            DropdownMenuItem(
+                              value: 'script',
+                              child: Text('Script'),
+                            ),
+                            DropdownMenuItem(
+                              value: 'sport',
+                              child: Text('Sport'),
+                            ),
+                          ],
+                          onChanged: (v) {
+                            if (v == null) return;
+                            setState(() => _fontStyle = v);
+                          },
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: DropdownButtonFormField<String>(
+                          value: _fontColour,
+                          decoration: const InputDecoration(
+                            labelText: 'Print colour',
+                            border: OutlineInputBorder(),
+                          ),
+                          items: const [
+                            DropdownMenuItem(
+                              value: 'white',
+                              child: Text('White'),
+                            ),
+                            DropdownMenuItem(
+                              value: 'gold',
+                              child: Text('Gold'),
+                            ),
+                            DropdownMenuItem(
+                              value: 'purple',
+                              child: Text('Union purple'),
+                            ),
+                          ],
+                          onChanged: (v) {
+                            if (v == null) return;
+                            setState(() => _fontColour = v);
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 24),
