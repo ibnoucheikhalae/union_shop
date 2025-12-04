@@ -368,3 +368,100 @@ Widget _buildLineField({
                             ),
                           ],
                           const SizedBox(height: 16),
+
+
+     // Print position & number of lines
+                          if (isWide)
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: DropdownButtonFormField<String>(
+                                    value: _printPosition,
+                                    decoration: const InputDecoration(
+                                      labelText: 'Print position',
+                                      border: OutlineInputBorder(),
+                                    ),
+                                    items: const [
+                                      DropdownMenuItem(
+                                          value: 'front',
+                                          child: Text('Front')),
+                                      DropdownMenuItem(
+                                          value: 'back', child: Text('Back')),
+                                      DropdownMenuItem(
+                                          value: 'sleeve',
+                                          child:
+                                              Text('Sleeve (demo option)')),
+                                    ],
+                                    onChanged: (v) {
+                                      if (v == null) return;
+                                      setState(() => _printPosition = v);
+                                    },
+                                  ),
+                                ),
+                                const SizedBox(width: 12),
+                                Expanded(
+                                  child: DropdownButtonFormField<int>(
+                                    value: _numLines,
+                                    decoration: const InputDecoration(
+                                      labelText: 'Number of lines',
+                                      border: OutlineInputBorder(),
+                                    ),
+                                    items: const [
+                                      DropdownMenuItem(
+                                          value: 1, child: Text('1 line')),
+                                      DropdownMenuItem(
+                                          value: 2, child: Text('2 lines')),
+                                      DropdownMenuItem(
+                                          value: 3, child: Text('3 lines')),
+                                    ],
+                                    onChanged: (v) {
+                                      if (v == null) return;
+                                      setState(() => _numLines = v);
+                                    },
+                                  ),
+                                ),
+                              ],
+                            )
+                          else ...[
+                            DropdownButtonFormField<String>(
+                              value: _printPosition,
+                              decoration: const InputDecoration(
+                                labelText: 'Print position',
+                                border: OutlineInputBorder(),
+                              ),
+                              items: const [
+                                DropdownMenuItem(
+                                    value: 'front', child: Text('Front')),
+                                DropdownMenuItem(
+                                    value: 'back', child: Text('Back')),
+                                DropdownMenuItem(
+                                    value: 'sleeve',
+                                    child: Text('Sleeve (demo option)')),
+                              ],
+                              onChanged: (v) {
+                                if (v == null) return;
+                                setState(() => _printPosition = v);
+                              },
+                            ),
+                            const SizedBox(height: 12),
+                            DropdownButtonFormField<int>(
+                              value: _numLines,
+                              decoration: const InputDecoration(
+                                labelText: 'Number of lines',
+                                border: OutlineInputBorder(),
+                              ),
+                              items: const [
+                                DropdownMenuItem(
+                                    value: 1, child: Text('1 line')),
+                                DropdownMenuItem(
+                                    value: 2, child: Text('2 lines')),
+                                DropdownMenuItem(
+                                    value: 3, child: Text('3 lines')),
+                              ],
+                              onChanged: (v) {
+                                if (v == null) return;
+                                setState(() => _numLines = v);
+                              },
+                            ),
+                          ],
+                          const SizedBox(height: 16),
