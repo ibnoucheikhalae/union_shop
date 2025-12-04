@@ -71,3 +71,47 @@ class PrintShackAboutPage extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
+                  const SizedBox(height: 8),
+                  const Text(
+                    '• Up to 3 lines of text per print area.\n'
+                    '• Maximum 20 characters per line.\n'
+                    '• One print position per item in this demo.\n'
+                    '• Turnaround time, colours and prices are placeholders only.',
+                    style: TextStyle(fontSize: 15, height: 1.6),
+                  ),
+                  const SizedBox(height: 32),
+
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/personalisation');
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF4d2963),
+                        foregroundColor: Colors.white,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.zero,
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 14,
+                        ),
+                      ),
+                      child: const Text(
+                        'START PERSONALISING',
+                        style: TextStyle(
+                          letterSpacing: 1,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            const AppFooter(),
+          ],
+        ),
+      ),
+    );
