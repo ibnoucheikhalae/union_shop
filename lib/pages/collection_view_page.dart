@@ -328,12 +328,15 @@ class _CollectionViewPageState extends State<CollectionViewPage> {
                     ...paginatedProducts.map((product) {
                       return Padding(
                         padding: const EdgeInsets.only(bottom: 24.0),
-                        child: ProductCard(
-                          id: product.id,
-                          collectionSlug: product.collectionSlug,
-                          title: product.title,
-                          price: product.price,
-                          imageUrl: product.imageUrl ?? 'https://via.placeholder.com/400x400?text=Product',
+                        child: SizedBox(
+                          height: 400,
+                          child: ProductCard(
+                            id: product.id,
+                            collectionSlug: product.collectionSlug,
+                            title: product.title,
+                            price: product.price,
+                            imageUrl: product.imageUrl ?? 'https://via.placeholder.com/400x400?text=Product',
+                          ),
                         ),
                       );
                     }).toList(),
