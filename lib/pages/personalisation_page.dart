@@ -34,6 +34,7 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
   ];
 
   int _selectedImageIndex = 0;
+  int _quantity = 1;
 
   void _placeholder() {}
 
@@ -44,7 +45,7 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
     return true;
   }
 
-  void _addToCartDemo() {
+  void _addToCartDemo([int quantity = 1]) {
     if (!_isValid) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -67,7 +68,7 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
       product: demoProduct,
       colour: _garmentColour,
       size: 'N/A',
-      quantity: 1,
+      quantity: quantity,
     );
 
     ScaffoldMessenger.of(context).showSnackBar(
@@ -298,7 +299,65 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
                           ),
                           const SizedBox(height: 24),
 
-                          SizedBox(width: double.infinity, child: ElevatedButton(onPressed: _isValid ? _addToCartDemo : null, style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF4d2963), foregroundColor: Colors.white, shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero), padding: const EdgeInsets.symmetric(vertical: 14)), child: const Text('ADD PERSONALISED ITEM TO CART (DEMO)', style: TextStyle(letterSpacing: 0.5, fontSize: 13)))),
+                          // Quantity selector + Add to cart area
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              const Text('Quantity', style: TextStyle(fontSize: 16)),
+                              const SizedBox(width: 12),
+                              Container(
+                                decoration: BoxDecoration(border: Border.all(color: Colors.grey[300]!), borderRadius: BorderRadius.circular(4)),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    IconButton(
+                                      padding: EdgeInsets.zero,
+                                      constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+                                      icon: const Icon(Icons.remove),
+                                      onPressed: _quantity > 1 ? () => setState(() => _quantity--) : null,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                                      child: Text('$_quantity', style: const TextStyle(fontSize: 16)),
+                                    ),
+                                    IconButton(
+                                      padding: EdgeInsets.zero,
+                                      constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+                                      icon: const Icon(Icons.add),
+                                      onPressed: () => setState(() => _quantity++),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 16),
+
+                          SizedBox(
+                            width: double.infinity,
+                            child: ElevatedButton(
+                              onPressed: _isValid ? () => _addToCartDemo(_quantity) : null,
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xFF4d2963),
+                                foregroundColor: Colors.white,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.zero,
+                                ),
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 14,
+                                ),
+                              ),
+                              child: const Text(
+                                'Add personalised item to cart',
+                                style: TextStyle(
+                                  letterSpacing: 0.5,
+                                  fontSize: 13,
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          const Text('This is a demo – no real orders are processed.', style: TextStyle(fontSize: 12, color: Colors.grey)),
                         ],
                       );
 
