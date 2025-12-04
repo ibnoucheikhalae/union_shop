@@ -162,3 +162,53 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
       );
       return;
     }
+     // Dummy product – in a real app you’d look this up from your data.
+    final demoProduct = Product(
+      id: 'print-demo',
+      collectionSlug: 'print-shack',
+      title: 'Personalised ${_productType.toUpperCase()} (Demo)',
+      price: '£0.00', // coursework only
+      imageUrl: 'https://via.placeholder.com/400x400?text=Personalised+Demo',
+    );
+
+    CartService.instance.addToCart(
+      product: demoProduct,
+      colour: _garmentColour,
+      size: 'N/A',
+      quantity: 1,
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Personalised item added to cart (demo only).'),
+      ),
+    );
+  }
+
+  Widget _buildLineField({
+    required String label,
+    required String value,
+    required ValueChanged<String> onChanged,
+  }) {
+    final remaining = _maxCharsPerLine - value.length;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        TextField(
+          maxLength: _maxCharsPerLine,
+          decoration: InputDecoration(
+            labelText: label,
+            border: const OutlineInputBorder(),
+            counterText: '', // hide default counter
+          ),
+          onChanged: (text) => setState(() => onChanged(text)),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          '$remaining characters left',
+          style: const TextStyle(fontSize: 12, color: Colors.grey),
+        ),
+        const SizedBox(height: 12),
+      ],
+    );
+  }
