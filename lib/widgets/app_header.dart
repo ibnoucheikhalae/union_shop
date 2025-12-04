@@ -16,8 +16,6 @@ class AppHeader extends StatelessWidget {
     required this.onMenuTap,
   });
 
-  // Print Shack now uses an inline popup menu (PopupMenuButton) in the nav.
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -56,10 +54,7 @@ class AppHeader extends StatelessWidget {
                           width: 18,
                           height: 18,
                           child: const Center(
-                            child: Icon(
-                              Icons.image_not_supported,
-                              color: Colors.grey,
-                            ),
+                            child: Icon(Icons.image_not_supported, color: Colors.grey),
                           ),
                         );
                       },
@@ -68,55 +63,30 @@ class AppHeader extends StatelessWidget {
 
                   const SizedBox(width: 20),
 
-                  // NAV LINKS (compact row so popup aligns under link)
+                  // ---------------- NAVIGATION LINKS ----------------
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       TextButton(
                         onPressed: () => Navigator.pushNamed(context, '/'),
-                        child: const Text(
-                          'Home',
-                          style: TextStyle(color: Colors.black),
-                        ),
+                        child: const Text('Home', style: TextStyle(color: Colors.black)),
                       ),
                       const SizedBox(width: 8),
 
                       TextButton(
                         onPressed: () => Navigator.pushNamed(context, '/about'),
-                        child: const Text(
-                          'About',
-                          style: TextStyle(color: Colors.black),
-                        ),
+                        child: const Text('About', style: TextStyle(color: Colors.black)),
                       ),
                       const SizedBox(width: 8),
 
                       TextButton(
                         onPressed: () => Navigator.pushNamed(context, '/collections'),
-                        child: const Text(
-                          'Shop',
-                          style: TextStyle(color: Colors.black),
-                        ),
+                        child: const Text('Shop', style: TextStyle(color: Colors.black)),
                       ),
                       const SizedBox(width: 8),
 
+                      // ---------------- PRINT SHACK DROPDOWN ----------------
                       PopupMenuButton<String>(
-                        child: Row(
-                          children: const [
-                            Text('The Print Shack', style: TextStyle(color: Colors.black)),
-                            SizedBox(width: 4),
-                            Icon(Icons.arrow_drop_down, size: 18, color: Colors.black),
-                          ],
-                        ),
-                        itemBuilder: (context) => [
-                          const PopupMenuItem<String>(
-                            value: 'about',
-                            child: Text('About'),
-                          ),
-                          const PopupMenuItem<String>(
-                            value: 'personalise',
-                            child: Text('Personalisation'),
-                          ),
-                        ],
                         onSelected: (value) {
                           if (value == 'about') {
                             Navigator.pushNamed(context, '/printshack');
@@ -124,40 +94,55 @@ class AppHeader extends StatelessWidget {
                             Navigator.pushNamed(context, '/personalisation');
                           }
                         },
+                        itemBuilder: (context) => [
+                          const PopupMenuItem<String>(
+                            value: 'about',
+                            child: Text('About Print Shack'),
+                          ),
+                          const PopupMenuItem<String>(
+                            value: 'personalise',
+                            child: Text('Personalisation'),
+                          ),
+                        ],
+                        child: InkWell(
+                          child: Row(
+                            children: const [
+                              Text('The Print Shack',
+                                  style: TextStyle(color: Colors.black)),
+                              SizedBox(width: 4),
+                              Icon(Icons.arrow_drop_down,
+                                  size: 18, color: Colors.black),
+                            ],
+                          ),
+                        ),
                       ),
+
                       const SizedBox(width: 8),
 
                       TextButton(
                         onPressed: () => Navigator.pushNamed(context, '/sale'),
-                        child: const Text(
-                          'Sale',
-                          style: TextStyle(color: Colors.black),
-                        ),
+                        child: const Text('Sale', style: TextStyle(color: Colors.black)),
                       ),
                     ],
                   ),
 
                   const Spacer(),
 
-                  // ICONS
+                  // ---------------- ACTION ICONS ----------------
                   IconButton(
-                    icon:
-                        const Icon(Icons.search, size: 18, color: Colors.grey),
+                    icon: const Icon(Icons.search, size: 18, color: Colors.grey),
                     onPressed: onSearchTap,
                   ),
                   IconButton(
-                    icon: const Icon(Icons.person_outline,
-                        size: 18, color: Colors.grey),
+                    icon: const Icon(Icons.person_outline, size: 18, color: Colors.grey),
                     onPressed: onAccountTap,
                   ),
                   IconButton(
-                    icon: const Icon(Icons.shopping_bag_outlined,
-                        size: 18, color: Colors.grey),
+                    icon: const Icon(Icons.shopping_bag_outlined, size: 18, color: Colors.grey),
                     onPressed: onCartTap,
                   ),
                   IconButton(
-                    icon:
-                        const Icon(Icons.menu, size: 18, color: Colors.grey),
+                    icon: const Icon(Icons.menu, size: 18, color: Colors.grey),
                     onPressed: onMenuTap,
                   ),
                 ],
@@ -169,4 +154,3 @@ class AppHeader extends StatelessWidget {
     );
   }
 }
-
