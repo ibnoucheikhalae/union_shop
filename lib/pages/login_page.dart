@@ -21,7 +21,9 @@ class LoginPage extends StatelessWidget {
     );
   },
   onSearchTap: _placeholder,
-  onAccountTap: _placeholder,
+  onAccountTap: () {
+    Navigator.pushNamed(context, '/login');
+  },
   onCartTap: () {
     Navigator.pushNamed(context, '/cart'); // 👈 NEW
   },
