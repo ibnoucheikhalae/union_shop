@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../widgets/app_header.dart';
 import '../widgets/footer.dart';
+import '../widgets/collection_card.dart';
 import '../data/dummy_collections.dart';
 import '../models/collection.dart';
 
@@ -97,47 +98,9 @@ class CollectionsPage extends StatelessWidget {
                       final imageUrl = _collectionImages[collection.slug] ??
                           _fallbackCollectionImage;
 
-                      return GestureDetector(
+                      return CollectionCard(
+                        collection: collection,
                         onTap: () => _openCollection(context, collection),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(4),
-                          child: Stack(
-                            fit: StackFit.expand,
-                            children: [
-                              // Use network image (remote) directly. Previously
-                              // this tried a local asset then fell back to network.
-                              // We now rely on remote images only so they load
-                              // without an assets entry in `pubspec.yaml`.
-                              Image.network(
-                                imageUrl,
-                                fit: BoxFit.cover,
-                                errorBuilder: (context, _, __) => Container(
-                                  color: Colors.grey[300],
-                                ),
-                              ),
-                              // dark overlay
-                              Container(
-                                color: Colors.black.withOpacity(0.35),
-                              ),
-                              // collection title in the middle
-                              Center(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    collection.title,
-                                    textAlign: TextAlign.center,
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      height: 1.2,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
                       );
                     },
                   ),
