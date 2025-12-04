@@ -77,5 +77,34 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
       ),
     );
   }
-
-
+Widget _buildLineField({
+    required String label,
+    required String value,
+    required ValueChanged<String> onChanged,
+  }) {
+    final remaining = _maxCharsPerLine - value.length;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        TextField(
+          maxLength: _maxCharsPerLine,
+          decoration: InputDecoration(
+            labelText: label,
+            border: const OutlineInputBorder(),
+            counterText: '',
+          ),
+          onChanged: (text) {
+            setState(() {
+              onChanged(text);
+            });
+          },
+        ),
+        const SizedBox(height: 4),
+        Text(
+          '$remaining characters left',
+          style: const TextStyle(fontSize: 12, color: Colors.grey),
+        ),
+        const SizedBox(height: 12),
+      ],
+    );
+  }
