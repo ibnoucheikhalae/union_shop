@@ -583,3 +583,171 @@ Widget _buildLineField({
                             ),
                           ],
                           const SizedBox(height: 16),
+
+ // Quantity + add to cart
+                          Row(
+                            children: [
+                              const Text(
+                                'Quantity',
+                                style: TextStyle(fontSize: 14),
+                              ),
+                              const SizedBox(width: 12),
+                              Container(
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.grey[300]!),
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    IconButton(
+                                      icon: const Icon(Icons.remove, size: 18),
+                                      onPressed: _quantity > 1
+                                          ? () {
+                                              setState(
+                                                () => _quantity--,
+                                              );
+                                            }
+                                          : null,
+                                      visualDensity: VisualDensity.compact,
+                                    ),
+                                    Text('$_quantity'),
+                                    IconButton(
+                                      icon: const Icon(Icons.add, size: 18),
+                                      onPressed: () {
+                                        setState(() => _quantity++);
+                                      },
+                                      visualDensity: VisualDensity.compact,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 16),
+
+                          SizedBox(
+                            width: double.infinity,
+                            child: ElevatedButton(
+                              onPressed: _isValid ? _addToCartDemo : null,
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xFF4d2963),
+                                foregroundColor: Colors.white,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.zero,
+                                ),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 14),
+                              ),
+                              child: const Text(
+                                'Add personalised item to cart',
+                                style: TextStyle(
+                                  letterSpacing: 0.5,
+                                  fontSize: 13,
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          const Text(
+                            'This is a demo – no real orders are processed.',
+                            style:
+                                TextStyle(fontSize: 12, color: Colors.grey),
+                          ),
+
+                          const SizedBox(height: 16),
+                          const Text(
+                            'This is an approximate preview of how your text will appear.',
+                            style:
+                                TextStyle(fontSize: 12, color: Colors.grey),
+                          ),
+                          const SizedBox(height: 8),
+                          Center(
+                            child: Container(
+                              width: isWide ? 420 : double.infinity,
+                              padding: const EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                color: Colors.black,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Text(
+                                linesPreview.isEmpty
+                                    ? 'Your text will appear here'
+                                    : linesPreview,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  height: 1.4,
+                                ),
+                              ),
+                            ),
+                          ),
+
+                          const SizedBox(height: 24),
+                          const Text(
+                            'How our personalisation works',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          const Text(
+                            '• Pricing from £3.00 per item (demo pricing).\n'
+                            '• Typical turnaround: 2–5 working days (demo estimate).\n'
+                            '• We can print on T-shirts, hoodies and sweatshirts in this demo.\n'
+                            '• This service is provided for coursework demonstration only.',
+                            style: TextStyle(fontSize: 13, height: 1.5),
+                          ),
+                          const SizedBox(height: 16),
+                          const Text(
+                            'Important',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          const Text(
+                            '• Please check spelling carefully – you are responsible for text accuracy.\n'
+                            '• Personalised items are non-refundable in this demo scenario.',
+                            style: TextStyle(fontSize: 13, height: 1.5),
+                          ),
+                          const SizedBox(height: 24),
+                        ],
+                      );
+
+                      if (isWide) {
+                        return Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(flex: 5, child: imageArea),
+                            const SizedBox(width: 32),
+                            Expanded(flex: 6, child: formColumn),
+                          ],
+                        );
+                      }
+
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          imageArea,
+                          const SizedBox(height: 24),
+                          formColumn,
+                        ],
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ),
+
+            const AppFooter(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
