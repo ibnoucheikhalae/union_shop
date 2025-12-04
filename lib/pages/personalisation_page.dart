@@ -59,7 +59,7 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
     final demoProduct = Product(
       id: 'print-demo',
       collectionSlug: 'print-shack',
-      title: 'Personalised ${_productType.toUpperCase()} (Demo)',
+      title: 'Personalised ${_productType.toUpperCase()} ',
       price: '£3.00', // demo pricing
       imageUrl: _galleryImages[_selectedImageIndex],
     );
@@ -73,7 +73,7 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
 
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
-        content: Text('Personalised item added to cart (demo only).'),
+        content: Text('Personalised item added to cart.'),
       ),
     );
   }
@@ -247,15 +247,14 @@ Widget _buildLineField({
                           ),
                           const SizedBox(height: 4),
                           const Text(
-                            'Tax included. Demo coursework only.',
+                            'Tax included.',
                             style:
                                 TextStyle(fontSize: 12, color: Colors.grey),
                           ),
                           const SizedBox(height: 12),
                           const Text(
-                            'Add personalised text to your hoodie, T-shirt or sweatshirt. '
-                            'Choose garment, colour and print position. This is a coursework demo only – '
-                            'no real orders are processed.',
+                            'Add personalised text to your hoodie, T-shirt or sweatshirt.\n '
+                            'Choose garment, colour and print position',
                             style: TextStyle(fontSize: 14, height: 1.6),
                           ),
                           const SizedBox(height: 24),
@@ -390,7 +389,7 @@ Widget _buildLineField({
                                       DropdownMenuItem(
                                           value: 'sleeve',
                                           child:
-                                              Text('Sleeve (demo option)')),
+                                              Text('Sleeve')),
                                     ],
                                     onChanged: (v) {
                                       if (v == null) return;
@@ -436,7 +435,7 @@ Widget _buildLineField({
                                     value: 'back', child: Text('Back')),
                                 DropdownMenuItem(
                                     value: 'sleeve',
-                                    child: Text('Sleeve (demo option)')),
+                                    child: Text('Sleeve')),
                               ],
                               onChanged: (v) {
                                 if (v == null) return;
@@ -650,7 +649,7 @@ Widget _buildLineField({
                           ),
                           const SizedBox(height: 8),
                           const Text(
-                            'This is a demo – no real orders are processed.',
+                            'Personalised items are non-refundable.',
                             style:
                                 TextStyle(fontSize: 12, color: Colors.grey),
                           ),
@@ -694,10 +693,10 @@ Widget _buildLineField({
                           ),
                           const SizedBox(height: 8),
                           const Text(
-                            '• Pricing from £3.00 per item (demo pricing).\n'
-                            '• Typical turnaround: 2–5 working days (demo estimate).\n'
-                            '• We can print on T-shirts, hoodies and sweatshirts in this demo.\n'
-                            '• This service is provided for coursework demonstration only.',
+                            '• Pricing from £3.00 per item .\n'
+                            '• Typical turnaround: 2–5 working days.\n'
+                            '• We can print on T-shirts, hoodies and sweatshirts.\n'
+                          ,
                             style: TextStyle(fontSize: 13, height: 1.5),
                           ),
                           const SizedBox(height: 16),
@@ -711,7 +710,7 @@ Widget _buildLineField({
                           const SizedBox(height: 8),
                           const Text(
                             '• Please check spelling carefully – you are responsible for text accuracy.\n'
-                            '• Personalised items are non-refundable in this demo scenario.',
+                            '• Personalised items are non-refundable.',
                             style: TextStyle(fontSize: 13, height: 1.5),
                           ),
                           const SizedBox(height: 24),
