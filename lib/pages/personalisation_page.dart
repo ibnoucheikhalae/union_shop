@@ -144,18 +144,31 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
                       final formColumn = Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          // Product summary (title, price, tax, short description)
                           const Text(
-                            'Personalise Your Text',
+                            'Personalise Text',
                             style: TextStyle(
-                              fontSize: 28,
+                              fontSize: 30,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           const SizedBox(height: 8),
                           const Text(
-                            'Use this demo form to design a personalised item. '
-                            'Options and prices are placeholders – no real orders '
-                            'are processed.',
+                            'From £3.00',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          const Text(
+                            'Tax included. Demo coursework only.',
+                            style: TextStyle(fontSize: 12, color: Colors.grey),
+                          ),
+                          const SizedBox(height: 12),
+                          const Text(
+                            'Personalise a garment with up to three lines of text. '
+                            'Choose garment, colour and print position — this is a visual demo only.',
                             style: TextStyle(fontSize: 14, height: 1.6),
                           ),
                           const SizedBox(height: 24),
