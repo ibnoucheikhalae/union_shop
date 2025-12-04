@@ -8,6 +8,7 @@ const List<Collection> dummyCollections = [
     title: 'Hoodies & Sweatshirts',
     description: 'Warm and comfy uni hoodies for everyday campus life.',
     category: 'clothing',
+    imageUrl: 'https://via.placeholder.com/600x800?text=Hoodies',
   ),
 
   Collection(
@@ -16,6 +17,7 @@ const List<Collection> dummyCollections = [
     title: 'Gifts & Accessories',
     description: 'Mugs, magnets, keyrings and small presents.',
     category: 'gifts',
+    imageUrl: 'https://via.placeholder.com/600x800?text=Gifts',
   ),
   Collection(
     id: 'c3',
@@ -23,6 +25,7 @@ const List<Collection> dummyCollections = [
     title: 'Stationery',
     description: 'Notebooks, pens, and study essentials.',
     category: 'stationery',
+    imageUrl: 'https://via.placeholder.com/600x800?text=Stationery',
   ),
   Collection(
     id: 'c4',
@@ -37,6 +40,7 @@ const List<Collection> dummyCollections = [
     title: 'Campus Essentials',
     description: 'Everyday bits you need around campus.',
     category: 'essentials',
+    imageUrl: 'https://via.placeholder.com/600x800?text=Campus+Essentials',
   ),
   Collection(
   id: 'c6',
@@ -44,5 +48,6 @@ const List<Collection> dummyCollections = [
   title: 'Sale Items',
   description: 'Discounted items — limited time offers.',
   category: 'sales',
+  imageUrl: 'https://via.placeholder.com/600x800?text=Sale',
 ),
 ];

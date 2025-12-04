@@ -104,17 +104,15 @@ class CollectionsPage extends StatelessWidget {
                           child: Stack(
                             fit: StackFit.expand,
                             children: [
-                              // try local asset first (assets/images/<slug>.png),
-                              // fall back to the remote image if the asset isn't present.
-                              Image.asset(
-                                'assets/images/${collection.slug}.png',
+                              // Use network image (remote) directly. Previously
+                              // this tried a local asset then fell back to network.
+                              // We now rely on remote images only so they load
+                              // without an assets entry in `pubspec.yaml`.
+                              Image.network(
+                                imageUrl,
                                 fit: BoxFit.cover,
-                                errorBuilder: (context, _, __) => Image.network(
-                                  imageUrl,
-                                  fit: BoxFit.cover,
-                                  errorBuilder: (context, _, __) => Container(
-                                    color: Colors.grey[300],
-                                  ),
+                                errorBuilder: (context, _, __) => Container(
+                                  color: Colors.grey[300],
                                 ),
                               ),
                               // dark overlay

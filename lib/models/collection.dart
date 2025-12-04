@@ -4,7 +4,9 @@ class Collection {
   final String slug;        // e.g. 'hoodies', 'gifts'
   final String title;
   final String description;
-  final String category;    // e.g. 'clothing', 'gifts', 'stationery'
+  final String category;   
+  // Optional image for the collection (asset path or remote URL)
+  final String? imageUrl; // e.g. 'assets/images/hoodies.png' or remote URL
 
   const Collection({
     required this.id,
@@ -12,5 +14,6 @@ class Collection {
     required this.title,
     required this.description,
     required this.category,
+    this.imageUrl,
   });
 }
