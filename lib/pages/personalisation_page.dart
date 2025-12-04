@@ -222,3 +222,97 @@ class PersonalisationPage extends StatefulWidget {
                     ],
                   ),
                   const SizedBox(height: 24),
+
+                // Live summary “preview”
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: Colors.grey[50],
+                      border: Border.all(color: Colors.grey[300]!),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Preview summary (demo)',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          'Product: ${_productType.toUpperCase()}',
+                          style: const TextStyle(fontSize: 14),
+                        ),
+                        Text(
+                          'Garment colour: $_garmentColour',
+                          style: const TextStyle(fontSize: 14),
+                        ),
+                        Text(
+                          'Print position: $_printPosition',
+                          style: const TextStyle(fontSize: 14),
+                        ),
+                        Text(
+                          'Font: $_fontStyle / $_fontColour',
+                          style: const TextStyle(fontSize: 14),
+                        ),
+                        const SizedBox(height: 12),
+                        Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.all(12),
+                          color: Colors.black,
+                          child: Text(
+                            linesPreview.isEmpty
+                                ? 'Your text will appear here'
+                                : linesPreview,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              height: 1.4,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: _isValid ? _addToCartDemo : null,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF4d2963),
+                        foregroundColor: Colors.white,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.zero,
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 14,
+                        ),
+                      ),
+                      child: const Text(
+                        'ADD PERSONALISED ITEM TO CART (DEMO)',
+                        style: TextStyle(
+                          letterSpacing: 0.5,
+                          fontSize: 13,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            const AppFooter(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
