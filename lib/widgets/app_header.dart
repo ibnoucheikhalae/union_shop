@@ -16,6 +16,33 @@ class AppHeader extends StatelessWidget {
     required this.onMenuTap,
   });
 
+  void _openPrintShackMenu(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (ctx) {
+        return SimpleDialog(
+          title: const Text('Print Shack'),
+          children: [
+            SimpleDialogOption(
+              onPressed: () {
+                Navigator.pop(ctx); // close dialog
+                Navigator.pushNamed(context, '/printshack');
+              },
+              child: const Text('About Print Shack'),
+            ),
+            SimpleDialogOption(
+              onPressed: () {
+                Navigator.pop(ctx); // close dialog
+                Navigator.pushNamed(context, '/personalisation');
+              },
+              child: const Text('Personalise Text'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -77,6 +104,7 @@ class AppHeader extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 8),
+
                       TextButton(
                         onPressed: () => Navigator.pushNamed(context, '/about'),
                         child: const Text(
@@ -85,6 +113,7 @@ class AppHeader extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 8),
+
                       TextButton(
                         onPressed: () =>
                             Navigator.pushNamed(context, '/collections'),
@@ -94,9 +123,19 @@ class AppHeader extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 8),
+
                       TextButton(
                         onPressed: () =>
-                            Navigator.pushNamed(context, '/personalisation'),
+                            Navigator.pushNamed(context, '/sale'),
+                        child: const Text(
+                          'Sale',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+
+                      TextButton(
+                        onPressed: () => _openPrintShackMenu(context),
                         child: const Text(
                           'Print Shack',
                           style: TextStyle(color: Colors.black),
@@ -109,7 +148,8 @@ class AppHeader extends StatelessWidget {
 
                   // ICONS
                   IconButton(
-                    icon: const Icon(Icons.search, size: 18, color: Colors.grey),
+                    icon:
+                        const Icon(Icons.search, size: 18, color: Colors.grey),
                     onPressed: onSearchTap,
                   ),
                   IconButton(
