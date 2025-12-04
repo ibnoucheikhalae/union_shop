@@ -51,4 +51,33 @@ class AppFooter extends StatelessWidget {
 
               const SizedBox(width: 32),
 
-              
+              // Help & Info
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "Help and Information",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    TextButton(
+                      onPressed: () {},
+                      child: const Text("Search"),
+                    ),
+                    TextButton(
+                      onPressed: () {},
+                      child: const Text("Terms & Conditions of Sale"),
+                    ),
+                    TextButton(
+                      onPressed: () {},
+                      child: const Text("Policy"),
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(width: 32),
