@@ -52,3 +52,22 @@ class PrintShackAboutPage extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
+                  const SizedBox(height: 8),
+                  const Text(
+                    '1. Choose a product and colour.\n'
+                    '2. Pick your print position and number of lines.\n'
+                    '3. Enter your personalised text.\n'
+                    '4. Review your summary and place the order in the cart.\n\n'
+                    'All examples in this coursework are for demonstration only – '
+                    'no real orders are processed.',
+                    style: TextStyle(fontSize: 15, height: 1.6),
+                  ),
+                  const SizedBox(height: 24),
+
+                  const Text(
+                    'Turnaround & limits (demo)',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
