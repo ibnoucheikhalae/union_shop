@@ -49,7 +49,7 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
       id: 'print-demo',
       collectionSlug: 'print-shack',
       title: 'Personalised ${_productType.toUpperCase()} (Demo)',
-      price: '£0.00', // coursework only
+      price: '£3.00', // coursework only
       imageUrl: 'https://via.placeholder.com/400x400?text=Personalised+Demo',
     );
 
