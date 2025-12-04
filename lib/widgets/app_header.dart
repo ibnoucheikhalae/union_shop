@@ -129,3 +129,36 @@ class AppHeader extends StatelessWidget {
     );
   }
 }
+
+class _PersonalisationPageState extends State<PersonalisationPage> {
+  // Simple demo state
+  String _productType = 'hoodie';
+  String _garmentColour = 'navy';
+  String _printPosition = 'front';
+  int _numLines = 1;
+  String _line1 = '';
+  String _line2 = '';
+  String _line3 = '';
+  String _fontStyle = 'block';
+  String _fontColour = 'white';
+
+  final _maxCharsPerLine = 20;
+
+  void _placeholder() {}
+
+  bool get _isValid {
+    if (_line1.trim().isEmpty) return false;
+    if (_numLines >= 2 && _line2.trim().isEmpty) return false;
+    if (_numLines >= 3 && _line3.trim().isEmpty) return false;
+    return true;
+  }
+
+  void _addToCartDemo() {
+    if (!_isValid) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please fill in the required text fields.'),
+        ),
+      );
+      return;
+    }
