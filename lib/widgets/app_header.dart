@@ -212,3 +212,49 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
       ],
     );
   }
+ @override
+  Widget build(BuildContext context) {
+    final linesPreview = [
+      _line1,
+      if (_numLines >= 2) _line2,
+      if (_numLines >= 3) _line3,
+    ].where((t) => t.trim().isNotEmpty).join('\n');
+
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            AppHeader(
+              onLogoTap: () {
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  '/',
+                  (route) => false,
+                );
+              },
+              onSearchTap: _placeholder,
+              onAccountTap: () => Navigator.pushNamed(context, '/login'),
+              onCartTap: () => Navigator.pushNamed(context, '/cart'),
+              onMenuTap: _placeholder,
+            ),
+
+            Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Personalise Your Text',
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  const Text(
+                    'Use this demo form to design a personalised item. '
+                    'Options and prices are placeholders – no real orders '
+                    'are processed.',
+                    style: TextStyle(fontSize: 14, height: 1.6),
+                  ),
+                  const SizedBox(height: 24),
