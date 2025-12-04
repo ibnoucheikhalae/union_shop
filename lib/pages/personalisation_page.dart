@@ -142,3 +142,21 @@ class PersonalisationPage extends StatefulWidget {
                     ],
                   ),
                   const SizedBox(height: 16),
+ // Dynamic text fields
+                  _buildLineField(
+                    label: 'Line 1 text',
+                    value: _line1,
+                    onChanged: (t) => _line1 = t,
+                  ),
+                  if (_numLines >= 2)
+                    _buildLineField(
+                      label: 'Line 2 text',
+                      value: _line2,
+                      onChanged: (t) => _line2 = t,
+                    ),
+                  if (_numLines >= 3)
+                    _buildLineField(
+                      label: 'Line 3 text',
+                      value: _line3,
+                      onChanged: (t) => _line3 = t,
+                    ),
