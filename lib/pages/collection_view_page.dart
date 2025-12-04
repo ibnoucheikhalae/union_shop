@@ -23,7 +23,7 @@ class _CollectionViewPageState extends State<CollectionViewPage> {
   final String _selectedFit = 'all';
 
   int _currentPage = 1;
-  int itemsPerPage = 4;
+  int itemsPerPage = 3;
 
   double _parsePrice(String price) {
     final cleaned = price.replaceAll(RegExp(r'[^0-9.]'), '');
@@ -316,32 +316,27 @@ class _CollectionViewPageState extends State<CollectionViewPage> {
 
                   const SizedBox(height: 24),
 
-                  // Grid of products in this collection
-                  GridView.count(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    crossAxisCount:
-                        MediaQuery.of(context).size.width > 600 ? 3 : 2,
-                    mainAxisSpacing: 16,
-                    crossAxisSpacing: 16,
-                    childAspectRatio: 3 / 4,
-                    children: paginatedProducts.isEmpty
-                        ? const [
-                            Center(
-                              child:
-                                  Text('No products in this collection yet.'),
-                            ),
-                          ]
-                        : paginatedProducts.map((product) {
-                            return ProductCard(
-                              title: product.title,
-                              price: product.price,
-                              // you can map to a real image later
-                              imageUrl:
-                                  'https://via.placeholder.com/400x400?text=Product',
-                            );
-                          }).toList(),
-                  ),
+                  // List of products in this collection (1 per row)
+                  if (paginatedProducts.isEmpty)
+                    const Center(
+                      child: Padding(
+                        padding: EdgeInsets.all(32.0),
+                        child: Text('No products in this collection yet.'),
+                      ),
+                    )
+                  else
+                    ...paginatedProducts.map((product) {
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 24.0),
+                        child: ProductCard(
+                          id: product.id,
+                          collectionSlug: product.collectionSlug,
+                          title: product.title,
+                          price: product.price,
+                          imageUrl: product.imageUrl ?? 'https://via.placeholder.com/400x400?text=Product',
+                        ),
+                      );
+                    }).toList(),
                 ],
               ),
             ),
