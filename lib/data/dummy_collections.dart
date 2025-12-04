@@ -8,7 +8,7 @@ const List<Collection> dummyCollections = [
     title: 'Hoodies & Sweatshirts',
     description: 'Warm and comfy uni hoodies for everyday campus life.',
     category: 'clothing',
-    imageUrl: 'https://via.placeholder.com/600x800?text=Hoodies',
+    imageUrl: 'assets/images/product/p1.png',
   ),
 
   Collection(
@@ -17,7 +17,7 @@ const List<Collection> dummyCollections = [
     title: 'Gifts & Accessories',
     description: 'Mugs, magnets, keyrings and small presents.',
     category: 'gifts',
-    imageUrl: 'https://via.placeholder.com/600x800?text=Gifts',
+    imageUrl:  'assets/images/product/p4.png',
   ),
   Collection(
     id: 'c3',
@@ -25,7 +25,7 @@ const List<Collection> dummyCollections = [
     title: 'Stationery',
     description: 'Notebooks, pens, and study essentials.',
     category: 'stationery',
-    imageUrl: 'https://via.placeholder.com/600x800?text=Stationery',
+    imageUrl: 'assets/images/product/p2.png',
   ),
   Collection(
     id: 'c4',
@@ -33,6 +33,7 @@ const List<Collection> dummyCollections = [
     title: 'Sportswear',
     description: 'Activewear for BUCS teams and gym sessions.',
     category: 'clothing',
+    imageUrl: 'assets/images/product/p3.png',
   ),
   Collection(
     id: 'c5',
@@ -40,7 +41,7 @@ const List<Collection> dummyCollections = [
     title: 'Campus Essentials',
     description: 'Everyday bits you need around campus.',
     category: 'essentials',
-    imageUrl: 'https://via.placeholder.com/600x800?text=Campus+Essentials',
+    imageUrl: 'assets/images/product/p5.png',
   ),
   Collection(
   id: 'c6',
@@ -48,6 +49,6 @@ const List<Collection> dummyCollections = [
   title: 'Sale Items',
   description: 'Discounted items — limited time offers.',
   category: 'sales',
-  imageUrl: 'https://via.placeholder.com/600x800?text=Sale',
+  imageUrl: 'assets/images/product/p1.png',
 ),
 ];
