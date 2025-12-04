@@ -134,3 +134,31 @@ class AppFooter extends StatelessWidget {
 
           const SizedBox(height: 40),
           const Divider(),
+
+          // ---- LOWER FOOTER ----
+          const SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // Social icons (dummy)
+              Row(
+                children: [
+                  Icon(Icons.facebook, color: Colors.grey[700]),
+                  const SizedBox(width: 12),
+                  Icon(Icons.camera_alt, color: Colors.grey[700]), // fake IG
+                  const SizedBox(width: 12),
+                  Icon(Icons.local_post_office, color: Colors.grey[700]),
+                ],
+              ),
+
+              const Text(
+                "© 2025, Student Shop — Demo Footer",
+                style: TextStyle(color: Colors.grey, fontSize: 12),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
