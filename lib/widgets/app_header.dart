@@ -16,32 +16,7 @@ class AppHeader extends StatelessWidget {
     required this.onMenuTap,
   });
 
-  void _openPrintShackMenu(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (ctx) {
-        return SimpleDialog(
-          title: const Text('Print Shack'),
-          children: [
-            SimpleDialogOption(
-              onPressed: () {
-                Navigator.pop(ctx); // close dialog
-                Navigator.pushNamed(context, '/printshack');
-              },
-              child: const Text('About Print Shack'),
-            ),
-            SimpleDialogOption(
-              onPressed: () {
-                Navigator.pop(ctx); // close dialog
-                Navigator.pushNamed(context, '/personalisation');
-              },
-              child: const Text('Personalise Text'),
-            ),
-          ],
-        );
-      },
-    );
-  }
+  // Print Shack now uses an inline popup menu (PopupMenuButton) in the nav.
 
   @override
   Widget build(BuildContext context) {
@@ -93,8 +68,9 @@ class AppHeader extends StatelessWidget {
 
                   const SizedBox(width: 20),
 
-                  // NAV LINKS
+                  // NAV LINKS (compact row so popup aligns under link)
                   Row(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       TextButton(
                         onPressed: () => Navigator.pushNamed(context, '/'),
@@ -115,8 +91,7 @@ class AppHeader extends StatelessWidget {
                       const SizedBox(width: 8),
 
                       TextButton(
-                        onPressed: () =>
-                            Navigator.pushNamed(context, '/collections'),
+                        onPressed: () => Navigator.pushNamed(context, '/collections'),
                         child: const Text(
                           'Shop',
                           style: TextStyle(color: Colors.black),
@@ -124,20 +99,38 @@ class AppHeader extends StatelessWidget {
                       ),
                       const SizedBox(width: 8),
 
-                      TextButton(
-                        onPressed: () =>
-                            Navigator.pushNamed(context, '/sale'),
-                        child: const Text(
-                          'Sale',
-                          style: TextStyle(color: Colors.black),
+                      PopupMenuButton<String>(
+                        child: Row(
+                          children: const [
+                            Text('The Print Shack', style: TextStyle(color: Colors.black)),
+                            SizedBox(width: 4),
+                            Icon(Icons.arrow_drop_down, size: 18, color: Colors.black),
+                          ],
                         ),
+                        itemBuilder: (context) => [
+                          const PopupMenuItem<String>(
+                            value: 'about',
+                            child: Text('About'),
+                          ),
+                          const PopupMenuItem<String>(
+                            value: 'personalise',
+                            child: Text('Personalisation'),
+                          ),
+                        ],
+                        onSelected: (value) {
+                          if (value == 'about') {
+                            Navigator.pushNamed(context, '/printshack');
+                          } else if (value == 'personalise') {
+                            Navigator.pushNamed(context, '/personalisation');
+                          }
+                        },
                       ),
                       const SizedBox(width: 8),
 
                       TextButton(
-                        onPressed: () => _openPrintShackMenu(context),
+                        onPressed: () => Navigator.pushNamed(context, '/sale'),
                         child: const Text(
-                          'Print Shack',
+                          'Sale',
                           style: TextStyle(color: Colors.black),
                         ),
                       ),
@@ -176,3 +169,4 @@ class AppHeader extends StatelessWidget {
     );
   }
 }
+
