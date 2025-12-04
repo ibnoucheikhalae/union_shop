@@ -215,3 +215,61 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
+
+            // ==== OUR RANGE (4 big tiles) ====
+            Container(
+              color: Colors.white,
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 24),
+              child: Column(
+                children: [
+                  const Text(
+                    'OUR RANGE',
+                    style: TextStyle(
+                      fontSize: 18,
+                      letterSpacing: 1.2,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 24),
+                  GridView.count(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    crossAxisCount:
+                        MediaQuery.of(context).size.width > 900 ? 4 : 2,
+                    crossAxisSpacing: 16,
+                    mainAxisSpacing: 16,
+                    childAspectRatio: 4 / 3,
+                    children: [
+                      _RangeTile(
+                        label: 'Clothing',
+                        onTap: () => _goToCollections(context),
+                      ),
+                      _RangeTile(
+                        label: 'Merchandise',
+                        onTap: () => _goToCollections(context),
+                      ),
+                      _RangeTile(
+                        label: 'Graduation',
+                        onTap: () => _goToCollections(context),
+                      ),
+                      _RangeTile(
+                        label: 'SALE',
+                        onTap: () {
+                          Navigator.pushNamed(context, '/sale');
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+
+            const AppFooter(),
+          ],
+        ),
+      ),
+    );
+  }
+}
