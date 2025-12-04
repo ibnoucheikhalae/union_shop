@@ -108,3 +108,39 @@ Widget _buildLineField({
       ],
     );
   }
+
+ @override
+  Widget build(BuildContext context) {
+    final linesPreview = [
+      _line1,
+      if (_numLines >= 2) _line2,
+      if (_numLines >= 3) _line3,
+    ].where((t) => t.trim().isNotEmpty).join('\n');
+
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            AppHeader(
+              onLogoTap: () {
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  '/',
+                  (route) => false,
+                );
+              },
+              onSearchTap: _placeholder,
+              onAccountTap: () => Navigator.pushNamed(context, '/login'),
+              onCartTap: () => Navigator.pushNamed(context, '/cart'),
+              onMenuTap: _placeholder,
+            ),
+
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 1100),
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      final bool isWide = constraints.maxWidth >= 900;
