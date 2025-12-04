@@ -281,24 +281,6 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
                           ),
                           const SizedBox(height: 24),
 
-                          // Live summary “preview”
-                          Container(
-                            width: double.infinity,
-                            padding: const EdgeInsets.all(16),
-                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: Colors.grey[50], border: Border.all(color: Colors.grey[300]!)),
-                            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                              const Text('Preview summary (demo)', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16)),
-                              const SizedBox(height: 8),
-                              Text('Product: ${_productType.toUpperCase()}', style: const TextStyle(fontSize: 14)),
-                              Text('Garment colour: $_garmentColour', style: const TextStyle(fontSize: 14)),
-                              Text('Print position: $_printPosition', style: const TextStyle(fontSize: 14)),
-                              Text('Font: $_fontStyle / $_fontColour', style: const TextStyle(fontSize: 14)),
-                              const SizedBox(height: 12),
-                              Container(width: double.infinity, padding: const EdgeInsets.all(12), color: Colors.black, child: Text(linesPreview.isEmpty ? 'Your text will appear here' : linesPreview, textAlign: TextAlign.center, style: const TextStyle(color: Colors.white, fontSize: 16, height: 1.4))),
-                            ]),
-                          ),
-                          const SizedBox(height: 24),
-
                           // Quantity selector + Add to cart area
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -358,6 +340,30 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
                           ),
                           const SizedBox(height: 8),
                           const Text('This is a demo – no real orders are processed.', style: TextStyle(fontSize: 12, color: Colors.grey)),
+
+                          // Live text preview moved below add-to-cart: helper + simplified preview box
+                          const SizedBox(height: 16),
+                          const Text(
+                            'This is an approximate preview of how your text will appear.',
+                            style: TextStyle(fontSize: 12, color: Colors.grey),
+                          ),
+                          const SizedBox(height: 8),
+                          Center(
+                            child: Container(
+                              width: isWide ? 420 : double.infinity,
+                              padding: const EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                color: Colors.black,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Text(
+                                linesPreview.isEmpty ? 'Your text will appear here' : linesPreview,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(color: Colors.white, fontSize: 16, height: 1.4),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 24),
                         ],
                       );
 
