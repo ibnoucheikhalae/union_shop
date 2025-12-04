@@ -223,3 +223,71 @@ Widget _buildLineField({
                           ),
                         ],
                       );
+
+
+    
+                      // ----- RIGHT: FORM COLUMN -----
+                      final formColumn = Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Personalise Text',
+                            style: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          const Text(
+                            'From £3.00',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          const Text(
+                            'Tax included. Demo coursework only.',
+                            style:
+                                TextStyle(fontSize: 12, color: Colors.grey),
+                          ),
+                          const SizedBox(height: 12),
+                          const Text(
+                            'Add personalised text to your hoodie, T-shirt or sweatshirt. '
+                            'Choose garment, colour and print position. This is a coursework demo only – '
+                            'no real orders are processed.',
+                            style: TextStyle(fontSize: 14, height: 1.6),
+                          ),
+                          const SizedBox(height: 24),
+
+                          // Product type & colour
+                          if (isWide)
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: DropdownButtonFormField<String>(
+                                    value: _productType,
+                                    decoration: const InputDecoration(
+                                      labelText: 'Product',
+                                      border: OutlineInputBorder(),
+                                    ),
+                                    items: const [
+                                      DropdownMenuItem(
+                                          value: 'hoodie',
+                                          child: Text('Hoodie')),
+                                      DropdownMenuItem(
+                                          value: 'tshirt',
+                                          child: Text('T-Shirt')),
+                                      DropdownMenuItem(
+                                          value: 'sweatshirt',
+                                          child: Text('Sweatshirt')),
+                                      DropdownMenuItem(
+                                          value: 'other',
+                                          child: Text('Other garment')),
+                                    ],
+                                    onChanged: (v) {
+                                      if (v == null) return;
+                                      setState(() => _productType = v);
+                                    },
+                                  ),
+                                ),
