@@ -363,6 +363,42 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
                               ),
                             ),
                           ),
+
+                          const SizedBox(height: 24),
+
+                          // Details section (static)
+                          const Text(
+                            'How our personalisation works',
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                          ),
+                          const SizedBox(height: 8),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Row(children: [Text('•'), SizedBox(width: 8), Expanded(child: Text('Pricing from £3.00 per item (demo pricing).'))]),
+                              SizedBox(height: 6),
+                              Row(children: [Text('•'), SizedBox(width: 8), Expanded(child: Text('Typical turnaround: 2-5 working days (demo estimate).'))]),
+                              SizedBox(height: 6),
+                              Row(children: [Text('•'), SizedBox(width: 8), Expanded(child: Text('We can print on T‑shirts, hoodies and sweatshirts in this demo.'))]),
+                              SizedBox(height: 6),
+                              Row(children: [Text('•'), SizedBox(width: 8), Expanded(child: Text('This service is provided for coursework demonstration only.'))]),
+                            ],
+                          ),
+                          const SizedBox(height: 12),
+
+                          const Text(
+                            'Important',
+                            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                          ),
+                          const SizedBox(height: 8),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Row(children: [Text('•'), SizedBox(width: 8), Expanded(child: Text('Please check spelling carefully — you are responsible for text accuracy.'))]),
+                              SizedBox(height: 6),
+                              Row(children: [Text('•'), SizedBox(width: 8), Expanded(child: Text('Personalised items are non‑refundable in this demo scenario.'))]),
+                            ],
+                          ),
                           const SizedBox(height: 24),
                         ],
                       );
