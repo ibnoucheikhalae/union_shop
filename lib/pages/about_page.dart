@@ -51,8 +51,8 @@ class AboutPage extends StatelessWidget {
                   const SizedBox(height: 20),
 
                   const Text(
-                    'The Union Shop is part of the University of Portsmouth Students\' Union. '
-                    'We exist to support and celebrate student life — offering official branded '
+                    'The Union Shop is part of the University of Portsmouth Student\' s Union. '
+                    'We exist to support and celebrate student life. Offering official branded '
                     'clothing, merchandise, stationery, graduation gifts, and personalised items.\n',
                     style: TextStyle(fontSize: 16, height: 1.5),
                   ),
@@ -73,41 +73,10 @@ class AboutPage extends StatelessWidget {
 
                   const SizedBox(height: 24),
 
+                  
                   const Text(
-                    'Opening Hours',
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-
-                  const SizedBox(height: 12),
-
-                  const Text(
-                    'Term Time:\n'
-                    'Monday – Friday: 10am – 4pm\n\n'
-                    'Consolidation / Outside Term Time:\n'
-                    'Monday – Friday: 10am – 3pm\n\n'
-                    'Online store available 24/7.',
-                    style: TextStyle(fontSize: 16, height: 1.5),
-                  ),
-
-                  const SizedBox(height: 30),
-
-                  const Text(
-                    'Contact Us',
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-
-                  const SizedBox(height: 10),
-
-                  const Text(
-                    'Have questions about orders, products, or sizing?\n'
-                    'Email us at: union.shop@port.ac.uk\n'
-                    'Or visit the Students\' Union building for in-person support.',
+                    'If you have questions about orders, products, or sizing. Email us at: union.shop@port.ac.uk\n'
+                    'Or visit the Student\' s Union building for in-person support.',
                     style: TextStyle(fontSize: 16, height: 1.5),
                   ),
                 ],
