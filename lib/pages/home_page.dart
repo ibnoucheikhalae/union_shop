@@ -4,26 +4,13 @@ import '../widgets/app_header.dart';
 import '../widgets/footer.dart';
 import '../widgets/product_card.dart';
 
-// simple placeholder for header callback actions
 void _placeholder() {}
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  void navigateToHome(BuildContext context) {
-    Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
-  }
-
-  void navigateToProduct(BuildContext context) {
-    Navigator.pushNamed(context, '/product');
-  }
-
-  void navigateToCollections(BuildContext context) {
+  void _goToCollections(BuildContext context) {
     Navigator.pushNamed(context, '/collections');
-  }
-
-  void placeholderCallbackForButtons() {
-    // This is the event handler for buttons that don't work yet
   }
 
   @override
@@ -32,77 +19,95 @@ class HomeScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Header using reusable AppHeader
+            // Reusable header
             AppHeader(
-  onLogoTap: () {
-    Navigator.pushNamedAndRemoveUntil(
-      context,
-      '/',
-      (route) => false,
-    );
-  },
-  onSearchTap: _placeholder,
-  onAccountTap: () {
-    Navigator.pushNamed(context, '/login');  // 👈 GO TO LOGIN PAGE
-  },
-  onCartTap: () {
-    Navigator.pushNamed(context, '/cart');
-  },
-  onMenuTap: _placeholder,
-),
+              onLogoTap: () {
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  '/',
+                  (route) => false,
+                );
+              },
+              onSearchTap: _placeholder,
+              onAccountTap: () {
+                Navigator.pushNamed(context, '/login');
+              },
+              onCartTap: () {
+                Navigator.pushNamed(context, '/cart');
+              },
+              onMenuTap: _placeholder,
+            ),
 
-
-
-            // Hero Section
+            // ==== HERO – "Essential Range - Over 20% OFF!" ====
             SizedBox(
-              height: 400,
+              height: 380,
               width: double.infinity,
               child: Stack(
                 children: [
+                  // Background image
                   Positioned.fill(
-                    child: Container(
-                      color: Colors.black87,
+                    child: Image.network(
+                      'https://shop.upsu.net/cdn/shop/files/Essential_Tshirt_1.jpg', // any hero image
+                      fit: BoxFit.cover,
+                      errorBuilder: (_, __, ___) => Container(
+                        color: Colors.black87,
+                      ),
                     ),
                   ),
+                  // Dark overlay
+                  Positioned.fill(
+                    child: Container(
+                      color: Colors.black.withOpacity(0.4),
+                    ),
+                  ),
+                  // Text + button
                   Positioned(
                     left: 24,
                     right: 24,
-                    top: 80,
+                    bottom: 60,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         const Text(
-                          'Placeholder Hero Title',
+                          'Essential Range - Over 20% OFF!',
+                          textAlign: TextAlign.center,
                           style: TextStyle(
-                            fontSize: 32,
+                            fontSize: 26,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                             height: 1.2,
                           ),
                         ),
-                        const SizedBox(height: 16),
+                        const SizedBox(height: 12),
                         const Text(
-                          "This is placeholder text for the hero section.",
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.white,
-                            height: 1.5,
-                          ),
+                          'Over 20% off our Essential Range. Come and grab yours while stock lasts!',
                           textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.white,
+                            height: 1.4,
+                          ),
                         ),
-                        const SizedBox(height: 32),
+                        const SizedBox(height: 24),
                         ElevatedButton(
-                          onPressed: () => navigateToCollections(context),
+                          onPressed: () => _goToCollections(context),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFF4d2963),
                             foregroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 32,
+                              vertical: 14,
+                            ),
                             shape: const RoundedRectangleBorder(
                               borderRadius: BorderRadius.zero,
                             ),
                           ),
                           child: const Text(
-                            'BROWSE PRODUCTS',
-                            style: TextStyle(fontSize: 14, letterSpacing: 1),
+                            'BROWSE COLLECTION',
+                            style: TextStyle(
+                              fontSize: 14,
+                              letterSpacing: 1,
+                            ),
                           ),
                         ),
                       ],
@@ -111,88 +116,3 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-
-            // Products Section
-            Container(
-              color: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.all(40.0),
-                child: Column(
-                  children: [
-                    const Text(
-                      'PLACEHOLDER PRODUCTS SECTION',
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.black,
-                        letterSpacing: 1,
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    ElevatedButton(
-                      onPressed: () => navigateToCollections(context),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF4d2963),
-                        foregroundColor: Colors.white,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.zero,
-                        ),
-                      ),
-                      child: const Text('VIEW ALL PRODUCTS'),
-                    ),
-                    const SizedBox(height: 32),
-                    GridView.count(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      crossAxisCount:
-                          MediaQuery.of(context).size.width > 600 ? 2 : 1,
-                      crossAxisSpacing: 24,
-                      mainAxisSpacing: 48,
-                      children: const [
-                        ProductCard(
-                          id: 'ph1',
-                          collectionSlug: '',
-                          title: 'Placeholder Product 1',
-                          price: '£10.00',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                        ),
-                        ProductCard(
-                          id: 'ph2',
-                          collectionSlug: '',
-                          title: 'Placeholder Product 2',
-                          price: '£15.00',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                        ),
-                        ProductCard(
-                          id: 'ph3',
-                          collectionSlug: '',
-                          title: 'Placeholder Product 3',
-                          price: '£20.00',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                        ),
-                        ProductCard(
-                          id: 'ph4',
-                          collectionSlug: '',
-                          title: 'Placeholder Product 4',
-                          price: '£25.00',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-
-            const AppFooter(),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-// Using shared `ProductCard` from widgets/product_card.dart
