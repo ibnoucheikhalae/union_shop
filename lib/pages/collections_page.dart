@@ -104,12 +104,17 @@ class CollectionsPage extends StatelessWidget {
                           child: Stack(
                             fit: StackFit.expand,
                             children: [
-                              // background image
-                              Image.network(
-                                imageUrl,
+                              // try local asset first (assets/images/<slug>.png),
+                              // fall back to the remote image if the asset isn't present.
+                              Image.asset(
+                                'assets/images/${collection.slug}.png',
                                 fit: BoxFit.cover,
-                                errorBuilder: (context, _, __) => Container(
-                                  color: Colors.grey[300],
+                                errorBuilder: (context, _, __) => Image.network(
+                                  imageUrl,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, _, __) => Container(
+                                    color: Colors.grey[300],
+                                  ),
                                 ),
                               ),
                               // dark overlay
