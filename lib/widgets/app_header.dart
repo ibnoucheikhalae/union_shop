@@ -116,6 +116,10 @@ class AppHeader extends StatelessWidget {
                     icon: const Icon(Icons.menu, size: 18, color: Colors.grey),
                     onPressed: onMenuTap,
                   ),
+                  IconButton(
+                    icon: const Icon(Icons.print, size: 18, color: Colors.grey),
+                    onPressed: () => Navigator.pushNamed(context, '/printshack'),
+                  ),
                 ],
               ),
             ),

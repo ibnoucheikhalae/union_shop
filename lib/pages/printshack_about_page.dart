@@ -115,3 +115,5 @@ class PrintShackAboutPage extends StatelessWidget {
         ),
       ),
     );
+  }
+}
