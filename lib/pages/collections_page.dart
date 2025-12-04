@@ -7,25 +7,7 @@ import '../widgets/collection_card.dart';
 import '../data/dummy_collections.dart';
 import '../models/collection.dart';
 
-/// Simple map of images for each collection slug (hard-coded = allowed)
-const Map<String, String> _collectionImages = {
-  'autumn-favourites':
-      'https://shop.upsu.net/cdn/shop/files/AutumnFavourites_1024x1024.jpg?v=1',
-  'black-friday':
-      'https://shop.upsu.net/cdn/shop/files/BlackFriday_1024x1024.jpg?v=1',
-  'clothing':
-      'https://shop.upsu.net/cdn/shop/files/ClothingPurpleHoodie_1024x1024.jpg?v=1',
-  'original-clothing':
-      'https://shop.upsu.net/cdn/shop/files/OriginalClothing_1024x1024.jpg?v=1',
-  'election-discounts':
-      'https://shop.upsu.net/cdn/shop/files/ElectionDiscounts_1024x1024.jpg?v=1',
-  'essential-range':
-      'https://shop.upsu.net/cdn/shop/files/EssentialRange_1024x1024.jpg?v=1',
-'sale': 'https://shop.upsu.net/cdn/shop/files/sale-banner_1024x1024.jpg?v=1',
-};
-
-const String _fallbackCollectionImage =
-    'https://via.placeholder.com/600x800?text=Collection';
+// (collection image mapping removed; collections use their own imageUrl field)
 
 class CollectionsPage extends StatelessWidget {
   const CollectionsPage({super.key});
@@ -95,8 +77,6 @@ class CollectionsPage extends StatelessWidget {
                     itemCount: collections.length,
                     itemBuilder: (context, index) {
                       final collection = collections[index];
-                      final imageUrl = _collectionImages[collection.slug] ??
-                          _fallbackCollectionImage;
 
                       return CollectionCard(
                         collection: collection,

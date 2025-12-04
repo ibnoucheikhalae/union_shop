@@ -7,7 +7,7 @@ import '../widgets/product_card.dart';
 void _placeholder() {}
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({Key? key}) : super(key: key);
 
   void _goToCollections(BuildContext context) {
     Navigator.pushNamed(context, '/collections');
@@ -279,7 +279,6 @@ class _RangeTile extends StatelessWidget {
   final VoidCallback onTap;
 
   const _RangeTile({
-    super.key,
     required this.label,
     required this.onTap,
   });
