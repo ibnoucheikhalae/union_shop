@@ -74,6 +74,12 @@ class _CartPageState extends State<CartPage> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/collections');
+                    },
+                    child: const Text('Continue shopping'),
+                  ),
                   const SizedBox(height: 16),
 
                   if (items.isEmpty)

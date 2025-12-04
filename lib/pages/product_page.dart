@@ -108,6 +108,20 @@ class _ProductPageState extends State<ProductPage> {
               onMenuTap: _placeholder,
             ),
 
+            // Back link to return to previous collection or listing
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text('Back to collection'),
+                ),
+              ),
+            ),
+
             // Main content
             Padding(
               padding: const EdgeInsets.all(24.0),

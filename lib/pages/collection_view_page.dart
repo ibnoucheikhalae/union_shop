@@ -18,9 +18,9 @@ class CollectionViewPage extends StatefulWidget {
 class _CollectionViewPageState extends State<CollectionViewPage> {
   // UI state for filters/sorting/pagination
   String _selectedSort = 'popular';
-  String _selectedSize = 'all';
-  String _selectedColour = 'all';
-  String _selectedFit = 'all';
+  final String _selectedSize = 'all';
+  final String _selectedColour = 'all';
+  final String _selectedFit = 'all';
 
   int _currentPage = 1;
   int itemsPerPage = 4;
@@ -106,6 +106,19 @@ class _CollectionViewPageState extends State<CollectionViewPage> {
                 Navigator.pushNamed(context, '/cart');
               },
               onMenuTap: _placeholder,
+            ),
+
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/collections');
+                  },
+                  child: const Text('Back to all collections'),
+                ),
+              ),
             ),
 
             Padding(
@@ -347,7 +360,6 @@ class _CollectionProductCard extends StatelessWidget {
   final String price;
 
   const _CollectionProductCard({
-    super.key,
     required this.title,
     required this.price,
   });
