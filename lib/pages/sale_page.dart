@@ -23,9 +23,7 @@ class SalePage extends StatelessWidget {
     );
   },
   onSearchTap: _placeholder,
-  onAccountTap: () {
-    Navigator.pushNamed(context, '/login');
-  },
+  onAccountTap: _placeholder,
   onCartTap: () {
     Navigator.pushNamed(context, '/cart'); // 👈 NEW
   },
