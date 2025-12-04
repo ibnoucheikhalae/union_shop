@@ -11,7 +11,138 @@ class PersonalisationPage extends StatefulWidget {
   State<PersonalisationPage> createState() => _PersonalisationPageState();
 }
 
-    // Product type & colour
+class _PersonalisationPageState extends State<PersonalisationPage> {
+  // Simple demo state
+  String _productType = 'hoodie';
+  String _garmentColour = 'navy';
+  String _printPosition = 'front';
+  int _numLines = 1;
+  String _line1 = '';
+  String _line2 = '';
+  String _line3 = '';
+  String _fontStyle = 'block';
+  String _fontColour = 'white';
+
+  final _maxCharsPerLine = 20;
+
+  void _placeholder() {}
+
+  bool get _isValid {
+    if (_line1.trim().isEmpty) return false;
+    if (_numLines >= 2 && _line2.trim().isEmpty) return false;
+    if (_numLines >= 3 && _line3.trim().isEmpty) return false;
+    return true;
+  }
+
+  void _addToCartDemo() {
+    if (!_isValid) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please fill in the required text fields.'),
+        ),
+      );
+      return;
+    }
+
+    // Dummy product – in a real app you’d look this up from your data.
+    final demoProduct = Product(
+      id: 'print-demo',
+      collectionSlug: 'print-shack',
+      title: 'Personalised ${_productType.toUpperCase()} (Demo)',
+      price: '£0.00', // coursework only
+      imageUrl: 'https://via.placeholder.com/400x400?text=Personalised+Demo',
+    );
+
+    CartService.instance.addToCart(
+      product: demoProduct,
+      colour: _garmentColour,
+      size: 'N/A',
+      quantity: 1,
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Personalised item added to cart (demo only).'),
+      ),
+    );
+  }
+
+  Widget _buildLineField({
+    required String label,
+    required String value,
+    required ValueChanged<String> onChanged,
+  }) {
+    final remaining = _maxCharsPerLine - value.length;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        TextField(
+          maxLength: _maxCharsPerLine,
+          decoration: InputDecoration(
+            labelText: label,
+            border: const OutlineInputBorder(),
+            counterText: '', // hide default counter
+          ),
+          onChanged: (text) => setState(() => onChanged(text)),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          '$remaining characters left',
+          style: const TextStyle(fontSize: 12, color: Colors.grey),
+        ),
+        const SizedBox(height: 12),
+      ],
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final linesPreview = [
+      _line1,
+      if (_numLines >= 2) _line2,
+      if (_numLines >= 3) _line3,
+    ].where((t) => t.trim().isNotEmpty).join('\n');
+
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            AppHeader(
+              onLogoTap: () {
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  '/',
+                  (route) => false,
+                );
+              },
+              onSearchTap: _placeholder,
+              onAccountTap: () => Navigator.pushNamed(context, '/login'),
+              onCartTap: () => Navigator.pushNamed(context, '/cart'),
+              onMenuTap: _placeholder,
+            ),
+
+            Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Personalise Your Text',
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  const Text(
+                    'Use this demo form to design a personalised item. '
+                    'Options and prices are placeholders – no real orders '
+                    'are processed.',
+                    style: TextStyle(fontSize: 14, height: 1.6),
+                  ),
+                  const SizedBox(height: 24),
+
+                  // Product type & colour
                   Row(
                     children: [
                       Expanded(
@@ -81,7 +212,7 @@ class PersonalisationPage extends StatefulWidget {
                   ),
                   const SizedBox(height: 16),
 
-    // Print position & number of lines
+                  // Print position & number of lines
                   Row(
                     children: [
                       Expanded(
@@ -142,7 +273,8 @@ class PersonalisationPage extends StatefulWidget {
                     ],
                   ),
                   const SizedBox(height: 16),
- // Dynamic text fields
+
+                  // Dynamic text fields
                   _buildLineField(
                     label: 'Line 1 text',
                     value: _line1,
@@ -160,8 +292,8 @@ class PersonalisationPage extends StatefulWidget {
                       value: _line3,
                       onChanged: (t) => _line3 = t,
                     ),
-      
-      // Font style & colour
+
+                  // Font style & colour
                   Row(
                     children: [
                       Expanded(
@@ -223,7 +355,7 @@ class PersonalisationPage extends StatefulWidget {
                   ),
                   const SizedBox(height: 24),
 
-                // Live summary “preview”
+                  // Live summary “preview”
                   Container(
                     width: double.infinity,
                     padding: const EdgeInsets.all(16),
