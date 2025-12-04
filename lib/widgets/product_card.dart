@@ -23,8 +23,12 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // For now, always navigate to the generic product page
-        Navigator.pushNamed(context, '/product');
+        // Navigate to product page and pass the product id for deep-linking
+        Navigator.pushNamed(
+          context,
+          '/product',
+          arguments: id ?? title,
+        );
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

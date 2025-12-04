@@ -60,6 +60,29 @@ class _ProductPageState extends State<ProductPage> {
 
   @override
   Widget build(BuildContext context) {
+    // Allow deep-linking: read optional productId from route arguments.
+    final args = ModalRoute.of(context)?.settings.arguments;
+    String? productId;
+    if (args is String) {
+      productId = args;
+    } else if (args is Map && args['productId'] is String) {
+      productId = args['productId'] as String;
+    }
+
+    final Product effectiveProduct = (productId != null)
+        ? dummyProducts.firstWhere(
+            (p) => p.id == productId,
+            orElse: () => dummyProducts.first,
+          )
+        : product;
+
+    // Update local product reference for the page (safe during build).
+    product = effectiveProduct;
+
+    // Ensure sensible defaults for selectors when product changes.
+    _selectedColour = _selectedColour ?? (product.colours.isNotEmpty ? product.colours.first : null);
+    _selectedSize = _selectedSize ?? (product.sizes.isNotEmpty ? product.sizes.first : null);
+
     // Parse numeric price for layout if you want it
     final priceText = product.price; // already includes £
 
