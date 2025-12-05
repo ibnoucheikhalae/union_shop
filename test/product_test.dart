@@ -1,62 +1,97 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:union_shop/pages/product_page.dart';
+import 'package:union_shop/data/dummy_products.dart';
 
 void main() {
   group('Product Page Tests', () {
     Widget createTestWidget() {
-      return const MaterialApp(home: ProductPage());
+      return MaterialApp(
+        routes: {
+          '/': (context) => const ProductPage(),
+          '/cart': (context) => const Scaffold(body: Text('Cart Page')),
+          '/login': (context) => const Scaffold(body: Text('Login Page')),
+        },
+        home: const ProductPage(),
+      );
     }
 
-    testWidgets('should display product page with basic elements', (
+    testWidgets('should display product page with product details', (
       tester,
     ) async {
       await tester.pumpWidget(createTestWidget());
-      await tester.pump();
+      await tester.pumpAndSettle();
 
-      // Check that basic UI elements are present
-      expect(
-        find.text('PLACEHOLDER HEADER TEXT - STUDENTS TO UPDATE!'),
-        findsOneWidget,
-      );
-      expect(find.text('Placeholder Product Name'), findsOneWidget);
-      expect(find.text('£15.00'), findsOneWidget);
-      expect(find.text('Description'), findsOneWidget);
+      // Check that product information is displayed
+      expect(find.text(dummyProducts.first.title), findsOneWidget);
+      expect(find.text(dummyProducts.first.price), findsOneWidget);
     });
 
-    testWidgets('should display student instruction text', (tester) async {
+    testWidgets('should display colour and size dropdowns', (tester) async {
       await tester.pumpWidget(createTestWidget());
-      await tester.pump();
+      await tester.pumpAndSettle();
 
-      // Check that student instruction is present
-      expect(
-        find.text(
-          'Students should add size options, colour options, quantity selector, add to cart button, and buy now button here.',
-        ),
-        findsOneWidget,
-      );
+      // Check that colour and size selectors are present
+      if (dummyProducts.first.colours.isNotEmpty) {
+        expect(find.text('Colour'), findsOneWidget);
+      }
+      if (dummyProducts.first.sizes.isNotEmpty) {
+        expect(find.text('Size'), findsOneWidget);
+      }
     });
 
-    testWidgets('should display header icons', (tester) async {
+    testWidgets('should display quantity selector', (tester) async {
       await tester.pumpWidget(createTestWidget());
-      await tester.pump();
+      await tester.pumpAndSettle();
 
-      // Check that header icons are present
-      expect(find.byIcon(Icons.search), findsOneWidget);
-      expect(find.byIcon(Icons.shopping_bag_outlined), findsOneWidget);
-      expect(find.byIcon(Icons.menu), findsOneWidget);
+      // Check that quantity selector is present
+      expect(find.text('Quantity'), findsOneWidget);
+      expect(find.byIcon(Icons.add), findsOneWidget);
+      expect(find.byIcon(Icons.remove), findsOneWidget);
     });
 
-    testWidgets('should display footer', (tester) async {
+    testWidgets('should display add to cart button', (tester) async {
       await tester.pumpWidget(createTestWidget());
+      await tester.pumpAndSettle();
+
+      // Check that add to cart button is present
+      expect(find.text('ADD TO CART'), findsOneWidget);
+    });
+
+    testWidgets('should increment quantity when plus button tapped', (tester) async {
+      await tester.pumpWidget(createTestWidget());
+      await tester.pumpAndSettle();
+
+      // Find and tap the plus button
+      final plusButton = find.byIcon(Icons.add);
+      await tester.tap(plusButton);
       await tester.pump();
 
-      // Check that footer is present
-      expect(find.text('Placeholder Footer'), findsOneWidget);
-      expect(
-        find.text('Students should customise this footer section'),
-        findsOneWidget,
-      );
+      // Verify quantity increased
+      expect(find.text('2'), findsOneWidget);
+    });
+
+    testWidgets('should not decrement quantity below 1', (tester) async {
+      await tester.pumpWidget(createTestWidget());
+      await tester.pumpAndSettle();
+
+      // Find the minus button (should be disabled at quantity 1)
+      final minusButton = find.byIcon(Icons.remove);
+      
+      // Try to tap it
+      await tester.tap(minusButton);
+      await tester.pump();
+
+      // Quantity should still be 1
+      expect(find.text('1'), findsOneWidget);
+    });
+
+    testWidgets('should display back button', (tester) async {
+      await tester.pumpWidget(createTestWidget());
+      await tester.pumpAndSettle();
+
+      // Check that back button is present
+      expect(find.text('Back to collection'), findsOneWidget);
     });
   });
 }
