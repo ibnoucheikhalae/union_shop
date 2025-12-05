@@ -43,7 +43,17 @@ class CartService {
     }
   }
 
-  
+  // Save cart to persistent storage
+  Future<void> _saveCart() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final cartJson = json.encode(_items.map((item) => item.toJson()).toList());
+      await prefs.setString(_cartKey, cartJson);
+    } catch (e) {
+      print('Error saving cart: $e');
+    }
+  }
+
   Future<void> addToCart({
     required Product product,
     required String colour,
