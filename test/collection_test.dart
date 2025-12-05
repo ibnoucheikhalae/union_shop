@@ -4,36 +4,36 @@ import 'package:union_shop/data/dummy_collections.dart';
 
 void main() {
   group('Collection Data Tests', () {
-    test('should have 6 products in sportswear collection', () {
+    test('should have 12 products in sportswear collection', () {
       final sportswearProducts = dummyProducts
           .where((p) => p.collectionSlug == 'sportswear')
           .toList();
-      expect(sportswearProducts.length, 6);
+      expect(sportswearProducts.length, 12);
       
       for (var product in sportswearProducts) {
         expect(product.collectionSlug, 'sportswear');
       }
     });
 
-    test('should have 3 products in gifts collection', () {
+    test('should have 12 products in gifts collection', () {
       final giftsProducts = dummyProducts
           .where((p) => p.collectionSlug == 'gifts')
           .toList();
-      expect(giftsProducts.length, 3);
+      expect(giftsProducts.length, 12);
     });
 
-    test('should have 3 products in stationery collection', () {
+    test('should have 12 products in stationery collection', () {
       final stationeryProducts = dummyProducts
           .where((p) => p.collectionSlug == 'stationery')
           .toList();
-      expect(stationeryProducts.length, 3);
+      expect(stationeryProducts.length, 12);
     });
 
-    test('should have 3 products in campus essentials collection', () {
+    test('should have 12 products in campus essentials collection', () {
       final essentialsProducts = dummyProducts
           .where((p) => p.collectionSlug == 'campus-essentials')
           .toList();
-      expect(essentialsProducts.length, 3);
+      expect(essentialsProducts.length, 12);
     });
 
     test('all collections should have metadata', () {
