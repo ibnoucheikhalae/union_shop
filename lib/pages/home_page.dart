@@ -210,7 +210,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       // Slide 3: Sale
                       _buildCarouselSlide(
-                        imageUrl: 'https://sfycdn.speedsize.com/fbaf6506-81e1-43a2-bcc1-80e18c7b0146/uk.representclo.com/cdn/shop/files/XdlRigLSspo2iOuLAsCKK4RgqOT0vHnX-gIB9D03FGQ.jpg?v=1756827483&width=2000',
+                        imageUrl: 'https://images.asos-media.com/products/the-couture-club-co-ord-oversized-hoodied-zip-through-hoodie-in-off-white/205193706-1-white?\$n_640w\$&wid=513&fit=constrain',
                         title: 'Sale - Up to 50% OFF!',
                         subtitle: 'Limited time offers on selected items',
                         buttonText: 'SHOP SALE',
