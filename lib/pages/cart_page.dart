@@ -17,8 +17,22 @@ class _CartPageState extends State<CartPage> {
   void _placeholder() {}
 
   CartService get _cart => CartService.instance;
+  bool _isLoading = true;
 
-  void _placeOrder() {
+  @override
+  void initState() {
+    super.initState();
+    _loadCart();
+  }
+
+  Future<void> _loadCart() async {
+    await _cart.loadCart();
+    setState(() {
+      _isLoading = false;
+    });
+  }
+
+  Future<void> _placeOrder() async {
     if (_cart.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Your cart is empty.')),
@@ -27,11 +41,12 @@ class _CartPageState extends State<CartPage> {
     }
 
     // Fake checkout — no real payments.
-    _cart.clear();
+    await _cart.clear();
 
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
-        content: Text('Order placed (demo only).'),
+        content: Text('Order placed (demo only). Thank you!'),
+        duration: Duration(seconds: 3),
       ),
     );
 
@@ -64,25 +79,45 @@ class _CartPageState extends State<CartPage> {
 
             Padding(
               padding: const EdgeInsets.all(24.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Your Cart',
-                    style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/collections');
-                    },
-                    child: const Text('Continue shopping'),
-                  ),
-                  const SizedBox(height: 16),
+              child: _isLoading
+                  ? const Center(
+                      child: Padding(
+                        padding: EdgeInsets.all(40.0),
+                        child: CircularProgressIndicator(),
+                      ),
+                    )
+                  : Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              'Your Cart',
+                              style: TextStyle(
+                                fontSize: 28,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            if (items.isNotEmpty)
+                              Text(
+                                '${_cart.itemCount} item${_cart.itemCount == 1 ? '' : 's'}',
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                          ],
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/collections');
+                          },
+                          child: const Text('Continue shopping'),
+                        ),
+                        const SizedBox(height: 16),
 
-                  if (items.isEmpty)
+                        if (items.isEmpty)
                     const Text(
                       'Your shopping cart is currently empty.',
                       style: TextStyle(
@@ -159,10 +194,15 @@ class _CartPageState extends State<CartPage> {
                                     ),
                                   ),
                                   TextButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        _cart.removeItem(item);
-                                      });
+                                    onPressed: () async {
+                                      await _cart.removeItem(item);
+                                      setState(() {});
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        const SnackBar(
+                                          content: Text('Item removed from cart'),
+                                          duration: Duration(seconds: 2),
+                                        ),
+                                      );
                                     },
                                     child: const Text('Remove'),
                                   ),
@@ -182,26 +222,24 @@ class _CartPageState extends State<CartPage> {
                                 Row(
                                   children: [
                                     IconButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          _cart.updateQuantity(
-                                            item,
-                                            item.quantity - 1,
-                                          );
-                                        });
+                                      onPressed: () async {
+                                        await _cart.updateQuantity(
+                                          item,
+                                          item.quantity - 1,
+                                        );
+                                        setState(() {});
                                       },
                                       icon: const Icon(Icons.remove),
                                       visualDensity: VisualDensity.compact,
                                     ),
                                     Text('${item.quantity}'),
                                     IconButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          _cart.updateQuantity(
-                                            item,
-                                            item.quantity + 1,
-                                          );
-                                        });
+                                      onPressed: () async {
+                                        await _cart.updateQuantity(
+                                          item,
+                                          item.quantity + 1,
+                                        );
+                                        setState(() {});
                                       },
                                       icon: const Icon(Icons.add),
                                       visualDensity: VisualDensity.compact,
@@ -225,27 +263,120 @@ class _CartPageState extends State<CartPage> {
                     const SizedBox(height: 24),
 
                     // Summary + checkout
-                    Align(
-                      alignment: Alignment.centerRight,
+                    Container(
+                      padding: const EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        color: Colors.grey[50],
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(color: Colors.grey[300]!),
+                      ),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            'Subtotal: £${_cart.subtotal.toStringAsFixed(2)}',
-                            style: const TextStyle(
+                          const Text(
+                            'Order Summary',
+                            style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          const SizedBox(height: 12),
+                          const SizedBox(height: 16),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text('Subtotal:'),
+                              Text('£${_cart.subtotal.toStringAsFixed(2)}'),
+                            ],
+                          ),
+                          const SizedBox(height: 8),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text('Tax (20% VAT):'),
+                              Text('£${_cart.tax.toStringAsFixed(2)}'),
+                            ],
+                          ),
+                          const SizedBox(height: 8),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text('Shipping:'),
+                              Text(
+                                _cart.shipping == 0
+                                    ? 'FREE'
+                                    : '£${_cart.shipping.toStringAsFixed(2)}',
+                                style: TextStyle(
+                                  color: _cart.shipping == 0
+                                      ? Colors.green
+                                      : Colors.black,
+                                  fontWeight: _cart.shipping == 0
+                                      ? FontWeight.bold
+                                      : FontWeight.normal,
+                                ),
+                              ),
+                            ],
+                          ),
+                          if (_cart.subtotal < 50 && _cart.subtotal > 0) ...[
+                            const SizedBox(height: 4),
+                            Text(
+                              'Add £${(50 - _cart.subtotal).toStringAsFixed(2)} more for free shipping!',
+                              style: const TextStyle(
+                                fontSize: 12,
+                                color: Colors.blue,
+                              ),
+                            ),
+                          ],
+                          const Divider(height: 24),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text(
+                                'Total:',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                '£${_cart.total.toStringAsFixed(2)}',
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFF4d2963),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 16),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               TextButton(
-                                onPressed: () {
-                                  setState(() {
-                                    _cart.clear();
-                                  });
+                                onPressed: () async {
+                                  final confirmed = await showDialog<bool>(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                      title: const Text('Clear Cart'),
+                                      content: const Text(
+                                          'Are you sure you want to remove all items?'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(context, false),
+                                          child: const Text('Cancel'),
+                                        ),
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(context, true),
+                                          child: const Text('Clear'),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                  if (confirmed == true) {
+                                    await _cart.clear();
+                                    setState(() {});
+                                  }
                                 },
                                 child: const Text('Clear cart'),
                               ),
@@ -256,8 +387,8 @@ class _CartPageState extends State<CartPage> {
                                   backgroundColor: const Color(0xFF4d2963),
                                   foregroundColor: Colors.white,
                                   padding: const EdgeInsets.symmetric(
-                                    horizontal: 24,
-                                    vertical: 12,
+                                    horizontal: 32,
+                                    vertical: 14,
                                   ),
                                   shape: const RoundedRectangleBorder(
                                     borderRadius: BorderRadius.zero,
