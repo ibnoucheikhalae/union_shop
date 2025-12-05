@@ -373,7 +373,7 @@ const List<Product> dummyProducts = [
     title: 'Campus Track Jacket',
     price: '£32.00',
     collectionSlug: 'sportswear',
-    imageUrl: 'https://cdn.media.amplience.net/i/carhartt_wip/A252008_89_XX-ST-01?%24ST%24=&fmt=auto&w=828&qlt=default',
+    imageUrl: 'https://i.ebayimg.com/images/g/U9IAAOSwlG9mRQcG/s-l1200.jpg',
     description: 'Lightweight track jacket with full zip, side pockets, University crest on chest, wind-resistant',
     sizes: ['S', 'M', 'L', 'XL'],
     colours: ['Navy', 'Black'],
