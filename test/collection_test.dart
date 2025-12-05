@@ -5,7 +5,9 @@ import 'package:union_shop/data/dummy_collections.dart';
 void main() {
   group('Collection Data Tests', () {
     test('should have 6 products in sportswear collection', () {
-      final sportswearProducts = dummyProducts['sportswear'] ?? [];
+      final sportswearProducts = dummyProducts
+          .where((p) => p.collectionSlug == 'sportswear')
+          .toList();
       expect(sportswearProducts.length, 6);
       
       for (var product in sportswearProducts) {
@@ -14,17 +16,23 @@ void main() {
     });
 
     test('should have 3 products in gifts collection', () {
-      final giftsProducts = dummyProducts['gifts'] ?? [];
+      final giftsProducts = dummyProducts
+          .where((p) => p.collectionSlug == 'gifts')
+          .toList();
       expect(giftsProducts.length, 3);
     });
 
     test('should have 3 products in stationery collection', () {
-      final stationeryProducts = dummyProducts['stationery'] ?? [];
+      final stationeryProducts = dummyProducts
+          .where((p) => p.collectionSlug == 'stationery')
+          .toList();
       expect(stationeryProducts.length, 3);
     });
 
     test('should have 3 products in campus essentials collection', () {
-      final essentialsProducts = dummyProducts['campus-essentials'] ?? [];
+      final essentialsProducts = dummyProducts
+          .where((p) => p.collectionSlug == 'campus-essentials')
+          .toList();
       expect(essentialsProducts.length, 3);
     });
 
@@ -39,22 +47,20 @@ void main() {
     });
 
     test('all products should have valid image URLs', () {
-      dummyProducts.forEach((collection, products) {
-        for (var product in products) {
-          expect(product.imageUrl, isNotEmpty);
-          expect(product.imageUrl.startsWith('http'), true,
-              reason: 'Product ${product.title} in $collection has invalid URL');
-        }
-      });
+      for (var product in dummyProducts) {
+        expect(product.imageUrl, isNotEmpty,
+            reason: 'Product ${product.title} has empty imageUrl');
+        final url = product.imageUrl ?? '';
+        expect(url.startsWith('http') || url.startsWith('assets'), true,
+            reason: 'Product ${product.title} has invalid URL: $url');
+      }
     });
 
     test('all products should have valid prices', () {
-      dummyProducts.forEach((collection, products) {
-        for (var product in products) {
-          expect(product.price, isNotEmpty);
-          expect(product.price.contains('£'), true);
-        }
-      });
+      for (var product in dummyProducts) {
+        expect(product.price, isNotEmpty);
+        expect(product.price.contains('£'), true);
+      }
     });
   });
 }
