@@ -175,15 +175,23 @@ class _CollectionViewPageState extends State<CollectionViewPage> {
                   ],
 
                   // --- Filters ---
-                  Row(
-                    children: [
-                      Expanded(
-                        child: DropdownButtonFormField<String>(
-                          value: _selectedSort,
-                          decoration: const InputDecoration(
-                            labelText: 'Sort by',
-                            border: OutlineInputBorder(),
-                          ),
+                  LayoutBuilder(
+                    builder: (context, constraints) {
+                      final isDesktop = constraints.maxWidth > 600;
+                      
+                      if (isDesktop) {
+                        // Desktop: filters in rows
+                        return Column(
+                          children: [
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: DropdownButtonFormField<String>(
+                                    value: _selectedSort,
+                                    decoration: const InputDecoration(
+                                      labelText: 'Sort by',
+                                      border: OutlineInputBorder(),
+                                    ),
                           items: const [
                             DropdownMenuItem(
                               value: 'popular',
@@ -206,22 +214,22 @@ class _CollectionViewPageState extends State<CollectionViewPage> {
                               child: Text('Z → A'),
                             ),
                           ],
-                          onChanged: (v) {
-                            setState(() {
-                              _selectedSort = v ?? 'popular';
-                              _currentPage = 1; // reset page on sort change
-                            });
-                          },
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: DropdownButtonFormField<String>(
-                          value: _selectedSize,
-                          decoration: const InputDecoration(
-                            labelText: 'Size',
-                            border: OutlineInputBorder(),
-                          ),
+                                    onChanged: (v) {
+                                      setState(() {
+                                        _selectedSort = v ?? 'popular';
+                                        _currentPage = 1;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                const SizedBox(width: 12),
+                                Expanded(
+                                  child: DropdownButtonFormField<String>(
+                                    value: _selectedSize,
+                                    decoration: const InputDecoration(
+                                      labelText: 'Size',
+                                      border: OutlineInputBorder(),
+                                    ),
                           items: const [
                             DropdownMenuItem(
                               value: 'all',
@@ -244,23 +252,21 @@ class _CollectionViewPageState extends State<CollectionViewPage> {
                               child: Text('XL'),
                             ),
                           ],
-                          onChanged: (_) {
-                            // you can add real filter logic later
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 12),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: DropdownButtonFormField<String>(
-                          value: _selectedColour,
-                          decoration: const InputDecoration(
-                            labelText: 'Colour',
-                            border: OutlineInputBorder(),
-                          ),
+                                    onChanged: (_) {},
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 12),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: DropdownButtonFormField<String>(
+                                    value: _selectedColour,
+                                    decoration: const InputDecoration(
+                                      labelText: 'Colour',
+                                      border: OutlineInputBorder(),
+                                    ),
                           items: const [
                             DropdownMenuItem(
                               value: 'all',
@@ -279,39 +285,111 @@ class _CollectionViewPageState extends State<CollectionViewPage> {
                               child: Text('Navy'),
                             ),
                           ],
-                          onChanged: (_) {
-                            // later: apply colour filters
-                          },
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: DropdownButtonFormField<String>(
-                          value: _selectedFit,
-                          decoration: const InputDecoration(
-                            labelText: 'Fit',
-                            border: OutlineInputBorder(),
-                          ),
-                          items: const [
-                            DropdownMenuItem(
-                              value: 'all',
-                              child: Text('All fits'),
-                            ),
-                            DropdownMenuItem(
-                              value: 'regular',
-                              child: Text('Regular'),
-                            ),
-                            DropdownMenuItem(
-                              value: 'oversized',
-                              child: Text('Oversized'),
+                                    onChanged: (_) {},
+                                  ),
+                                ),
+                                const SizedBox(width: 12),
+                                Expanded(
+                                  child: DropdownButtonFormField<String>(
+                                    value: _selectedFit,
+                                    decoration: const InputDecoration(
+                                      labelText: 'Fit',
+                                      border: OutlineInputBorder(),
+                                    ),
+                                    items: const [
+                                      DropdownMenuItem(
+                                        value: 'all',
+                                        child: Text('All fits'),
+                                      ),
+                                      DropdownMenuItem(
+                                        value: 'regular',
+                                        child: Text('Regular'),
+                                      ),
+                                      DropdownMenuItem(
+                                        value: 'oversized',
+                                        child: Text('Oversized'),
+                                      ),
+                                    ],
+                                    onChanged: (_) {},
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
-                          onChanged: (_) {
-                            // later: apply fit filters
-                          },
-                        ),
-                      ),
-                    ],
+                        );
+                      } else {
+                        // Mobile: filters stacked vertically
+                        return Column(
+                          children: [
+                            DropdownButtonFormField<String>(
+                              value: _selectedSort,
+                              decoration: const InputDecoration(
+                                labelText: 'Sort by',
+                                border: OutlineInputBorder(),
+                              ),
+                              items: const [
+                                DropdownMenuItem(value: 'popular', child: Text('Most popular')),
+                                DropdownMenuItem(value: 'price_low_high', child: Text('Price: Low to High')),
+                                DropdownMenuItem(value: 'price_high_low', child: Text('Price: High to Low')),
+                                DropdownMenuItem(value: 'az', child: Text('A → Z')),
+                                DropdownMenuItem(value: 'za', child: Text('Z → A')),
+                              ],
+                              onChanged: (v) {
+                                setState(() {
+                                  _selectedSort = v ?? 'popular';
+                                  _currentPage = 1;
+                                });
+                              },
+                            ),
+                            const SizedBox(height: 12),
+                            DropdownButtonFormField<String>(
+                              value: _selectedSize,
+                              decoration: const InputDecoration(
+                                labelText: 'Size',
+                                border: OutlineInputBorder(),
+                              ),
+                              items: const [
+                                DropdownMenuItem(value: 'all', child: Text('All sizes')),
+                                DropdownMenuItem(value: 's', child: Text('S')),
+                                DropdownMenuItem(value: 'm', child: Text('M')),
+                                DropdownMenuItem(value: 'l', child: Text('L')),
+                                DropdownMenuItem(value: 'xl', child: Text('XL')),
+                              ],
+                              onChanged: (_) {},
+                            ),
+                            const SizedBox(height: 12),
+                            DropdownButtonFormField<String>(
+                              value: _selectedColour,
+                              decoration: const InputDecoration(
+                                labelText: 'Colour',
+                                border: OutlineInputBorder(),
+                              ),
+                              items: const [
+                                DropdownMenuItem(value: 'all', child: Text('All colours')),
+                                DropdownMenuItem(value: 'black', child: Text('Black')),
+                                DropdownMenuItem(value: 'grey', child: Text('Grey')),
+                                DropdownMenuItem(value: 'navy', child: Text('Navy')),
+                              ],
+                              onChanged: (_) {},
+                            ),
+                            const SizedBox(height: 12),
+                            DropdownButtonFormField<String>(
+                              value: _selectedFit,
+                              decoration: const InputDecoration(
+                                labelText: 'Fit',
+                                border: OutlineInputBorder(),
+                              ),
+                              items: const [
+                                DropdownMenuItem(value: 'all', child: Text('All fits')),
+                                DropdownMenuItem(value: 'regular', child: Text('Regular')),
+                                DropdownMenuItem(value: 'oversized', child: Text('Oversized')),
+                              ],
+                              onChanged: (_) {},
+                            ),
+                          ],
+                        );
+                      }
+                    },
                   ),
 
                   const SizedBox(height: 24),
