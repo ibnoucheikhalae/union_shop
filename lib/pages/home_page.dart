@@ -1,3 +1,4 @@
+
 // lib/pages/home_page.dart
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -187,7 +188,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       // Slide 3: Sale
                       _buildCarouselSlide(
-                        imageUrl: 'https://shop.upsu.net/cdn/shop/files/Essential_Hoodie.jpg',
+                        imageUrl: 'https://sfycdn.speedsize.com/fbaf6506-81e1-43a2-bcc1-80e18c7b0146/uk.representclo.com/cdn/shop/files/XdlRigLSspo2iOuLAsCKK4RgqOT0vHnX-gIB9D03FGQ.jpg?v=1756827483&width=2000',
                         title: 'Sale - Up to 50% OFF!',
                         subtitle: 'Limited time offers on selected items',
                         buttonText: 'SHOP SALE',
