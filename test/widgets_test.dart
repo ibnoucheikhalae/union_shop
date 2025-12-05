@@ -115,8 +115,11 @@ void main() {
     testWidgets('should display collection information', (tester) async {
       bool tapped = false;
       const collection = Collection(
-        name: 'Sportswear',
+        id: 'test1',
+        title: 'Sportswear',
         slug: 'sportswear',
+        description: 'Sports apparel',
+        category: 'clothing',
         imageUrl: 'https://via.placeholder.com/300',
       );
 
@@ -138,8 +141,11 @@ void main() {
     testWidgets('should call onTap when tapped', (tester) async {
       bool tapped = false;
       const collection = Collection(
-        name: 'Test Collection',
+        id: 'test2',
+        title: 'Test Collection',
         slug: 'test',
+        description: 'Test description',
+        category: 'test',
       );
 
       await tester.pumpWidget(
@@ -160,10 +166,12 @@ void main() {
 
     testWidgets('should create collection card with all fields', (tester) async {
       const collection = Collection(
-        name: 'Campus Essentials',
+        id: 'test3',
+        title: 'Campus Essentials',
         slug: 'campus-essentials',
-        imageUrl: 'https://via.placeholder.com/300',
         description: 'Essential items for campus life',
+        category: 'essentials',
+        imageUrl: 'https://via.placeholder.com/300',
       );
 
       await tester.pumpWidget(
