@@ -94,7 +94,8 @@ class _AppHeaderState extends State<AppHeader> {
                         onSelected: (value) {
                           Navigator.pushNamed(
                             context, 
-                            '/collection/$value',
+                            '/collection',
+                            arguments: value,
                           );
                         },
                         itemBuilder: (context) => [
