@@ -382,7 +382,9 @@ class _CartPageState extends State<CartPage> {
                               ),
                               const SizedBox(width: 8),
                               ElevatedButton(
-                                onPressed: _placeOrder,
+                                onPressed: () {
+                                  Navigator.pushNamed(context, '/checkout');
+                                },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: const Color(0xFF4d2963),
                                   foregroundColor: Colors.white,
