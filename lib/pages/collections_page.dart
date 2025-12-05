@@ -67,8 +67,10 @@ class CollectionsPage extends StatelessWidget {
                   GridView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 
+                        MediaQuery.of(context).size.width > 900 ? 3 :
+                        MediaQuery.of(context).size.width > 600 ? 2 : 1,
                       crossAxisSpacing: 16,
                       mainAxisSpacing: 16,
                       childAspectRatio: 3 / 4,
