@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _goToPrintShack() {
-    Navigator.pushNamed(context, '/printshack-about');
+    Navigator.pushNamed(context, '/personalisation');
   }
 
   Future<void> _launchDominos() async {
@@ -171,7 +171,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       // Slide 1: Collections
                       _buildCarouselSlide(
-                        imageUrl: 'https://shop.upsu.net/cdn/shop/files/Essential_Tshirt_1.jpg',
+                        imageUrl: 'https://shop.upsu.net/cdn/shop/files/Pink_Essential_Hoodie_2a3589c2-096f-479f-ac60-d41e8a853d04_1080x.jpg?v=1749131089',
                         title: 'Explore Our Collections',
                         subtitle: 'Discover hoodies, accessories, stationery & more',
                         buttonText: 'SHOP NOW',
@@ -179,7 +179,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       // Slide 2: Print Shack
                       _buildCarouselSlide(
-                        imageUrl: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=1200',
+                        imageUrl: 'https://shop.upsu.net/cdn/shop/files/CloseUp_1024x1024@2x.jpg?v=1614736784',
                         title: 'Print Shack',
                         subtitle: 'Custom printing services for all your needs',
                         buttonText: 'LEARN MORE',
