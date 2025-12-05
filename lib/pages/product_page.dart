@@ -37,7 +37,7 @@ class _ProductPageState extends State<ProductPage> {
     _selectedSize = product.sizes.isNotEmpty ? product.sizes.first : null;
   }
 
-  void _addToCart() {
+  Future<void> _addToCart() async {
     if (_selectedColour == null || _selectedSize == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -47,7 +47,7 @@ class _ProductPageState extends State<ProductPage> {
       return;
     }
 
-    CartService.instance.addToCart(
+    await CartService.instance.addToCart(
       product: product,
       colour: _selectedColour!,
       size: _selectedSize!,

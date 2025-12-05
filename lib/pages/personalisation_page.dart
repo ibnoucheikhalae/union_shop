@@ -46,7 +46,7 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
     return true;
   }
 
-  void _addToCartDemo() {
+  Future<void> _addToCartDemo() async {
     if (!_isValid) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -64,7 +64,7 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
       imageUrl: _galleryImages[_selectedImageIndex],
     );
 
-    CartService.instance.addToCart(
+    await CartService.instance.addToCart(
       product: demoProduct,
       colour: _garmentColour,
       size: 'N/A',
@@ -74,6 +74,7 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('Personalised item added to cart.'),
+        duration: Duration(seconds: 2),
       ),
     );
   }
