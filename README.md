@@ -292,7 +292,7 @@ This project is created for educational purposes as part of the University of Po
 
 ## 👤 Contact
 
-**Alaei Bnoucheikh**
+**Alae Ibnoucheikh**
 
 - GitHub: [@ibnoucheikhalae](https://github.com/ibnoucheikhalae)
 - Repository: [union_shop](https://github.com/ibnoucheikhalae/union_shop)
