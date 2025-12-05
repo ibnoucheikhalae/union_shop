@@ -20,7 +20,7 @@ class _CollectionViewPageState extends State<CollectionViewPage> {
   String _selectedSort = 'popular';
 
   int _currentPage = 1;
-  int itemsPerPage = 3;
+  int itemsPerPage = 9;
 
   double _parsePrice(String price) {
     final cleaned = price.replaceAll(RegExp(r'[^0-9.]'), '');
@@ -84,6 +84,7 @@ class _CollectionViewPageState extends State<CollectionViewPage> {
     // --------------------------------------------
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -224,7 +225,7 @@ class _CollectionViewPageState extends State<CollectionViewPage> {
 
                   const SizedBox(height: 24),
 
-                  // Centered vertical list of products
+                  // Grid of products (3 columns)
                   if (paginatedProducts.isEmpty)
                     const Center(
                       child: Padding(
@@ -233,24 +234,26 @@ class _CollectionViewPageState extends State<CollectionViewPage> {
                       ),
                     )
                   else
-                    Center(
-                      child: ConstrainedBox(
-                        constraints: const BoxConstraints(maxWidth: 600),
-                        child: Column(
-                          children: paginatedProducts.map((product) {
-                            return Padding(
-                              padding: const EdgeInsets.only(bottom: 32.0),
-                              child: ProductCard(
-                                id: product.id,
-                                collectionSlug: product.collectionSlug,
-                                title: product.title,
-                                price: product.price,
-                                imageUrl: product.imageUrl ?? 'https://via.placeholder.com/400x400?text=Product',
-                              ),
-                            );
-                          }).toList(),
-                        ),
+                    GridView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                        childAspectRatio: 0.7,
+                        crossAxisSpacing: 16,
+                        mainAxisSpacing: 16,
                       ),
+                      itemCount: paginatedProducts.length,
+                      itemBuilder: (context, index) {
+                        final product = paginatedProducts[index];
+                        return ProductCard(
+                          id: product.id,
+                          collectionSlug: product.collectionSlug,
+                          title: product.title,
+                          price: product.price,
+                          imageUrl: product.imageUrl ?? 'https://via.placeholder.com/400x400?text=Product',
+                        );
+                      },
                     ),
                 ],
               ),
