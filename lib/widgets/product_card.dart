@@ -21,6 +21,8 @@ class ProductCard extends StatelessWidget {
   });
 @override
   Widget build(BuildContext context) {
+    final isMobile = MediaQuery.of(context).size.width < 600;
+    
     return GestureDetector(
       onTap: () {
         // Navigate to product page and pass the product id for deep-linking
@@ -32,78 +34,96 @@ class ProductCard extends StatelessWidget {
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
-          AspectRatio(
-            aspectRatio: 1,
-            child: Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.grey[200],
-              ),
-              child: Image.network(
-                imageUrl,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) {
-                  return Container(
-                    color: Colors.grey[300],
-                    child: const Center(
-                      child: Icon(
-                        Icons.image_not_supported,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 4),
-              Text(
-                title,
-                style: const TextStyle(
-                  fontSize: 14,
-                  color: Colors.black,
+          Flexible(
+            child: AspectRatio(
+              aspectRatio: 1,
+              child: Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.grey[200],
                 ),
-                maxLines: 2,
-              ),
-              const SizedBox(height: 4),
-              Text(
-                price,
-                style: const TextStyle(
-                  fontSize: 13,
-                  color: Colors.grey,
-                ),
-              ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: IconButton(
-                  icon: const Icon(Icons.add_shopping_cart),
-                  onPressed: () async {
-                    final product = Product(
-                      id: id ?? title,
-                      title: title,
-                      price: price,
-                      collectionSlug: collectionSlug ?? '',
-                      imageUrl: imageUrl,
-                    );
-                    await CartService.instance.addToCart(
-                      product: product,
-                      colour: '',
-                      size: '',
-                    );
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Added to cart'),
-                        duration: Duration(seconds: 2),
+                child: Image.network(
+                  imageUrl,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Container(
+                      color: Colors.grey[300],
+                      child: const Center(
+                        child: Icon(
+                          Icons.image_not_supported,
+                          color: Colors.grey,
+                        ),
                       ),
                     );
                   },
                 ),
               ),
-            ],
+            ),
+          ),
+          Flexible(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(height: isMobile ? 2 : 4),
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: isMobile ? 12 : 14,
+                    color: Colors.black,
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                SizedBox(height: isMobile ? 2 : 4),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Flexible(
+                      child: Text(
+                        price,
+                        style: TextStyle(
+                          fontSize: isMobile ? 11 : 13,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ),
+                    IconButton(
+                      icon: Icon(
+                        Icons.add_shopping_cart,
+                        size: isMobile ? 18 : 24,
+                      ),
+                      padding: EdgeInsets.all(isMobile ? 4 : 8),
+                      constraints: const BoxConstraints(),
+                      onPressed: () async {
+                        final product = Product(
+                          id: id ?? title,
+                          title: title,
+                          price: price,
+                          collectionSlug: collectionSlug ?? '',
+                          imageUrl: imageUrl,
+                        );
+                        await CartService.instance.addToCart(
+                          product: product,
+                          colour: '',
+                          size: '',
+                        );
+                        if (context.mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Added to cart'),
+                              duration: Duration(seconds: 2),
+                            ),
+                          );
+                        }
+                      },
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ],
       ),
