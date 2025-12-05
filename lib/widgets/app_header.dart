@@ -89,10 +89,53 @@ class _AppHeaderState extends State<AppHeader> {
                       ),
                       const SizedBox(width: 8),
 
-                      TextButton(
-                        onPressed: () => Navigator.pushNamed(context, '/collections'),
-                        child: const Text('Shop', style: TextStyle(color: Colors.black)),
+                      // ---------------- SHOP DROPDOWN ----------------
+                      PopupMenuButton<String>(
+                        onSelected: (value) {
+                          Navigator.pushNamed(
+                            context, 
+                            '/collection/$value',
+                          );
+                        },
+                        itemBuilder: (context) => [
+                          const PopupMenuItem<String>(
+                            value: 'sportswear',
+                            child: Text('Sportswear'),
+                          ),
+                          const PopupMenuItem<String>(
+                            value: 'hoodies',
+                            child: Text('Hoodies & Sweatshirts'),
+                          ),
+                          const PopupMenuItem<String>(
+                            value: 'stationery',
+                            child: Text('Stationery'),
+                          ),
+                          const PopupMenuItem<String>(
+                            value: 'gifts',
+                            child: Text('Gifts & Accessories'),
+                          ),
+                          const PopupMenuItem<String>(
+                            value: 'campus-essentials',
+                            child: Text('Campus Essentials'),
+                          ),
+                          const PopupMenuItem<String>(
+                            value: 'sale',
+                            child: Text('Sale Items'),
+                          ),
+                        ],
+                        child: InkWell(
+                          child: Row(
+                            children: const [
+                              Text('Shop',
+                                  style: TextStyle(color: Colors.black)),
+                              SizedBox(width: 4),
+                              Icon(Icons.arrow_drop_down,
+                                  size: 18, color: Colors.black),
+                            ],
+                          ),
+                        ),
                       ),
+
                       const SizedBox(width: 8),
 
                       // ---------------- PRINT SHACK DROPDOWN ----------------
