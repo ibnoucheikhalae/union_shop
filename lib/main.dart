@@ -1,6 +1,7 @@
 // lib/main.dart
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'pages/home_page.dart';
 import 'pages/product_page.dart';
@@ -49,6 +50,18 @@ class UnionShopApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF4d2963)),
+        textTheme: GoogleFonts.poppinsTextTheme().copyWith(
+          displayLarge: GoogleFonts.poppins(fontWeight: FontWeight.w700, letterSpacing: -0.5),
+          displayMedium: GoogleFonts.poppins(fontWeight: FontWeight.w700, letterSpacing: -0.5),
+          displaySmall: GoogleFonts.poppins(fontWeight: FontWeight.w600, letterSpacing: 0),
+          headlineLarge: GoogleFonts.poppins(fontWeight: FontWeight.w700),
+          headlineMedium: GoogleFonts.poppins(fontWeight: FontWeight.w600),
+          titleLarge: GoogleFonts.poppins(fontWeight: FontWeight.w600),
+          titleMedium: GoogleFonts.poppins(fontWeight: FontWeight.w600),
+          bodyLarge: GoogleFonts.poppins(fontWeight: FontWeight.w500),
+          bodyMedium: GoogleFonts.poppins(fontWeight: FontWeight.w400),
+          labelLarge: GoogleFonts.poppins(fontWeight: FontWeight.w600, letterSpacing: 1),
+        ),
       ),
       initialRoute: '/',
       routes: {
