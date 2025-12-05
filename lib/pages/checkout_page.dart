@@ -173,7 +173,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               const Text('Subtotal:'),
-                              Text(_cart.subtotal),
+                              Text('£${_cart.subtotal.toStringAsFixed(2)}'),
                             ],
                           ),
                           const SizedBox(height: 8),
@@ -181,7 +181,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               const Text('Tax (20%):'),
-                              Text(_cart.tax),
+                              Text('£${_cart.tax.toStringAsFixed(2)}'),
                             ],
                           ),
                           const SizedBox(height: 8),
@@ -189,7 +189,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               const Text('Shipping:'),
-                              Text(_cart.shipping),
+                              Text('£${_cart.shipping.toStringAsFixed(2)}'),
                             ],
                           ),
                           const Divider(height: 24),
@@ -204,7 +204,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                 ),
                               ),
                               Text(
-                                _cart.total,
+                                '£${_cart.total.toStringAsFixed(2)}',
                                 style: const TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
