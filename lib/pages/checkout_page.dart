@@ -132,11 +132,14 @@ class _CheckoutPageState extends State<CheckoutPage> {
 
             Padding(
               padding: const EdgeInsets.all(24.0),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 800),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
                     const Text(
                       'Checkout',
                       style: TextStyle(
@@ -229,40 +232,80 @@ class _CheckoutPageState extends State<CheckoutPage> {
                     ),
                     const SizedBox(height: 16),
 
-                    Row(
-                      children: [
-                        Expanded(
-                          child: TextFormField(
-                            controller: _firstNameController,
-                            decoration: const InputDecoration(
-                              labelText: 'First Name',
-                              border: OutlineInputBorder(),
-                            ),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Required';
-                              }
-                              return null;
-                            },
-                          ),
-                        ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          child: TextFormField(
-                            controller: _lastNameController,
-                            decoration: const InputDecoration(
-                              labelText: 'Last Name',
-                              border: OutlineInputBorder(),
-                            ),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Required';
-                              }
-                              return null;
-                            },
-                          ),
-                        ),
-                      ],
+                    LayoutBuilder(
+                      builder: (context, constraints) {
+                        if (constraints.maxWidth > 600) {
+                          // Desktop: side by side
+                          return Row(
+                            children: [
+                              Expanded(
+                                child: TextFormField(
+                                  controller: _firstNameController,
+                                  decoration: const InputDecoration(
+                                    labelText: 'First Name',
+                                    border: OutlineInputBorder(),
+                                  ),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Required';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ),
+                              const SizedBox(width: 16),
+                              Expanded(
+                                child: TextFormField(
+                                  controller: _lastNameController,
+                                  decoration: const InputDecoration(
+                                    labelText: 'Last Name',
+                                    border: OutlineInputBorder(),
+                                  ),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Required';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ),
+                            ],
+                          );
+                        } else {
+                          // Mobile: stacked
+                          return Column(
+                            children: [
+                              TextFormField(
+                                controller: _firstNameController,
+                                decoration: const InputDecoration(
+                                  labelText: 'First Name',
+                                  border: OutlineInputBorder(),
+                                ),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Required';
+                                  }
+                                  return null;
+                                },
+                              ),
+                              const SizedBox(height: 16),
+                              TextFormField(
+                                controller: _lastNameController,
+                                decoration: const InputDecoration(
+                                  labelText: 'Last Name',
+                                  border: OutlineInputBorder(),
+                                ),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Required';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ],
+                          );
+                        }
+                      },
                     ),
                     const SizedBox(height: 16),
 
@@ -316,41 +359,81 @@ class _CheckoutPageState extends State<CheckoutPage> {
                     ),
                     const SizedBox(height: 16),
 
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 2,
-                          child: TextFormField(
-                            controller: _cityController,
-                            decoration: const InputDecoration(
-                              labelText: 'City',
-                              border: OutlineInputBorder(),
-                            ),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Required';
-                              }
-                              return null;
-                            },
-                          ),
-                        ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          child: TextFormField(
-                            controller: _postcodeController,
-                            decoration: const InputDecoration(
-                              labelText: 'Postcode',
-                              border: OutlineInputBorder(),
-                            ),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Required';
-                              }
-                              return null;
-                            },
-                          ),
-                        ),
-                      ],
+                    LayoutBuilder(
+                      builder: (context, constraints) {
+                        if (constraints.maxWidth > 600) {
+                          // Desktop: side by side
+                          return Row(
+                            children: [
+                              Expanded(
+                                flex: 2,
+                                child: TextFormField(
+                                  controller: _cityController,
+                                  decoration: const InputDecoration(
+                                    labelText: 'City',
+                                    border: OutlineInputBorder(),
+                                  ),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Required';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ),
+                              const SizedBox(width: 16),
+                              Expanded(
+                                child: TextFormField(
+                                  controller: _postcodeController,
+                                  decoration: const InputDecoration(
+                                    labelText: 'Postcode',
+                                    border: OutlineInputBorder(),
+                                  ),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Required';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ),
+                            ],
+                          );
+                        } else {
+                          // Mobile: stacked
+                          return Column(
+                            children: [
+                              TextFormField(
+                                controller: _cityController,
+                                decoration: const InputDecoration(
+                                  labelText: 'City',
+                                  border: OutlineInputBorder(),
+                                ),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Required';
+                                  }
+                                  return null;
+                                },
+                              ),
+                              const SizedBox(height: 16),
+                              TextFormField(
+                                controller: _postcodeController,
+                                decoration: const InputDecoration(
+                                  labelText: 'Postcode',
+                                  border: OutlineInputBorder(),
+                                ),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Required';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ],
+                          );
+                        }
+                      },
                     ),
 
                     const SizedBox(height: 32),
@@ -401,53 +484,106 @@ class _CheckoutPageState extends State<CheckoutPage> {
                     ),
                     const SizedBox(height: 16),
 
-                    Row(
-                      children: [
-                        Expanded(
-                          child: TextFormField(
-                            controller: _expiryController,
-                            decoration: const InputDecoration(
-                              labelText: 'Expiry Date',
-                              border: OutlineInputBorder(),
-                              hintText: 'MM/YY',
-                            ),
-                            keyboardType: TextInputType.datetime,
-                            maxLength: 5,
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Required';
-                              }
-                              if (!value.contains('/') || value.length < 5) {
-                                return 'Use MM/YY format';
-                              }
-                              return null;
-                            },
-                          ),
-                        ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          child: TextFormField(
-                            controller: _cvvController,
-                            decoration: const InputDecoration(
-                              labelText: 'CVV',
-                              border: OutlineInputBorder(),
-                              hintText: '123',
-                            ),
-                            keyboardType: TextInputType.number,
-                            maxLength: 4,
-                            obscureText: true,
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Required';
-                              }
-                              if (value.length < 3) {
-                                return 'Invalid CVV';
-                              }
-                              return null;
-                            },
-                          ),
-                        ),
-                      ],
+                    LayoutBuilder(
+                      builder: (context, constraints) {
+                        if (constraints.maxWidth > 600) {
+                          // Desktop: side by side
+                          return Row(
+                            children: [
+                              Expanded(
+                                child: TextFormField(
+                                  controller: _expiryController,
+                                  decoration: const InputDecoration(
+                                    labelText: 'Expiry Date',
+                                    border: OutlineInputBorder(),
+                                    hintText: 'MM/YY',
+                                  ),
+                                  keyboardType: TextInputType.datetime,
+                                  maxLength: 5,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Required';
+                                    }
+                                    if (!value.contains('/') || value.length < 5) {
+                                      return 'Use MM/YY format';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ),
+                              const SizedBox(width: 16),
+                              Expanded(
+                                child: TextFormField(
+                                  controller: _cvvController,
+                                  decoration: const InputDecoration(
+                                    labelText: 'CVV',
+                                    border: OutlineInputBorder(),
+                                    hintText: '123',
+                                  ),
+                                  keyboardType: TextInputType.number,
+                                  maxLength: 4,
+                                  obscureText: true,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Required';
+                                    }
+                                    if (value.length < 3) {
+                                      return 'Invalid CVV';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ),
+                            ],
+                          );
+                        } else {
+                          // Mobile: stacked
+                          return Column(
+                            children: [
+                              TextFormField(
+                                controller: _expiryController,
+                                decoration: const InputDecoration(
+                                  labelText: 'Expiry Date',
+                                  border: OutlineInputBorder(),
+                                  hintText: 'MM/YY',
+                                ),
+                                keyboardType: TextInputType.datetime,
+                                maxLength: 5,
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Required';
+                                  }
+                                  if (!value.contains('/') || value.length < 5) {
+                                    return 'Use MM/YY format';
+                                  }
+                                  return null;
+                                },
+                              ),
+                              const SizedBox(height: 16),
+                              TextFormField(
+                                controller: _cvvController,
+                                decoration: const InputDecoration(
+                                  labelText: 'CVV',
+                                  border: OutlineInputBorder(),
+                                  hintText: '123',
+                                ),
+                                keyboardType: TextInputType.number,
+                                maxLength: 4,
+                                obscureText: true,
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Required';
+                                  }
+                                  if (value.length < 3) {
+                                    return 'Invalid CVV';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ],
+                          );
+                        }
+                      },
                     ),
 
                     const SizedBox(height: 32),
@@ -495,6 +631,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
                 ),
               ),
             ),
+          ),
+        ),
 
             const AppFooter(),
           ],
