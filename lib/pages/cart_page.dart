@@ -32,27 +32,6 @@ class _CartPageState extends State<CartPage> {
     });
   }
 
-  Future<void> _placeOrder() async {
-    if (_cart.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Your cart is empty.')),
-      );
-      return;
-    }
-
-    // Fake checkout — no real payments.
-    await _cart.clear();
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Order placed (demo only). Thank you!'),
-        duration: Duration(seconds: 3),
-      ),
-    );
-
-    setState(() {});
-  }
-
   @override
   Widget build(BuildContext context) {
     final items = _cart.items;
