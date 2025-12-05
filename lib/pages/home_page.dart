@@ -380,61 +380,76 @@ class _HomeScreenState extends State<HomeScreen> {
             Container(
               color: Colors.white,
               width: double.infinity,
-              padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 24),
+              padding: EdgeInsets.symmetric(
+                vertical: 40, 
+                horizontal: MediaQuery.of(context).size.width > 600 ? 24 : 12,
+              ),
               child: Column(
                 children: [
-                  const Text(
+                  Text(
                     'PORTSMOUTH CITY COLLECTION',
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: MediaQuery.of(context).size.width > 600 ? 18 : 14,
                       letterSpacing: 1.2,
                       fontWeight: FontWeight.w600,
                     ),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 24),
-                  GridView.count(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    crossAxisCount:
-                        MediaQuery.of(context).size.width > 900 ? 4 : 2,
-                    crossAxisSpacing: 24,
-                    mainAxisSpacing: 32,
-                    childAspectRatio: 0.75,
-                    children: const [
-                      ProductCard(
-                        id: 'portsmouth-magnet',
-                        collectionSlug: 'portsmouth-city',
-                        title: 'Portsmouth City Magnet',
-                        price: '£4.50',
-                        imageUrl:
-                            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1080x.jpg?v=1752230282',
-                      ),
-                      ProductCard(
-                        id: 'portsmouth-postcard',
-                        collectionSlug: 'portsmouth-city',
-                        title: 'Portsmouth City Postcard',
-                        price: '£1.00',
-                        imageUrl:
-                            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1080x.jpg?v=1752232561',
-                      ),
-                      ProductCard(
-                        id: 'portsmouth-bookmark',
-                        collectionSlug: 'portsmouth-city',
-                        title: 'Portsmouth City Bookmark',
-                        price: '£3.00',
-                        imageUrl:
-                            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityBookmark1_1080x.jpg?v=1752230004',
-                      ),
-                      ProductCard(
-                        id: 'portsmouth-notebook',
-                        collectionSlug: 'portsmouth-city',
-                        title: 'Portsmouth City Notebook',
-                        price: '£7.50',
-                        imageUrl:
-                            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityNotebook_1024x1024@2x.jpg?v=1757419215',
-                      ),
-                    ],
+                  LayoutBuilder(
+                    builder: (context, constraints) {
+                      int crossAxisCount;
+                      if (constraints.maxWidth > 900) {
+                        crossAxisCount = 4;
+                      } else if (constraints.maxWidth > 600) {
+                        crossAxisCount = 2;
+                      } else {
+                        crossAxisCount = 2;
+                      }
+                      
+                      return GridView.count(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        crossAxisCount: crossAxisCount,
+                        crossAxisSpacing: constraints.maxWidth > 600 ? 12 : 8,
+                        mainAxisSpacing: constraints.maxWidth > 600 ? 12 : 8,
+                        childAspectRatio: constraints.maxWidth > 600 ? 0.8 : 0.75,
+                        children: const [
+                          ProductCard(
+                            id: 'portsmouth-magnet',
+                            collectionSlug: 'portsmouth-city',
+                            title: 'Portsmouth City Magnet',
+                            price: '£4.50',
+                            imageUrl:
+                                'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1080x.jpg?v=1752230282',
+                          ),
+                          ProductCard(
+                            id: 'portsmouth-postcard',
+                            collectionSlug: 'portsmouth-city',
+                            title: 'Portsmouth City Postcard',
+                            price: '£1.00',
+                            imageUrl:
+                                'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1080x.jpg?v=1752232561',
+                          ),
+                          ProductCard(
+                            id: 'portsmouth-bookmark',
+                            collectionSlug: 'portsmouth-city',
+                            title: 'Portsmouth City Bookmark',
+                            price: '£3.00',
+                            imageUrl:
+                                'https://shop.upsu.net/cdn/shop/files/PortsmouthCityBookmark1_1080x.jpg?v=1752230004',
+                          ),
+                          ProductCard(
+                            id: 'portsmouth-notebook',
+                            collectionSlug: 'portsmouth-city',
+                            title: 'Portsmouth City Notebook',
+                            price: '£7.50',
+                            imageUrl:
+                                'https://shop.upsu.net/cdn/shop/files/PortsmouthCityNotebook_1024x1024@2x.jpg?v=1757419215',
+                          ),
+                        ],
+                      );
+                    },
                   ),
                 ],
               ),
