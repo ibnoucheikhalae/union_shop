@@ -65,7 +65,9 @@ class AppFooter extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/search');
+                      },
                       child: const Text("Search"),
                     ),
                     TextButton(
