@@ -353,7 +353,7 @@ const List<Product> dummyProducts = [
     title: 'University Athletic Shorts',
     price: '£18.99',
     collectionSlug: 'sportswear',
-    imageUrl: 'https://www.aloyoga.com/cdn/shop/files/W6438R_0010_b1_s1_a1_1_m174_1024x1024.jpg?v=1739240603',
+    imageUrl: 'https://www.mytheresa.com/media/1094/1238/100/21/P01062198.jpg',
     description: 'Breathable mesh shorts with UoP logo, elastic waistband with drawstring, moisture-wicking fabric',
     sizes: ['S', 'M', 'L', 'XL'],
     colours: ['Navy', 'Black'],
