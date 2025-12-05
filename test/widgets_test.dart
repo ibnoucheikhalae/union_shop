@@ -113,7 +113,6 @@ void main() {
     }
 
     testWidgets('should display collection information', (tester) async {
-      bool tapped = false;
       const collection = Collection(
         id: 'test1',
         title: 'Sportswear',
@@ -127,9 +126,7 @@ void main() {
         createTestWidget(
           CollectionCard(
             collection: collection,
-            onTap: () {
-              tapped = true;
-            },
+            onTap: () {},
           ),
         ),
       );
