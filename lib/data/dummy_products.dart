@@ -413,7 +413,7 @@ const List<Product> dummyProducts = [
     title: 'Campus Gym Bag',
     price: '£24.99',
     collectionSlug: 'sportswear',
-    imageUrl: 'https://cdn.shopify.com/s/files/1/0098/8822/files/PursuitDuffleBagGSBlack-GSPitchGreyI2A9B-BB3J-0167.jpg?v=1699355297',
+    imageUrl: 'https://cdn.shopify.com/s/files/1/0098/8822/files/PowerHoldallGSBlack-WashI4A2J-BCPH-0127_f7c4daa7-ffdb-461e-ad6a-48e16a37e442.jpg?v=1733408376',
     description: 'Spacious gym bag with UoP logo, separate shoe compartment, adjustable strap',
     colours: ['Navy', 'Black'],
   ),
