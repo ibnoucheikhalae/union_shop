@@ -16,11 +16,8 @@ class CollectionViewPage extends StatefulWidget {
 }
 
 class _CollectionViewPageState extends State<CollectionViewPage> {
-  // UI state for filters/sorting/pagination
+  // UI state for sorting/pagination
   String _selectedSort = 'popular';
-  final String _selectedSize = 'all';
-  final String _selectedColour = 'all';
-  final String _selectedFit = 'all';
 
   int _currentPage = 1;
   int itemsPerPage = 3;
@@ -174,28 +171,28 @@ class _CollectionViewPageState extends State<CollectionViewPage> {
                     const SizedBox(height: 16),
                   ],
 
-                  // --- Filters ---
-                  LayoutBuilder(
-                    builder: (context, constraints) {
-                      final isDesktop = constraints.maxWidth > 600;
-                      
-                      if (isDesktop) {
-                        // Desktop: filters in rows
-                        return Column(
-                          children: [
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: DropdownButtonFormField<String>(
-                                    value: _selectedSort,
-                                    decoration: const InputDecoration(
-                                      labelText: 'Sort by',
-                                      border: OutlineInputBorder(),
-                                    ),
+                  // --- Sorting Options ---
+                  Row(
+                    children: [
+                      const Text(
+                        'Sort by:',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: DropdownButtonFormField<String>(
+                          value: _selectedSort,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                          ),
                           items: const [
                             DropdownMenuItem(
                               value: 'popular',
-                              child: Text('Most popular'),
+                              child: Text('Most Popular'),
                             ),
                             DropdownMenuItem(
                               value: 'price_low_high',
@@ -207,194 +204,27 @@ class _CollectionViewPageState extends State<CollectionViewPage> {
                             ),
                             DropdownMenuItem(
                               value: 'az',
-                              child: Text('A → Z'),
+                              child: Text('Name: A to Z'),
                             ),
                             DropdownMenuItem(
                               value: 'za',
-                              child: Text('Z → A'),
+                              child: Text('Name: Z to A'),
                             ),
                           ],
-                                    onChanged: (v) {
-                                      setState(() {
-                                        _selectedSort = v ?? 'popular';
-                                        _currentPage = 1;
-                                      });
-                                    },
-                                  ),
-                                ),
-                                const SizedBox(width: 12),
-                                Expanded(
-                                  child: DropdownButtonFormField<String>(
-                                    value: _selectedSize,
-                                    decoration: const InputDecoration(
-                                      labelText: 'Size',
-                                      border: OutlineInputBorder(),
-                                    ),
-                          items: const [
-                            DropdownMenuItem(
-                              value: 'all',
-                              child: Text('All sizes'),
-                            ),
-                            DropdownMenuItem(
-                              value: 's',
-                              child: Text('S'),
-                            ),
-                            DropdownMenuItem(
-                              value: 'm',
-                              child: Text('M'),
-                            ),
-                            DropdownMenuItem(
-                              value: 'l',
-                              child: Text('L'),
-                            ),
-                            DropdownMenuItem(
-                              value: 'xl',
-                              child: Text('XL'),
-                            ),
-                          ],
-                                    onChanged: (_) {},
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 12),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: DropdownButtonFormField<String>(
-                                    value: _selectedColour,
-                                    decoration: const InputDecoration(
-                                      labelText: 'Colour',
-                                      border: OutlineInputBorder(),
-                                    ),
-                          items: const [
-                            DropdownMenuItem(
-                              value: 'all',
-                              child: Text('All colours'),
-                            ),
-                            DropdownMenuItem(
-                              value: 'black',
-                              child: Text('Black'),
-                            ),
-                            DropdownMenuItem(
-                              value: 'grey',
-                              child: Text('Grey'),
-                            ),
-                            DropdownMenuItem(
-                              value: 'navy',
-                              child: Text('Navy'),
-                            ),
-                          ],
-                                    onChanged: (_) {},
-                                  ),
-                                ),
-                                const SizedBox(width: 12),
-                                Expanded(
-                                  child: DropdownButtonFormField<String>(
-                                    value: _selectedFit,
-                                    decoration: const InputDecoration(
-                                      labelText: 'Fit',
-                                      border: OutlineInputBorder(),
-                                    ),
-                                    items: const [
-                                      DropdownMenuItem(
-                                        value: 'all',
-                                        child: Text('All fits'),
-                                      ),
-                                      DropdownMenuItem(
-                                        value: 'regular',
-                                        child: Text('Regular'),
-                                      ),
-                                      DropdownMenuItem(
-                                        value: 'oversized',
-                                        child: Text('Oversized'),
-                                      ),
-                                    ],
-                                    onChanged: (_) {},
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        );
-                      } else {
-                        // Mobile: filters stacked vertically
-                        return Column(
-                          children: [
-                            DropdownButtonFormField<String>(
-                              value: _selectedSort,
-                              decoration: const InputDecoration(
-                                labelText: 'Sort by',
-                                border: OutlineInputBorder(),
-                              ),
-                              items: const [
-                                DropdownMenuItem(value: 'popular', child: Text('Most popular')),
-                                DropdownMenuItem(value: 'price_low_high', child: Text('Price: Low to High')),
-                                DropdownMenuItem(value: 'price_high_low', child: Text('Price: High to Low')),
-                                DropdownMenuItem(value: 'az', child: Text('A → Z')),
-                                DropdownMenuItem(value: 'za', child: Text('Z → A')),
-                              ],
-                              onChanged: (v) {
-                                setState(() {
-                                  _selectedSort = v ?? 'popular';
-                                  _currentPage = 1;
-                                });
-                              },
-                            ),
-                            const SizedBox(height: 12),
-                            DropdownButtonFormField<String>(
-                              value: _selectedSize,
-                              decoration: const InputDecoration(
-                                labelText: 'Size',
-                                border: OutlineInputBorder(),
-                              ),
-                              items: const [
-                                DropdownMenuItem(value: 'all', child: Text('All sizes')),
-                                DropdownMenuItem(value: 's', child: Text('S')),
-                                DropdownMenuItem(value: 'm', child: Text('M')),
-                                DropdownMenuItem(value: 'l', child: Text('L')),
-                                DropdownMenuItem(value: 'xl', child: Text('XL')),
-                              ],
-                              onChanged: (_) {},
-                            ),
-                            const SizedBox(height: 12),
-                            DropdownButtonFormField<String>(
-                              value: _selectedColour,
-                              decoration: const InputDecoration(
-                                labelText: 'Colour',
-                                border: OutlineInputBorder(),
-                              ),
-                              items: const [
-                                DropdownMenuItem(value: 'all', child: Text('All colours')),
-                                DropdownMenuItem(value: 'black', child: Text('Black')),
-                                DropdownMenuItem(value: 'grey', child: Text('Grey')),
-                                DropdownMenuItem(value: 'navy', child: Text('Navy')),
-                              ],
-                              onChanged: (_) {},
-                            ),
-                            const SizedBox(height: 12),
-                            DropdownButtonFormField<String>(
-                              value: _selectedFit,
-                              decoration: const InputDecoration(
-                                labelText: 'Fit',
-                                border: OutlineInputBorder(),
-                              ),
-                              items: const [
-                                DropdownMenuItem(value: 'all', child: Text('All fits')),
-                                DropdownMenuItem(value: 'regular', child: Text('Regular')),
-                                DropdownMenuItem(value: 'oversized', child: Text('Oversized')),
-                              ],
-                              onChanged: (_) {},
-                            ),
-                          ],
-                        );
-                      }
-                    },
+                          onChanged: (v) {
+                            setState(() {
+                              _selectedSort = v ?? 'popular';
+                              _currentPage = 1;
+                            });
+                          },
+                        ),
+                      ),
+                    ],
                   ),
 
                   const SizedBox(height: 24),
 
-                  // List of products in this collection (1 per row)
+                  // Centered vertical list of products
                   if (paginatedProducts.isEmpty)
                     const Center(
                       child: Padding(
@@ -403,18 +233,25 @@ class _CollectionViewPageState extends State<CollectionViewPage> {
                       ),
                     )
                   else
-                    ...paginatedProducts.map((product) {
-                      return Padding(
-                        padding: const EdgeInsets.only(bottom: 24.0),
-                        child: ProductCard(
-                          id: product.id,
-                          collectionSlug: product.collectionSlug,
-                          title: product.title,
-                          price: product.price,
-                          imageUrl: product.imageUrl ?? 'https://via.placeholder.com/400x400?text=Product',
+                    Center(
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(maxWidth: 600),
+                        child: Column(
+                          children: paginatedProducts.map((product) {
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: 32.0),
+                              child: ProductCard(
+                                id: product.id,
+                                collectionSlug: product.collectionSlug,
+                                title: product.title,
+                                price: product.price,
+                                imageUrl: product.imageUrl ?? 'https://via.placeholder.com/400x400?text=Product',
+                              ),
+                            );
+                          }).toList(),
                         ),
-                      );
-                    }).toList(),
+                      ),
+                    ),
                 ],
               ),
             ),
