@@ -15,11 +15,16 @@ class CollectionsPage extends StatelessWidget {
   void _placeholder() {}
 
   void _openCollection(BuildContext context, Collection collection) {
-    Navigator.pushNamed(
-      context,
-      '/collection',
-      arguments: collection.slug,
-    );
+    // Special case: if it's the sale collection, navigate to the sale page
+    if (collection.slug == 'sale') {
+      Navigator.pushNamed(context, '/sale');
+    } else {
+      Navigator.pushNamed(
+        context,
+        '/collection',
+        arguments: collection.slug,
+      );
+    }
   }
 
   @override
