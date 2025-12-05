@@ -376,7 +376,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
 
-            // ==== OUR RANGE (4 big tiles) ====
+            // ==== PORTSMOUTH CITY COLLECTION ====
             Container(
               color: Colors.white,
               width: double.infinity,
@@ -384,7 +384,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 children: [
                   const Text(
-                    'OUR RANGE',
+                    'PORTSMOUTH CITY COLLECTION',
                     style: TextStyle(
                       fontSize: 18,
                       letterSpacing: 1.2,
@@ -398,25 +398,41 @@ class _HomeScreenState extends State<HomeScreen> {
                     physics: const NeverScrollableScrollPhysics(),
                     crossAxisCount:
                         MediaQuery.of(context).size.width > 900 ? 4 : 2,
-                    crossAxisSpacing: 16,
-                    mainAxisSpacing: 16,
-                    childAspectRatio: 4 / 3,
-                    children: [
-                      _RangeTile(
-                        label: 'Clothing',
-                        onTap: _goToCollections,
+                    crossAxisSpacing: 24,
+                    mainAxisSpacing: 32,
+                    childAspectRatio: 0.75,
+                    children: const [
+                      ProductCard(
+                        id: 'portsmouth-magnet',
+                        collectionSlug: 'portsmouth-city',
+                        title: 'Portsmouth City Magnet',
+                        price: '£4.50',
+                        imageUrl:
+                            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
                       ),
-                      _RangeTile(
-                        label: 'Merchandise',
-                        onTap: _goToCollections,
+                      ProductCard(
+                        id: 'portsmouth-postcard',
+                        collectionSlug: 'portsmouth-city',
+                        title: 'Portsmouth City Postcard',
+                        price: '£1.00',
+                        imageUrl:
+                            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
                       ),
-                      _RangeTile(
-                        label: 'Graduation',
-                        onTap: _goToCollections,
+                      ProductCard(
+                        id: 'portsmouth-bookmark',
+                        collectionSlug: 'portsmouth-city',
+                        title: 'Portsmouth City Bookmark',
+                        price: '£3.00',
+                        imageUrl:
+                            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
                       ),
-                      _RangeTile(
-                        label: 'SALE',
-                        onTap: _goToSale,
+                      ProductCard(
+                        id: 'portsmouth-notebook',
+                        collectionSlug: 'portsmouth-city',
+                        title: 'Portsmouth City Notebook',
+                        price: '£7.50',
+                        imageUrl:
+                            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
                       ),
                     ],
                   ),
@@ -429,52 +445,131 @@ class _HomeScreenState extends State<HomeScreen> {
               color: Colors.white,
               width: double.infinity,
               padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 24),
-              child: Column(
-                children: [
-                  const Text(
-                    'Add a Personal Touch',
-                    style: TextStyle(
-                      fontSize: 18,
-                      letterSpacing: 1.2,
-                      fontWeight: FontWeight.w600,
+              child: MediaQuery.of(context).size.width > 800
+                  ? Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        // Image on the left
+                        Expanded(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: Image.network(
+                              'https://shop.upsu.net/cdn/shop/files/CloseUp_1024x1024@2x.jpg?v=1614736784',
+                              fit: BoxFit.cover,
+                              height: 300,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 40),
+                        // Text content on the right
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              const Text(
+                                'Add a Personal Touch',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  letterSpacing: 1.2,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                              const SizedBox(height: 16),
+                              const Text(
+                                'First add your item of clothing to your cart then click below to add your text!\nOne line of text contains 10 characters!',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  height: 1.5,
+                                ),
+                              ),
+                              const SizedBox(height: 24),
+                              ElevatedButton(
+                                onPressed: () {
+                                  Navigator.pushNamed(context, '/personalisation');
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: const Color(0xFF4d2963),
+                                  foregroundColor: Colors.white,
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 32,
+                                    vertical: 14,
+                                  ),
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.zero,
+                                  ),
+                                ),
+                                child: const Text(
+                                  'CLICK HERE TO ADD TEXT!',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    letterSpacing: 1,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    )
+                  : Column(
+                      children: [
+                        // Image on top for mobile
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Image.network(
+                            'https://shop.upsu.net/cdn/shop/files/CloseUp_1024x1024@2x.jpg?v=1614736784',
+                            fit: BoxFit.cover,
+                            width: double.infinity,
+                            height: 250,
+                          ),
+                        ),
+                        const SizedBox(height: 24),
+                        const Text(
+                          'Add a Personal Touch',
+                          style: TextStyle(
+                            fontSize: 18,
+                            letterSpacing: 1.2,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 16),
+                        const Text(
+                          'First add your item of clothing to your cart then click below to add your text!\nOne line of text contains 10 characters!',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 14,
+                            height: 1.5,
+                          ),
+                        ),
+                        const SizedBox(height: 24),
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/personalisation');
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF4d2963),
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 32,
+                              vertical: 14,
+                            ),
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.zero,
+                            ),
+                          ),
+                          child: const Text(
+                            'CLICK HERE TO ADD TEXT!',
+                            style: TextStyle(
+                              fontSize: 14,
+                              letterSpacing: 1,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 16),
-                  const Text(
-                    'First add your item of clothing to your cart then click below to add your text!\nOne line of text contains 10 characters!',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 14,
-                      height: 1.5,
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/personalisation');
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF4d2963),
-                      foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 32,
-                        vertical: 14,
-                      ),
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.zero,
-                      ),
-                    ),
-                    child: const Text(
-                      'CLICK HERE TO ADD TEXT!',
-                      style: TextStyle(
-                        fontSize: 14,
-                        letterSpacing: 1,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
             ),
 
             const AppFooter(),
