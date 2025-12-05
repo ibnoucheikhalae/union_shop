@@ -441,7 +441,7 @@ const List<Product> dummyProducts = [
     title: 'UoP Baseball Cap',
     price: '£12.99',
     collectionSlug: 'sportswear',
-    imageUrl: 'https://uk.oneractive.com/cdn/shop/files/250416_ALWAYSINONER_OVERSIZED_PIPED_WOVEN_TRACK_JACKET_SOFTBLACK_PDP_1440x1800_05.jpg?v=1756379421',
+    imageUrl: 'https://www.celine.com/on/demandware.static/-/Sites-masterCatalog/default/dwf61997d5/images/large/2AUA1969P.38NO_1_WIN23_W.jpg',
     description: 'Adjustable baseball cap with embroidered University logo, curved brim, breathable',
     colours: ['Navy', 'Black', 'White'],
   ),
