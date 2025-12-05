@@ -74,7 +74,7 @@ class ProductCard extends StatelessWidget {
                 alignment: Alignment.centerRight,
                 child: IconButton(
                   icon: const Icon(Icons.add_shopping_cart),
-                  onPressed: () {
+                  onPressed: () async {
                     final product = Product(
                       id: id ?? title,
                       title: title,
@@ -82,13 +82,16 @@ class ProductCard extends StatelessWidget {
                       collectionSlug: collectionSlug ?? '',
                       imageUrl: imageUrl,
                     );
-                    CartService.instance.addToCart(
+                    await CartService.instance.addToCart(
                       product: product,
                       colour: '',
                       size: '',
                     );
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Added to cart')),
+                      const SnackBar(
+                        content: Text('Added to cart'),
+                        duration: Duration(seconds: 2),
+                      ),
                     );
                   },
                 ),
