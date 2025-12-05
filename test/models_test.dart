@@ -81,36 +81,36 @@ void main() {
       }
     });
 
-    test('sportswear collection should have 6 products', () {
+    test('sportswear collection should have 12 products', () {
       final sportswearProducts = dummyProducts
           .where((p) => p.collectionSlug == 'sportswear')
           .toList();
       
-      expect(sportswearProducts.length, 6);
+      expect(sportswearProducts.length, 12);
     });
 
-    test('gifts collection should have 3 products', () {
+    test('gifts collection should have 12 products', () {
       final giftsProducts = dummyProducts
           .where((p) => p.collectionSlug == 'gifts')
           .toList();
       
-      expect(giftsProducts.length, 3);
+      expect(giftsProducts.length, 12);
     });
 
-    test('stationery collection should have 3 products', () {
+    test('stationery collection should have 12 products', () {
       final stationeryProducts = dummyProducts
           .where((p) => p.collectionSlug == 'stationery')
           .toList();
       
-      expect(stationeryProducts.length, 3);
+      expect(stationeryProducts.length, 12);
     });
 
-    test('campus essentials collection should have 3 products', () {
+    test('campus essentials collection should have 12 products', () {
       final essentialsProducts = dummyProducts
           .where((p) => p.collectionSlug == 'campus-essentials')
           .toList();
       
-      expect(essentialsProducts.length, 3);
+      expect(essentialsProducts.length, 12);
     });
   });
 }
