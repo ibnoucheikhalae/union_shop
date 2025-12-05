@@ -1,5 +1,6 @@
 // lib/main.dart
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import 'pages/home_page.dart';
 import 'pages/product_page.dart';
@@ -14,9 +15,27 @@ import 'pages/checkout_page.dart';
 import 'pages/printshack_about_page.dart';
 import 'pages/personalisation_page.dart';
 import 'pages/search_page.dart';
+import 'pages/account_page.dart';
 
-
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  // Initialize Firebase
+  try {
+    await Firebase.initializeApp(
+      options: const FirebaseOptions(
+        apiKey: 'your-api-key',
+        appId: 'your-app-id',
+        messagingSenderId: 'your-messaging-sender-id',
+        projectId: 'your-project-id',
+        storageBucket: 'your-storage-bucket',
+      ),
+    );
+  } catch (e) {
+    // Firebase initialization error - continue without Firebase
+    debugPrint('Firebase initialization failed: $e');
+  }
+  
   runApp(const UnionShopApp());
 }
 
@@ -43,9 +62,10 @@ class UnionShopApp extends StatelessWidget {
         '/signup': (context) => const SignupPage(),
         '/cart': (context) => const CartPage(),
         '/checkout': (context) => const CheckoutPage(),
-         '/printshack': (context) => const PrintShackAboutPage(),
-    '/personalisation': (context) => const PersonalisationPage(),
+        '/printshack': (context) => const PrintShackAboutPage(),
+        '/personalisation': (context) => const PersonalisationPage(),
         '/search': (context) => const SearchPage(),
+        '/account': (context) => const AccountPage(),
       },
     );
   }
