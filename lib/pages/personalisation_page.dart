@@ -30,10 +30,8 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
 
   // Simple gallery ()
   final List<String> _galleryImages = const [
-    'https://via.placeholder.com/800x800?text=Print+Shack+1',
-    'https://via.placeholder.com/800x800?text=Print+Shack+2',
-    'https://via.placeholder.com/800x800?text=Print+Shack+3',
-    'https://via.placeholder.com/800x800?text=Print+Shack+4',
+    'https://shop.upsu.net/cdn/shop/products/Personalised_Image_1024x1024@2x.jpg?v=1562949869',
+    'https://shop.upsu.net/cdn/shop/files/CloseUp_1080x.jpg?v=1614736784',
   ];
   int _selectedImageIndex = 0;
 
