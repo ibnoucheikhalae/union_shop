@@ -5,6 +5,8 @@ import 'package:union_shop/services/cart_service.dart';
 import 'package:union_shop/models/product.dart';
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+  
   group('Cart Page Tests', () {
     setUp(() async {
       // Clear cart before each test
@@ -13,11 +15,10 @@ void main() {
 
     Widget createTestWidget() {
       return MaterialApp(
+        home: const CartPage(),
         routes: {
-          '/': (context) => const CartPage(),
           '/checkout': (context) => const Scaffold(body: Text('Checkout Page')),
         },
-        home: const CartPage(),
       );
     }
 
