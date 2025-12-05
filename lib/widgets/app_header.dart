@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../services/cart_service.dart';
+import '../services/auth_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class AppHeader extends StatefulWidget {
   final VoidCallback onLogoTap;
@@ -23,6 +25,16 @@ class AppHeader extends StatefulWidget {
 
 class _AppHeaderState extends State<AppHeader> {
   final CartService _cart = CartService.instance;
+  final AuthService _authService = AuthService();
+
+  void _handleAccountTap() {
+    final user = _authService.currentUser;
+    if (user != null) {
+      Navigator.pushNamed(context, '/account');
+    } else {
+      widget.onAccountTap();
+    }
+  }
 
   void _showMobileMenu() {
     showModalBottomSheet(
@@ -288,9 +300,19 @@ class _AppHeaderState extends State<AppHeader> {
                   },
                 ),
                 if (!isMobile)
-                  IconButton(
-                    icon: const Icon(Icons.person_outline, size: 22, color: Colors.grey),
-                    onPressed: widget.onAccountTap,
+                  StreamBuilder<User?>(
+                    stream: _authService.authStateChanges,
+                    builder: (context, snapshot) {
+                      final isLoggedIn = snapshot.data != null;
+                      return IconButton(
+                        icon: Icon(
+                          isLoggedIn ? Icons.person : Icons.person_outline,
+                          size: 22,
+                          color: isLoggedIn ? const Color(0xFF4d2963) : Colors.grey,
+                        ),
+                        onPressed: _handleAccountTap,
+                      );
+                    },
                   ),
                 // Cart icon with badge
                 Stack(
