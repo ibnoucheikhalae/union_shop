@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import '../services/cart_service.dart';
 
-class AppHeader extends StatelessWidget {
+class AppHeader extends StatefulWidget {
   final VoidCallback onLogoTap;
   final VoidCallback onSearchTap;
   final VoidCallback onAccountTap;
@@ -17,7 +18,16 @@ class AppHeader extends StatelessWidget {
   });
 
   @override
+  State<AppHeader> createState() => _AppHeaderState();
+}
+
+class _AppHeaderState extends State<AppHeader> {
+  final CartService _cart = CartService.instance;
+
+  @override
   Widget build(BuildContext context) {
+    final cartItemCount = _cart.itemCount;
+
     return Container(
       height: 100,
       color: Colors.white,
@@ -43,7 +53,7 @@ class AppHeader extends StatelessWidget {
                 children: [
                   // LOGO
                   GestureDetector(
-                    onTap: onLogoTap,
+                    onTap: widget.onLogoTap,
                     child: Image.network(
                       'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
                       height: 18,
@@ -137,15 +147,45 @@ class AppHeader extends StatelessWidget {
                   ),
                   IconButton(
                     icon: const Icon(Icons.person_outline, size: 18, color: Colors.grey),
-                    onPressed: onAccountTap,
+                    onPressed: widget.onAccountTap,
                   ),
-                  IconButton(
-                    icon: const Icon(Icons.shopping_bag_outlined, size: 18, color: Colors.grey),
-                    onPressed: onCartTap,
+                  // Cart icon with badge
+                  Stack(
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.shopping_bag_outlined, size: 18, color: Colors.grey),
+                        onPressed: widget.onCartTap,
+                      ),
+                      if (cartItemCount > 0)
+                        Positioned(
+                          right: 4,
+                          top: 4,
+                          child: Container(
+                            padding: const EdgeInsets.all(4),
+                            decoration: const BoxDecoration(
+                              color: Color(0xFF4d2963),
+                              shape: BoxShape.circle,
+                            ),
+                            constraints: const BoxConstraints(
+                              minWidth: 18,
+                              minHeight: 18,
+                            ),
+                            child: Text(
+                              cartItemCount > 99 ? '99+' : '$cartItemCount',
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 10,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                    ],
                   ),
                   IconButton(
                     icon: const Icon(Icons.menu, size: 18, color: Colors.grey),
-                    onPressed: onMenuTap,
+                    onPressed: widget.onMenuTap,
                   ),
                 ],
               ),
