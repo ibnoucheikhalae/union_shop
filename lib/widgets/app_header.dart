@@ -117,7 +117,7 @@ class _AppHeaderState extends State<AppHeader> {
                   title: const Text('Sale Items'),
                   onTap: () {
                     Navigator.pop(context);
-                    Navigator.pushNamed(context, '/collection', arguments: 'sale');
+                    Navigator.pushNamed(context, '/sale');
                   },
                 ),
               ],
@@ -233,7 +233,11 @@ class _AppHeaderState extends State<AppHeader> {
                   // Shop Dropdown
                   PopupMenuButton<String>(
                     onSelected: (value) {
-                      Navigator.pushNamed(context, '/collection', arguments: value);
+                      if (value == 'sale') {
+                        Navigator.pushNamed(context, '/sale');
+                      } else {
+                        Navigator.pushNamed(context, '/collection', arguments: value);
+                      }
                     },
                     itemBuilder: (context) => [
                       const PopupMenuItem(value: 'sportswear', child: Text('Sportswear')),
