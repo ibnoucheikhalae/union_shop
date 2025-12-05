@@ -8,7 +8,9 @@ class AuthService {
   AuthService._internal();
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final GoogleSignIn _googleSignIn = GoogleSignIn(
+    clientId: '450513610026-7cmmg02natjnm3f75los1sr9vm25hhac.apps.googleusercontent.com',
+  );
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   // Get current user
@@ -71,7 +73,9 @@ class AuthService {
     try {
       // Trigger Google Sign In flow
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-      if (googleUser == null) return null; // User cancelled
+      if (googleUser == null) {
+        throw 'Google sign-in was cancelled';
+      }
 
       // Obtain auth details
       final GoogleSignInAuthentication googleAuth = 
@@ -107,7 +111,7 @@ class AuthService {
     } on FirebaseAuthException catch (e) {
       throw _handleAuthException(e);
     } catch (e) {
-      throw 'An error occurred during Google sign in';
+      throw 'Google sign-in failed: ${e.toString()}';
     }
   }
 
