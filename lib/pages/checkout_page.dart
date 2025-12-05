@@ -88,7 +88,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
             ),
             SizedBox(height: 8),
             Text(
-              'This is a demo checkout. No real payment was processed.',
+              'No real payment was processed.',
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.grey),
             ),
@@ -487,7 +487,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                     const SizedBox(height: 16),
                     const Center(
                       child: Text(
-                        '🔒 Secure Demo Checkout - No real payment processed',
+                        '🔒 Secure Checkout - No real payment processed',
                         style: TextStyle(color: Colors.grey, fontSize: 12),
                       ),
                     ),
