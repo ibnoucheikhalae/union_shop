@@ -1,52 +1,313 @@
-# Union Shop — Flutter Coursework
+# Union Shop 🛍️
 
-This repository contains the coursework project for students enrolled in the **Programming Applications and Programming Languages (M30235)** and **User Experience Design and Implementation (M32605)** modules at the University of Portsmouth.
+A modern, fully-featured e-commerce Flutter application for the University of Portsmouth Student Union shop. This mobile-first application provides a seamless shopping experience with authentication, cart management, product browsing, and personalized merchandise options.
 
-## Overview
+![Flutter](https://img.shields.io/badge/Flutter-3.0+-02569B?style=flat&logo=flutter)
+![Dart](https://img.shields.io/badge/Dart-2.17+-0175C2?style=flat&logo=dart)
+![Firebase](https://img.shields.io/badge/Firebase-Integrated-FFCA28?style=flat&logo=firebase)
+![Tests](https://img.shields.io/badge/Tests-201%20Passing-success?style=flat)
 
-The Student Union has an e-commerce website, which you can access via this link: [shop.upsu.net](https://shop.upsu.net)
+## 📱 Overview
 
-In short, your task is to recreate the same website using Flutter. You must not start from scratch, as you need to begin by forking the GitHub repository that contains the incomplete code. [The getting started section of this document](#getting-started) will explain more. Once you have completed the application, you will submit the link to your forked repository on Moodle for assessment and demonstrate your application in a practical session. See the [submission](#submission) and [demonstration](#demonstration) sections for more information.
+Union Shop is a cross-platform e-commerce application that replicates the [UPSU Shop](https://shop.upsu.net) functionality with enhanced features including:
 
-⚠️ The UPSU.net link on the navbar of the union website is a link to an external site. This is not part of the application that you need to develop. So ignore the link highlighted below:
+- 🏠 **Dynamic Homepage** with featured products and collections
+- 🛒 **Shopping Cart** with persistent storage
+- 🔐 **Authentication System** (Email, Google, Apple Sign-In)
+- 🔍 **Product Search** functionality
+- 🎨 **Print Shack** - Custom merchandise personalization
+- 💳 **Checkout System** with order management
+- 📱 **Responsive Design** - Optimized for mobile and desktop
+- 💾 **Data Persistence** using SharedPreferences
 
-![Union Shop Header](https://raw.githubusercontent.com/manighahrmani/sandwich_shop/refs/heads/main/images/screenshot_union_site_header.png)
+## ✨ Key Features
 
-## Getting Started
+### User Authentication
+- Email/password authentication
+- Google Sign-In integration
+- Apple Sign-In support
+- User profile management with Firestore
+- Password reset functionality
+
+### Shopping Experience
+- Browse multiple product collections (Hoodies, Sportswear, Stationery, Gifts, etc.)
+- Advanced filtering and sorting (by price, name, popularity)
+- Pagination for large product catalogs
+- Product detail pages with image galleries
+- Color and size selection for products
+- Real-time cart updates with badge notifications
+
+### Cart & Checkout
+- Add/remove items with quantity management
+- Automatic price calculations (subtotal, 20% VAT, shipping)
+- Free shipping on orders over £50
+- Persistent cart storage across sessions
+- Order summary and checkout flow
+
+### Print Shack Personalization
+- Custom text personalization for merchandise
+- Dynamic preview updates
+- Multiple line support with character limits
+- Font style and color selection
+- Product type and garment color options
+
+### Additional Features
+- Global search across all products
+- Sale items with promotional pricing
+- About pages with company information
+- Responsive navigation with mobile menu
+- Footer with opening hours and links
+
+## 🚀 Getting Started
 
 ### Prerequisites
 
-You have three options for your development environment:
+- **Flutter SDK** (3.0 or higher) - [Install Flutter](https://flutter.dev/docs/get-started/install)
+- **Dart SDK** (2.17 or higher) - Included with Flutter
+- **Git** - [Install Git](https://git-scm.com/downloads)
+- **Code Editor** - VS Code or Android Studio recommended
+- **Firebase Account** (optional for authentication features)
 
-1. **Firebase Studio** (browser-based, no installation required)
-2. **University Windows computers** (via AppsAnywhere)
-3. **Personal computer** (Windows or macOS)
+### Installation
 
-Below is a quick guide for each option. For more information, you can refer to [Worksheet 0 — Introduction to Dart, Git and GitHub](https://manighahrmani.github.io/sandwich_shop/worksheet-0.html) and [Worksheet 1 — Introduction to Flutter](https://manighahrmani.github.io/sandwich_shop/worksheet-1.html).
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/ibnoucheikhalae/union_shop.git
+   cd union_shop
+   ```
 
-**Firebase Studio:**
+2. **Install dependencies**
+   ```bash
+   flutter pub get
+   ```
 
-- Access [idx.google.com](https://idx.google.com) with a personal Google account
-- Create a new Flutter Workspace (choose the Flutter template in the "Start coding an app" section)
-- Once the Flutter Workspace is created, open the integrated terminal (View → Terminal) and link this project to your forked GitHub repository by running the following commands (replace `YOUR-USERNAME` in the URL):
+3. **Configure Firebase (Optional)**
+   
+   If you want to use authentication features:
+   - Create a Firebase project at [console.firebase.google.com](https://console.firebase.google.com)
+   - Enable Authentication (Email/Password, Google, Apple)
+   - Enable Firestore Database
+   - Download configuration files and update `lib/main.dart` with your Firebase credentials
 
-  ```bash
-  rm -rf .git && git init && git remote add origin https://github.com/YOUR-USERNAME/union_shop.git && git fetch origin && git reset --hard origin/main
-  ```
+4. **Run the application**
+   ```bash
+   flutter run
+   ```
 
-  This command should remove the existing Git history, initialize a new Git repository, add your forked repository as the remote named `origin`, fetch the data from it, and reset the local files to match the `main` branch of your forked repository. After running the above commands, open the Source Control view in Visual Studio Code and commit any local changes. This will create a commit that points to your forked repository. In the terminal you can push the commit to GitHub with:
+   Or for web:
+   ```bash
+   flutter run -d chrome
+   ```
 
-  ```bash
-  git push -u origin main
-  ```
+### Running Tests
 
-  If you're unsure that you're connected to the correct repository, check the remote with:
+The project includes 201 comprehensive tests covering:
+- Unit tests for models and services
+- Widget tests for UI components
+- Integration tests for complete user flows
+- Edge case testing
 
-  ```bash
-  git remote -v
-  ```
+```bash
+# Run all tests
+flutter test
 
-  This should show the URL of your forked repository (`https://github.com/YOUR-USERNAME/union_shop.git` where `YOUR-USERNAME` is your GitHub username).
+# Run tests with coverage
+flutter test --coverage
+
+# Run specific test file
+flutter test test/cart_test.dart
+```
+
+## 📁 Project Structure
+
+```
+lib/
+├── main.dart                 # Application entry point
+├── data/                     # Data layer
+│   ├── dummy_collections.dart
+│   └── dummy_products.dart
+├── models/                   # Data models
+│   ├── cart_item.dart
+│   ├── collection.dart
+│   └── product.dart
+├── pages/                    # Screen/Page widgets
+│   ├── home_page.dart
+│   ├── collections_page.dart
+│   ├── collection_view_page.dart
+│   ├── product_page.dart
+│   ├── cart_page.dart
+│   ├── checkout_page.dart
+│   ├── login_page.dart
+│   ├── signup_page.dart
+│   ├── account_page.dart
+│   ├── search_page.dart
+│   ├── sale_page.dart
+│   ├── about_page.dart
+│   ├── personalisation_page.dart
+│   └── printshack_about_page.dart
+├── services/                 # Business logic layer
+│   ├── auth_service.dart
+│   ├── cart_service.dart
+│   └── search_service.dart
+└── widgets/                  # Reusable UI components
+    ├── app_header.dart
+    ├── footer.dart
+    ├── collection_card.dart
+    └── product_card.dart
+
+test/
+├── cart_test.dart           # Cart functionality tests
+├── cart_service_test.dart   # Cart service unit tests
+├── cart_item_test.dart      # Cart item model tests
+├── cart_edge_cases_test.dart
+├── search_service_test.dart # Search functionality tests
+├── search_edge_cases_test.dart
+├── models_test.dart         # Data model tests
+├── widgets_test.dart        # Widget tests
+├── integration_test.dart    # End-to-end tests
+├── footer_test.dart
+└── pages/                   # Page-specific tests
+    ├── home_page_test.dart
+    ├── cart_page_test.dart
+    ├── product_page_test.dart
+    └── ... (14 page test files)
+```
+
+## 🛠️ Technologies & Dependencies
+
+### Core Framework
+- **Flutter** - UI framework
+- **Dart** - Programming language
+
+### Key Packages
+- **firebase_core** (^3.8.1) - Firebase initialization
+- **firebase_auth** (^5.3.4) - Authentication
+- **cloud_firestore** (^5.5.1) - Cloud database
+- **google_sign_in** (^6.2.2) - Google authentication
+- **sign_in_with_apple** (^6.1.3) - Apple authentication
+- **shared_preferences** (^2.2.2) - Local data persistence
+- **google_fonts** (^6.1.0) - Poppins font family
+- **url_launcher** (^6.2.0) - External URL handling
+
+### Development Tools
+- **flutter_test** - Testing framework
+- **flutter_lints** - Code analysis and linting
+
+## 💻 Usage
+
+### Basic Navigation
+
+1. **Homepage** - View featured products and collections
+2. **Shop Dropdown** - Access product categories (Hoodies, Sportswear, etc.)
+3. **Search Icon** - Search for specific products
+4. **Cart Icon** - View shopping cart (shows item count badge)
+5. **Account Icon** - Login or access account dashboard
+
+### Shopping Flow
+
+1. Browse collections or search for products
+2. Click on a product to view details
+3. Select color and size options
+4. Choose quantity and click "Add to Cart"
+5. Review cart items and quantities
+6. Proceed to checkout
+7. Complete order (demo - no real payment processing)
+
+### Personalization (Print Shack)
+
+1. Navigate to "The Print Shack" from menu
+2. Select product type (Hoodie, T-Shirt, Bag)
+3. Choose garment color and print position
+4. Enter personalized text (up to 3 lines)
+5. Select font style and color
+6. Preview updates dynamically
+7. Add to cart with chosen customizations
+
+### Account Management
+
+1. Sign up with email or social login
+2. Complete profile information
+3. View and edit profile details
+4. Update contact information and address
+5. Sign out when finished
+
+## 📸 Screenshots
+
+*Note: Add screenshots of your application here to showcase key features*
+
+```
+[Homepage] [Collections] [Product Page]
+[Cart] [Checkout] [Account Dashboard]
+```
+
+## 🧪 Testing
+
+The application has **201 passing tests** covering:
+
+- **Unit Tests**: Models, services, data structures
+- **Widget Tests**: UI components, pages, navigation
+- **Integration Tests**: Complete user workflows
+- **Edge Cases**: Boundary conditions, error handling
+
+Test coverage includes:
+- Cart operations (add, remove, update, persistence)
+- Authentication flows
+- Search functionality
+- Product filtering and sorting
+- Responsive layout behavior
+- Form validation
+
+## 🐛 Known Issues & Limitations
+
+### Current Limitations
+- **Demo Payment**: Checkout is simulated - no real payment gateway integration
+- **Placeholder Images**: Some product images use placeholder URLs
+- **Limited Product Data**: Uses hardcoded dummy data instead of live API
+- **Offline Mode**: Requires internet for Firebase features
+
+### Future Improvements
+- [ ] Real payment gateway integration (Stripe/PayPal)
+- [ ] Backend API for dynamic product management
+- [ ] Order history and tracking
+- [ ] Product reviews and ratings
+- [ ] Wishlist functionality
+- [ ] Push notifications for orders
+- [ ] Advanced analytics dashboard
+- [ ] Multi-language support
+- [ ] Dark mode theme
+
+## 🤝 Contributing
+
+This is a coursework project for University of Portsmouth. If you're a student working on similar projects:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is created for educational purposes as part of the University of Portsmouth coursework.
+
+## 👤 Contact
+
+**Alaei Bnoucheikh**
+
+- GitHub: [@ibnoucheikhalae](https://github.com/ibnoucheikhalae)
+- Repository: [union_shop](https://github.com/ibnoucheikhalae/union_shop)
+
+## 🙏 Acknowledgments
+
+- University of Portsmouth - Course materials and guidance
+- [UPSU Shop](https://shop.upsu.net) - Original inspiration
+- Flutter Community - Documentation and resources
+- Firebase - Authentication and database services
+
+---
+
+**Built with ❤️ using Flutter**
+
 
 **University Computers:**
 
