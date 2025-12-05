@@ -11,19 +11,22 @@ class SearchService {
     final lowerQuery = query.toLowerCase();
 
     return dummyProducts.where((product) {
-      // Search in title
-      if (product.title.toLowerCase().contains(lowerQuery)) {
+      final title = product.title.toLowerCase();
+      final description = product.description?.toLowerCase() ?? '';
+      final collectionSlug = product.collectionSlug.toLowerCase();
+      
+      // Check if any word in title matches the query
+      if (_matchesWord(title, lowerQuery)) {
         return true;
       }
 
-      // Search in description
-      if (product.description != null &&
-          product.description!.toLowerCase().contains(lowerQuery)) {
+      // Check if any word in description matches the query
+      if (_matchesWord(description, lowerQuery)) {
         return true;
       }
 
-      // Search in collection slug
-      if (product.collectionSlug.toLowerCase().contains(lowerQuery)) {
+      // Check if collection slug matches
+      if (_matchesWord(collectionSlug, lowerQuery)) {
         return true;
       }
 
@@ -44,5 +47,22 @@ class SearchService {
 
       return false;
     }).toList();
+  }
+
+  // Helper method to check if query matches as a whole word or at word boundaries
+  static bool _matchesWord(String text, String query) {
+    // Split text into words (by spaces, hyphens, etc.)
+    final words = text.split(RegExp(r'[\s\-_]+'));
+    
+    // Check if any word starts with the query or equals it
+    for (final word in words) {
+      if (word == query || word.startsWith(query)) {
+        return true;
+      }
+    }
+    
+    // Also check if the full text contains the query as a standalone word
+    final pattern = RegExp(r'\b' + RegExp.escape(query) + r'\b');
+    return pattern.hasMatch(text);
   }
 }
