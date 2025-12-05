@@ -131,7 +131,9 @@ class AppHeader extends StatelessWidget {
                   // ---------------- ACTION ICONS ----------------
                   IconButton(
                     icon: const Icon(Icons.search, size: 18, color: Colors.grey),
-                    onPressed: onSearchTap,
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/search');
+                    },
                   ),
                   IconButton(
                     icon: const Icon(Icons.person_outline, size: 18, color: Colors.grey),
