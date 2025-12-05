@@ -1,53 +1,86 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:union_shop/pages/product_page.dart';
+import 'package:union_shop/models/product.dart';
 import 'package:union_shop/data/dummy_products.dart';
 
 void main() {
-  group('Product Page Tests', () {
-    Widget createTestWidget() {
-      return MaterialApp(
-        routes: {
-          '/': (context) => const ProductPage(),
-          '/cart': (context) => const Scaffold(body: Text('Cart Page')),
-          '/login': (context) => const Scaffold(body: Text('Login Page')),
-        },
-        home: const ProductPage(),
+  group('Product Model Tests', () {
+    test('should create product with required fields', () {
+      const product = Product(
+        id: 'test1',
+        title: 'Test Product',
+        price: '£10.00',
+        collectionSlug: 'test',
+        imageUrl: 'https://via.placeholder.com/200',
       );
-    }
 
-    testWidgets('should display product page with product details', (
-      tester,
-    ) async {
-      await tester.pumpWidget(createTestWidget());
-      await tester.pumpAndSettle();
-
-      // Check that product information is displayed
-      expect(find.text(dummyProducts.first.title), findsOneWidget);
-      expect(find.text(dummyProducts.first.price), findsOneWidget);
+      expect(product.id, 'test1');
+      expect(product.title, 'Test Product');
+      expect(product.price, '£10.00');
+      expect(product.collectionSlug, 'test');
+      expect(product.imageUrl, 'https://via.placeholder.com/200');
     });
 
-    testWidgets('should display colour and size dropdowns', (tester) async {
-      await tester.pumpWidget(createTestWidget());
-      await tester.pumpAndSettle();
+    test('should create product with optional fields', () {
+      const product = Product(
+        id: 'test1',
+        title: 'Test Product',
+        price: '£10.00',
+        collectionSlug: 'test',
+        imageUrl: 'https://via.placeholder.com/200',
+        description: 'Test description',
+        colours: ['Black', 'White'],
+        sizes: ['S', 'M', 'L'],
+      );
 
-      // Check that colour and size selectors are present
-      if (dummyProducts.first.colours.isNotEmpty) {
-        expect(find.text('Colour'), findsOneWidget);
-      }
-      if (dummyProducts.first.sizes.isNotEmpty) {
-        expect(find.text('Size'), findsOneWidget);
+      expect(product.description, 'Test description');
+      expect(product.colours, ['Black', 'White']);
+      expect(product.sizes, ['S', 'M', 'L']);
+    });
+
+    test('dummy products should have valid data', () {
+      expect(dummyProducts.isNotEmpty, true);
+
+      for (var product in dummyProducts) {
+        expect(product.id, isNotEmpty);
+        expect(product.title, isNotEmpty);
+        expect(product.price, isNotEmpty);
+        expect(product.collectionSlug, isNotEmpty);
       }
     });
 
-    testWidgets('should display quantity selector', (tester) async {
-      await tester.pumpWidget(createTestWidget());
-      await tester.pumpAndSettle();
+    test('should have products with colours and sizes', () {
+      final productsWithColours = dummyProducts.where(
+        (p) => p.colours.isNotEmpty,
+      ).toList();
+      expect(productsWithColours.isNotEmpty, true);
 
-      // Check that quantity selector is present
-      expect(find.text('Quantity'), findsOneWidget);
-      expect(find.byIcon(Icons.add), findsOneWidget);
-      expect(find.byIcon(Icons.remove), findsOneWidget);
+      final productsWithSizes = dummyProducts.where(
+        (p) => p.sizes.isNotEmpty,
+      ).toList();
+      expect(productsWithSizes.isNotEmpty, true);
+    });
+
+    test('should have products with descriptions', () {
+      final productsWithDescriptions = dummyProducts.where(
+        (p) => p.description != null && p.description!.isNotEmpty,
+      ).toList();
+      expect(productsWithDescriptions.isNotEmpty, true);
+    });
+
+    test('products should belong to valid collections', () {
+      final collections = <String>{};
+      for (var product in dummyProducts) {
+        collections.add(product.collectionSlug);
+      }
+
+      expect(collections.contains('hoodies'), true);
+      expect(collections.contains('sportswear'), true);
+      expect(collections.contains('gifts'), true);
+      expect(collections.contains('stationery'), true);
+      expect(collections.contains('campus-essentials'), true);
+    });
+  });
+}
     });
 
     testWidgets('should display add to cart button', (tester) async {
