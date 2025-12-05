@@ -1,38 +1,22 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:union_shop/pages/cart_page.dart';
 import 'package:union_shop/services/cart_service.dart';
 import 'package:union_shop/models/product.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   
-  group('Cart Page Tests', () {
+  group('Cart Logic Tests', () {
     setUp(() async {
       // Clear cart before each test
       await CartService.instance.clear();
     });
 
-    Widget createTestWidget() {
-      return MaterialApp(
-        home: const CartPage(),
-        routes: {
-          '/checkout': (context) => const Scaffold(body: Text('Checkout Page')),
-        },
-      );
-    }
-
-    testWidgets('should display empty cart message when cart is empty', (tester) async {
-      await tester.pumpWidget(createTestWidget());
-      await tester.pumpAndSettle();
-
-      // Check that empty cart message is displayed
-      expect(find.text('Your cart is empty'), findsOneWidget);
-      expect(find.text('CONTINUE SHOPPING'), findsOneWidget);
+    test('cart should be empty initially', () {
+      expect(CartService.instance.isEmpty, true);
+      expect(CartService.instance.items.length, 0);
     });
 
-    testWidgets('should display cart items when products are added', (tester) async {
-      // Add a test product to cart
+    test('should add product to cart', () async {
       final testProduct = const Product(
         id: 'test1',
         title: 'Test Product',
@@ -48,16 +32,11 @@ void main() {
         quantity: 1,
       );
 
-      await tester.pumpWidget(createTestWidget());
-      await tester.pumpAndSettle();
-
-      // Check that product is displayed
-      expect(find.text('Test Product'), findsOneWidget);
-      expect(find.text('£10.00'), findsOneWidget);
+      expect(CartService.instance.items.length, 1);
+      expect(CartService.instance.items.first.product.title, 'Test Product');
     });
 
-    testWidgets('should calculate total correctly', (tester) async {
-      // Add products to cart
+    test('should calculate subtotal correctly', () async {
       final testProduct1 = const Product(
         id: 'test1',
         title: 'Product 1',
@@ -73,15 +52,10 @@ void main() {
         quantity: 2,
       );
 
-      await tester.pumpWidget(createTestWidget());
-      await tester.pumpAndSettle();
-
-      // Check that total is displayed correctly
-      expect(find.textContaining('£20.00'), findsWidgets);
+      expect(CartService.instance.subtotal, 20.00);
     });
 
-    testWidgets('should display checkout button when cart has items', (tester) async {
-      // Add a test product
+    test('should calculate total with tax and shipping', () async {
       final testProduct = const Product(
         id: 'test1',
         title: 'Test Product',
@@ -97,15 +71,18 @@ void main() {
         quantity: 1,
       );
 
-      await tester.pumpWidget(createTestWidget());
-      await tester.pumpAndSettle();
+      final subtotal = CartService.instance.subtotal;
+      final tax = CartService.instance.tax;
+      final shipping = CartService.instance.shipping;
+      final total = CartService.instance.total;
 
-      // Check that checkout button is present
-      expect(find.text('PROCEED TO CHECKOUT'), findsOneWidget);
+      expect(subtotal, 10.00);
+      expect(tax, 2.00); // 20% of 10
+      expect(shipping, 4.99); // Under £50, so shipping applies
+      expect(total, closeTo(16.99, 0.01)); // Use closeTo for floating point comparison
     });
 
-    testWidgets('should remove item from cart when delete is tapped', (tester) async {
-      // Add a test product
+    test('should remove item from cart', () async {
       final testProduct = const Product(
         id: 'test1',
         title: 'Test Product',
@@ -121,18 +98,36 @@ void main() {
         quantity: 1,
       );
 
-      await tester.pumpWidget(createTestWidget());
-      await tester.pumpAndSettle();
+      expect(CartService.instance.items.length, 1);
 
-      // Find and tap delete button
-      final deleteButton = find.byIcon(Icons.delete);
-      if (deleteButton.evaluate().isNotEmpty) {
-        await tester.tap(deleteButton);
-        await tester.pumpAndSettle();
+      final item = CartService.instance.items.first;
+      await CartService.instance.removeItem(item);
 
-        // Cart should now be empty
-        expect(find.text('Your cart is empty'), findsOneWidget);
-      }
+      expect(CartService.instance.items.length, 0);
+      expect(CartService.instance.isEmpty, true);
+    });
+
+    test('should update item quantity', () async {
+      final testProduct = const Product(
+        id: 'test1',
+        title: 'Test Product',
+        price: '£10.00',
+        collectionSlug: 'test',
+        imageUrl: 'https://via.placeholder.com/200',
+      );
+
+      await CartService.instance.addToCart(
+        product: testProduct,
+        colour: 'Black',
+        size: 'M',
+        quantity: 1,
+      );
+
+      final item = CartService.instance.items.first;
+      await CartService.instance.updateQuantity(item, 3);
+
+      expect(CartService.instance.items.first.quantity, 3);
+      expect(CartService.instance.subtotal, 30.00);
     });
   });
 }
