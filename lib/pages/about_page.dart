@@ -66,6 +66,27 @@ class AboutPage extends StatelessWidget {
                   ),
 
                   const Text(
+                    'We also offer personalisation services for your clothing and accessories. ',
+                    style: TextStyle(fontSize: 16, height: 1.5),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/personalisation');
+                    },
+                    child: const Text(
+                      'Click here to personalise your items!',
+                      style: TextStyle(
+                        fontSize: 16,
+                        height: 1.5,
+                        color: Color(0xFF4d2963),
+                        decoration: TextDecoration.underline,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+
+                  const Text(
                     'We reinvest profits back into student services, activities, and support, meaning every '
                     'purchase contributes to enhancing the student experience.\n',
                     style: TextStyle(fontSize: 16, height: 1.5),
