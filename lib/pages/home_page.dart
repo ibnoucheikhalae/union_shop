@@ -408,7 +408,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         title: 'Portsmouth City Magnet',
                         price: '£4.50',
                         imageUrl:
-                            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1080x.jpg?v=1752230282',
                       ),
                       ProductCard(
                         id: 'portsmouth-postcard',
@@ -416,7 +416,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         title: 'Portsmouth City Postcard',
                         price: '£1.00',
                         imageUrl:
-                            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1080x.jpg?v=1752232561',
                       ),
                       ProductCard(
                         id: 'portsmouth-bookmark',
@@ -424,7 +424,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         title: 'Portsmouth City Bookmark',
                         price: '£3.00',
                         imageUrl:
-                            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityBookmark1_1080x.jpg?v=1752230004',
                       ),
                       ProductCard(
                         id: 'portsmouth-notebook',
@@ -432,7 +432,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         title: 'Portsmouth City Notebook',
                         price: '£7.50',
                         imageUrl:
-                            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityNotebook_1024x1024@2x.jpg?v=1757419215',
                       ),
                     ],
                   ),
