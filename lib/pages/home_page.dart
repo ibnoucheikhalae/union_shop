@@ -1,16 +1,132 @@
 // lib/pages/home_page.dart
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../widgets/app_header.dart';
 import '../widgets/footer.dart';
 import '../widgets/product_card.dart';
 
 void _placeholder() {}
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
-  void _goToCollections(BuildContext context) {
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int _currentCarouselIndex = 0;
+  final PageController _pageController = PageController();
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  void _goToCollections() {
     Navigator.pushNamed(context, '/collections');
+  }
+
+  void _goToSale() {
+    Navigator.pushNamed(context, '/sale');
+  }
+
+  void _goToPrintShack() {
+    Navigator.pushNamed(context, '/printshack-about');
+  }
+
+  Future<void> _launchDominos() async {
+    final Uri url = Uri.parse('https://www.dominos.co.uk');
+    if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Could not open Dominos website')),
+        );
+      }
+    }
+  }
+
+  Widget _buildCarouselSlide({
+    required String imageUrl,
+    required String title,
+    required String subtitle,
+    required String buttonText,
+    required VoidCallback onPressed,
+  }) {
+    return Stack(
+      children: [
+        // Background image
+        Positioned.fill(
+          child: Image.network(
+            imageUrl,
+            fit: BoxFit.cover,
+            errorBuilder: (_, __, ___) => Container(
+              color: Colors.black87,
+            ),
+          ),
+        ),
+        // Dark overlay
+        Positioned.fill(
+          child: Container(
+            color: Colors.black.withOpacity(0.4),
+          ),
+        ),
+        // Text + button
+        Positioned(
+          left: 24,
+          right: 24,
+          bottom: 80,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                title,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  height: 1.2,
+                ),
+              ),
+              const SizedBox(height: 12),
+              Text(
+                subtitle,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 16,
+                  color: Colors.white,
+                  height: 1.4,
+                ),
+              ),
+              const SizedBox(height: 24),
+              ElevatedButton(
+                onPressed: onPressed,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF4d2963),
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 32,
+                    vertical: 14,
+                  ),
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.zero,
+                  ),
+                ),
+                child: Text(
+                  buttonText,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    letterSpacing: 1,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
   }
 
   @override
@@ -38,79 +154,84 @@ class HomeScreen extends StatelessWidget {
               onMenuTap: _placeholder,
             ),
 
-            // ==== HERO – "Essential Range - Over 20% OFF!" ====
+            // ==== CAROUSEL HERO ====
             SizedBox(
-              height: 380,
+              height: 450,
               width: double.infinity,
               child: Stack(
                 children: [
-                  // Background image
-                  Positioned.fill(
-                    child: Image.network(
-                      'https://shop.upsu.net/cdn/shop/files/Essential_Tshirt_1.jpg', // any hero image
-                      fit: BoxFit.cover,
-                      errorBuilder: (_, __, ___) => Container(
-                        color: Colors.black87,
+                  // PageView for carousel slides
+                  PageView(
+                    controller: _pageController,
+                    onPageChanged: (index) {
+                      setState(() {
+                        _currentCarouselIndex = index;
+                      });
+                    },
+                    children: [
+                      // Slide 1: Collections
+                      _buildCarouselSlide(
+                        imageUrl: 'https://shop.upsu.net/cdn/shop/files/Essential_Tshirt_1.jpg',
+                        title: 'Explore Our Collections',
+                        subtitle: 'Discover hoodies, accessories, stationery & more',
+                        buttonText: 'SHOP NOW',
+                        onPressed: _goToCollections,
                       ),
-                    ),
+                      // Slide 2: Print Shack
+                      _buildCarouselSlide(
+                        imageUrl: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=1200',
+                        title: 'Print Shack',
+                        subtitle: 'Custom printing services for all your needs',
+                        buttonText: 'LEARN MORE',
+                        onPressed: _goToPrintShack,
+                      ),
+                      // Slide 3: Sale
+                      _buildCarouselSlide(
+                        imageUrl: 'https://shop.upsu.net/cdn/shop/files/Essential_Hoodie.jpg',
+                        title: 'Sale - Up to 50% OFF!',
+                        subtitle: 'Limited time offers on selected items',
+                        buttonText: 'SHOP SALE',
+                        onPressed: _goToSale,
+                      ),
+                      // Slide 4: Dominos
+                      _buildCarouselSlide(
+                        imageUrl: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=1200',
+                        title: 'Order Domino\'s Pizza',
+                        subtitle: 'Quick delivery straight to campus',
+                        buttonText: 'ORDER NOW',
+                        onPressed: _launchDominos,
+                      ),
+                    ],
                   ),
-                  // Dark overlay
-                  Positioned.fill(
-                    child: Container(
-                      color: Colors.black.withOpacity(0.4),
-                    ),
-                  ),
-                  // Text + button
+                  // Carousel indicators (dots)
                   Positioned(
-                    left: 24,
-                    right: 24,
-                    bottom: 60,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const Text(
-                          'Essential Range - Over 20% OFF!',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 26,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            height: 1.2,
-                          ),
-                        ),
-                        const SizedBox(height: 12),
-                        const Text(
-                          'Over 20% off our Essential Range. Come and grab yours while stock lasts!',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.white,
-                            height: 1.4,
-                          ),
-                        ),
-                        const SizedBox(height: 24),
-                        ElevatedButton(
-                          onPressed: () => _goToCollections(context),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF4d2963),
-                            foregroundColor: Colors.white,
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 32,
-                              vertical: 14,
-                            ),
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.zero,
+                    bottom: 20,
+                    left: 0,
+                    right: 0,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: List.generate(4, (index) {
+                        return GestureDetector(
+                          onTap: () {
+                            _pageController.animateToPage(
+                              index,
+                              duration: const Duration(milliseconds: 300),
+                              curve: Curves.easeInOut,
+                            );
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 4),
+                            width: _currentCarouselIndex == index ? 24 : 8,
+                            height: 8,
+                            decoration: BoxDecoration(
+                              color: _currentCarouselIndex == index
+                                  ? Colors.white
+                                  : Colors.white.withOpacity(0.5),
+                              borderRadius: BorderRadius.circular(4),
                             ),
                           ),
-                          child: const Text(
-                            'BROWSE COLLECTION',
-                            style: TextStyle(
-                              fontSize: 14,
-                              letterSpacing: 1,
-                            ),
-                          ),
-                        ),
-                      ],
+                        );
+                      }),
                     ),
                   ),
                 ],
@@ -139,10 +260,10 @@ class HomeScreen extends StatelessWidget {
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     crossAxisCount:
-                        MediaQuery.of(context).size.width > 800 ? 2 : 1,
+                        MediaQuery.of(context).size.width > 800 ? 3 : 1,
                     crossAxisSpacing: 24,
                     mainAxisSpacing: 32,
-                    childAspectRatio: 4 / 3,
+                    childAspectRatio: 0.75,
                     children: const [
                       ProductCard(
                         id: 'essential-hoodie',
@@ -150,7 +271,7 @@ class HomeScreen extends StatelessWidget {
                         title: 'Limited Edition Essential Zip Hoodies',
                         price: '£14.99',
                         imageUrl:
-                            'https://shop.upsu.net/cdn/shop/files/Essential_Zip_1.jpg',
+                            'https://i5.walmartimages.com/seo/Womens-Oversized-Hoodies-Fleece-Sweatshirts-Long-Sleeve-Sweaters-Pullover-Fall-Outfits-with-Pocket_f7e46bfd-ffd7-4468-92d4-77505d811915.f8c37ec4a3a4c124107ac2eb5ddebaa2.jpeg',
                       ),
                       ProductCard(
                         id: 'essential-tshirt',
@@ -158,7 +279,15 @@ class HomeScreen extends StatelessWidget {
                         title: 'Essential T-Shirt',
                         price: '£6.99',
                         imageUrl:
-                            'https://shop.upsu.net/cdn/shop/files/Essential_Tshirt_2.jpg',
+                            'https://m.media-amazon.com/images/I/61ExObQ54eL._AC_UY1000_.jpg',
+                      ),
+                      ProductCard(
+                        id: 'essential-sweatshirt',
+                        collectionSlug: 'essential',
+                        title: 'Essential Sweatshirt',
+                        price: '£18.99',
+                        imageUrl:
+                            'https://www.themercantilelondon.com/cdn/shop/files/4_98371666-c727-45cd-9c73-5b6d0e992de1.jpg?v=1752837826&width=1200',
                       ),
                     ],
                   ),
@@ -189,10 +318,10 @@ class HomeScreen extends StatelessWidget {
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     crossAxisCount:
-                        MediaQuery.of(context).size.width > 800 ? 2 : 1,
+                        MediaQuery.of(context).size.width > 800 ? 3 : 1,
                     crossAxisSpacing: 24,
                     mainAxisSpacing: 32,
-                    childAspectRatio: 4 / 3,
+                    childAspectRatio: 0.75,
                     children: const [
                       ProductCard(
                         id: 'signature-hoodie',
@@ -200,15 +329,23 @@ class HomeScreen extends StatelessWidget {
                         title: 'Signature Hoodie',
                         price: '£32.99',
                         imageUrl:
-                            'https://shop.upsu.net/cdn/shop/files/Signature_Hoodie.jpg',
+                            'assets/images/product/bluehoodie.png',
                       ),
                       ProductCard(
-                        id: 'signature-tshirt',
+                        id: 'signature-sweatshirt',
                         collectionSlug: 'signature',
                         title: 'Signature T-Shirt',
                         price: '£14.99',
                         imageUrl:
-                            'https://shop.upsu.net/cdn/shop/files/Signature_Tshirt.jpg',
+                            'assets/images/product/zipup.png',
+                      ),
+                      ProductCard(
+                        id: 'signature-jacket',
+                        collectionSlug: 'signature',
+                        title: 'Signature Jacket',
+                        price: '£45.99',
+                        imageUrl:
+                            'assets/images/product/greenhoodie.png',
                       ),
                     ],
                   ),
@@ -244,21 +381,19 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       _RangeTile(
                         label: 'Clothing',
-                        onTap: () => _goToCollections(context),
+                        onTap: _goToCollections,
                       ),
                       _RangeTile(
                         label: 'Merchandise',
-                        onTap: () => _goToCollections(context),
+                        onTap: _goToCollections,
                       ),
                       _RangeTile(
                         label: 'Graduation',
-                        onTap: () => _goToCollections(context),
+                        onTap: _goToCollections,
                       ),
                       _RangeTile(
                         label: 'SALE',
-                        onTap: () {
-                          Navigator.pushNamed(context, '/sale');
-                        },
+                        onTap: _goToSale,
                       ),
                     ],
                   ),
