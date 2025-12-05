@@ -24,11 +24,11 @@ void main() async {
   try {
     await Firebase.initializeApp(
       options: const FirebaseOptions(
-        apiKey: 'your-api-key',
-        appId: 'your-app-id',
-        messagingSenderId: 'your-messaging-sender-id',
-        projectId: 'your-project-id',
-        storageBucket: 'your-storage-bucket',
+        apiKey: 'AIzaSyDcHkbOsG0nWQr-iCh1qx5mvhWkjVr0W6c',
+        appId: '1:450513610026:web:83ed47b63dfdf2b879aa53',
+        messagingSenderId: '450513610026',
+        projectId: 'union-shop-a',
+        storageBucket: 'union-shop-a.firebasestorage.app',
       ),
     );
   } catch (e) {
