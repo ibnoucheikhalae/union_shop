@@ -129,4 +129,73 @@ class _SearchPageState extends State<SearchPage> {
 
                   const SizedBox(height: 32),
 
-                  
+                  // Search Results
+                  if (_hasSearched) ...[
+                    Text(
+                      _searchResults.isEmpty
+                          ? 'No results found for "${_searchController.text}"'
+                          : '${_searchResults.length} result${_searchResults.length == 1 ? '' : 's'} found',
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+
+                    if (_searchResults.isNotEmpty)
+                      GridView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount:
+                              MediaQuery.of(context).size.width > 600 ? 3 : 2,
+                          mainAxisSpacing: 16,
+                          crossAxisSpacing: 16,
+                          childAspectRatio: 3 / 4,
+                        ),
+                        itemCount: _searchResults.length,
+                        itemBuilder: (context, index) {
+                          final product = _searchResults[index];
+                          return ProductCard(
+                            id: product.id,
+                            collectionSlug: product.collectionSlug,
+                            title: product.title,
+                            price: product.price,
+                            imageUrl: product.imageUrl ??
+                                'https://via.placeholder.com/400x400?text=Product',
+                          );
+                        },
+                      ),
+                  ] else ...[
+                    Center(
+                      child: Column(
+                        children: const [
+                          SizedBox(height: 40),
+                          Icon(
+                            Icons.search,
+                            size: 64,
+                            color: Colors.grey,
+                          ),
+                          SizedBox(height: 16),
+                          Text(
+                            'Enter a search term to find products',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ],
+              ),
+            ),
+
+            const AppFooter(),
+          ],
+        ),
+      ),
+    );
+  }
+}
