@@ -58,7 +58,10 @@ class _CartPageState extends State<CartPage> {
 
             Padding(
               padding: const EdgeInsets.all(24.0),
-              child: _isLoading
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 1000),
+                  child: _isLoading
                   ? const Center(
                       child: Padding(
                         padding: EdgeInsets.all(40.0),
@@ -386,6 +389,8 @@ class _CartPageState extends State<CartPage> {
                 ],
               ),
             ),
+          ),
+        ),
 
             const AppFooter(),
           ],
