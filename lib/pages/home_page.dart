@@ -141,7 +141,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   buttonText,
                   style: const TextStyle(
                     fontSize: 14,
-                    letterSpacing: 1,
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 1.5,
                   ),
                 ),
               ),
@@ -265,20 +266,20 @@ class _HomeScreenState extends State<HomeScreen> {
             Container(
               color: Colors.white,
               width: double.infinity,
-              padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 24),
+              padding: const EdgeInsets.symmetric(vertical: 48, horizontal: 24),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const Text(
                     'ESSENTIAL RANGE – OVER 20% OFF!',
                     style: TextStyle(
-                      fontSize: 18,
-                      letterSpacing: 1.2,
-                      fontWeight: FontWeight.w600,
+                      fontSize: 22,
+                      letterSpacing: 0,
+                      fontWeight: FontWeight.w800,
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 32),
                   GridView.count(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
@@ -292,15 +293,15 @@ class _HomeScreenState extends State<HomeScreen> {
                         id: 'essential-hoodie',
                         collectionSlug: 'essential',
                         title: 'Limited Edition Essential Zip Hoodies',
-                        price: '£14.99',
+                        price: '£29.99',
                         imageUrl:
                             'https://i5.walmartimages.com/seo/Womens-Oversized-Hoodies-Fleece-Sweatshirts-Long-Sleeve-Sweaters-Pullover-Fall-Outfits-with-Pocket_f7e46bfd-ffd7-4468-92d4-77505d811915.f8c37ec4a3a4c124107ac2eb5ddebaa2.jpeg',
                       ),
                       ProductCard(
-                        id: 'essential-tshirt',
+                        id: 'essential-jacket',
                         collectionSlug: 'essential',
-                        title: 'Essential T-Shirt',
-                        price: '£6.99',
+                        title: 'Essential Jacket',
+                        price: '£39.99',
                         imageUrl:
                             'https://m.media-amazon.com/images/I/61ExObQ54eL._AC_UY1000_.jpg',
                       ),
@@ -308,7 +309,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         id: 'essential-sweatshirt',
                         collectionSlug: 'essential',
                         title: 'Essential Sweatshirt',
-                        price: '£18.99',
+                        price: '£34.99',
                         imageUrl:
                             'https://www.themercantilelondon.com/cdn/shop/files/4_98371666-c727-45cd-9c73-5b6d0e992de1.jpg?v=1752837826&width=1200',
                       ),
@@ -350,23 +351,23 @@ class _HomeScreenState extends State<HomeScreen> {
                         id: 'signature-hoodie',
                         collectionSlug: 'signature',
                         title: 'Signature Hoodie',
-                        price: '£32.99',
+                        price: '£39.99',
                         imageUrl:
                             'assets/images/product/bluehoodie.png',
                       ),
                       ProductCard(
                         id: 'signature-sweatshirt',
                         collectionSlug: 'signature',
-                        title: 'Signature T-Shirt',
-                        price: '£14.99',
+                        title: 'Signature Jacket',
+                        price: '£29.99',
                         imageUrl:
                             'assets/images/product/zipup.png',
                       ),
                       ProductCard(
                         id: 'signature-jacket',
                         collectionSlug: 'signature',
-                        title: 'Signature Jacket',
-                        price: '£45.99',
+                        title: 'Signature Hoodie',
+                        price: '£39.99',
                         imageUrl:
                             'assets/images/product/greenhoodie.png',
                       ),
@@ -381,21 +382,21 @@ class _HomeScreenState extends State<HomeScreen> {
               color: Colors.white,
               width: double.infinity,
               padding: EdgeInsets.symmetric(
-                vertical: 40, 
-                horizontal: MediaQuery.of(context).size.width > 600 ? 24 : 12,
+                vertical: MediaQuery.of(context).size.width > 600 ? 48 : 32, 
+                horizontal: MediaQuery.of(context).size.width > 600 ? 24 : 16,
               ),
               child: Column(
                 children: [
                   Text(
                     'PORTSMOUTH CITY COLLECTION',
                     style: TextStyle(
-                      fontSize: MediaQuery.of(context).size.width > 600 ? 18 : 14,
-                      letterSpacing: 1.2,
-                      fontWeight: FontWeight.w600,
+                      fontSize: MediaQuery.of(context).size.width > 600 ? 28 : 22,
+                      letterSpacing: -0.5,
+                      fontWeight: FontWeight.w800,
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 32),
                   LayoutBuilder(
                     builder: (context, constraints) {
                       int crossAxisCount;
@@ -411,8 +412,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         crossAxisCount: crossAxisCount,
-                        crossAxisSpacing: constraints.maxWidth > 600 ? 12 : 8,
-                        mainAxisSpacing: constraints.maxWidth > 600 ? 12 : 8,
+                        crossAxisSpacing: constraints.maxWidth > 600 ? 16 : 10,
+                        mainAxisSpacing: constraints.maxWidth > 600 ? 16 : 10,
                         childAspectRatio: constraints.maxWidth > 600 ? 0.8 : 0.75,
                         children: const [
                           ProductCard(
