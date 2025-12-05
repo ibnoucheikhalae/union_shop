@@ -349,4 +349,42 @@ const List<Product> dummyProducts = [
     description: 'Previous model campus backpack, fully functional with minor cosmetic marks - Was £34.99, save £15',
     colours: ['Black'],
   ),
+
+  // Portsmouth City Collection
+  Product(
+    id: 'portsmouth-magnet',
+    title: 'Portsmouth City Magnet',
+    price: '£4.50',
+    collectionSlug: 'portsmouth-city',
+    imageUrl: 'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1080x.jpg?v=1752230282',
+    description: 'Show your Portsmouth pride with this vibrant city magnet featuring iconic Portsmouth landmarks. Perfect for fridges, lockers, or any magnetic surface. High-quality, durable design that captures the spirit of Portsmouth.',
+    colours: ['Multicolor'],
+  ),
+  Product(
+    id: 'portsmouth-postcard',
+    title: 'Portsmouth City Postcard',
+    price: '£1.00',
+    collectionSlug: 'portsmouth-city',
+    imageUrl: 'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1080x.jpg?v=1752232561',
+    description: 'Send a piece of Portsmouth to friends and family with this beautifully designed postcard showcasing the city\'s most recognizable sights. Great for collectors or as a memorable keepsake.',
+    colours: ['Multicolor'],
+  ),
+  Product(
+    id: 'portsmouth-bookmark',
+    title: 'Portsmouth City Bookmark',
+    price: '£3.00',
+    collectionSlug: 'portsmouth-city',
+    imageUrl: 'https://shop.upsu.net/cdn/shop/files/PortsmouthCityBookmark1_1080x.jpg?v=1752230004',
+    description: 'Keep your place in style with this Portsmouth-themed bookmark. Features stunning Portsmouth cityscape imagery. Perfect for students and book lovers who want to carry a piece of Portsmouth with them.',
+    colours: ['Multicolor'],
+  ),
+  Product(
+    id: 'portsmouth-notebook',
+    title: 'Portsmouth City Notebook',
+    price: '£7.50',
+    collectionSlug: 'portsmouth-city',
+    imageUrl: 'https://shop.upsu.net/cdn/shop/files/PortsmouthCityNotebook_1024x1024@2x.jpg?v=1757419215',
+    description: 'A high-quality notebook adorned with Portsmouth city design. Perfect for lectures, note-taking, journaling, or sketching. Durable cover and quality paper make this an essential companion for any Portsmouth student.',
+    colours: ['Multicolor'],
+  ),
 ];
